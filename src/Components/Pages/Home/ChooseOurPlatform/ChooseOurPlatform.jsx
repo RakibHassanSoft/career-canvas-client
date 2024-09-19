@@ -1,6 +1,6 @@
 const ChooseOurPlatform = () => {
   return (
-    <section className="py-12 px-4 md:px-8 lg:px-16 bg-gray-50">
+    <section className="py-12 px-4 md:px-8 lg:px-16 bg-green-50 rounded-2xl">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-8 justify-items-center">
           {/* Left Side */}
@@ -11,7 +11,7 @@ const ChooseOurPlatform = () => {
                   <img
                     src="/public/thumbsAboutUs.png"
                     alt="Thumbs Up"
-                    className="w-24"
+                    className="w-16"
                   />
                 </div>
                 <div>
@@ -19,8 +19,8 @@ const ChooseOurPlatform = () => {
                     Easy Online Resume Builder
                   </h3>
                   <p className="text-gray-600 text-xl">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Laudantium modi assumenda.
+                    Create standout resumes effortlessly with our user-friendly
+                    platform.
                   </p>
                 </div>
               </div>
@@ -38,7 +38,8 @@ const ChooseOurPlatform = () => {
                     Step By Step Expert Tips
                   </h3>
                   <p className="text-gray-600 text-xl">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Get expert advice and follow our easy steps to enhance your
+                    resume.
                   </p>
                 </div>
               </div>
@@ -48,7 +49,7 @@ const ChooseOurPlatform = () => {
                   <img
                     src="/public/approvedAboutUs.png"
                     alt="Recruiter Approved"
-                    className="w-16"
+                    className="w-20"
                   />
                 </div>
                 <div>
@@ -56,7 +57,8 @@ const ChooseOurPlatform = () => {
                     Recruiter Approved Phrases
                   </h3>
                   <p className="text-gray-600 text-xl">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Use phrases and keywords that recruiters love to see, making
+                    your resume and get noticed.
                   </p>
                 </div>
               </div>
@@ -71,27 +73,29 @@ const ChooseOurPlatform = () => {
               <div className="flex gap-2 mb-4 md:justify-start justify-center">
                 <span className="w-4 h-4 bg-blue-500 rounded-full"></span>
                 <span className="w-4 h-4 bg-purple-500 rounded-full"></span>
-                <span className="w-4 h-4 bg-red-500 rounded-full"></span>
                 <span className="w-4 h-4 bg-green-500 rounded-full"></span>
+                <span className="w-4 h-4 bg-red-500 rounded-full"></span>
                 <span className="w-4 h-4 bg-yellow-500 rounded-full"></span>
               </div>
 
               {/* Title */}
-              <h2 className="text-4xl font-bold text-green-500 mb-4">
+              <h2 className="text-4xl font-bold text-green-500 mb-2">
                 Why Choose Our Platform?
               </h2>
 
               {/* Paragraphs */}
-              <div className="md:space-y-12 md:mt-5">
+              <div className="md:space-y-2">
                 <p className="text-gray-600 mb-4 text-xl">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis
-                  at dictum risus, non suscipit arcu. Quisque aliquam posuere
-                  tortor, sit amet convallis nunc scelerisque in.
+                  Our platform stands out because of its intuitive design and
+                  powerful features that simplify resume creation. We prioritize
+                  user experience and provide a range of customizable templates
+                  to help you present your professional profile effectively.
                 </p>
                 <p className="text-gray-600 mb-6 text-xl">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Labore eius molestiae facere, natus reprehenderit eaque eum,
-                  autem ipsam. Magni, error. Tempora odit labor. Fugit!
+                  We are committed to helping you succeed in your job search.
+                  Our platform offers real-time previews, easy-to-use editing
+                  tools, and expert guidance to ensure your resume makes a
+                  lasting impression on employers.
                 </p>
               </div>
             </div>
