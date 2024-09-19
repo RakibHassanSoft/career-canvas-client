@@ -9,8 +9,8 @@ const WeDeliverBest = () => {
             <div className="flex gap-2 mb-4 justify-start">
               <span className="w-4 h-4 bg-blue-500 rounded-full"></span>
               <span className="w-4 h-4 bg-purple-500 rounded-full"></span>
-              <span className="w-4 h-4 bg-red-500 rounded-full"></span>
               <span className="w-4 h-4 bg-green-500 rounded-full"></span>
+              <span className="w-4 h-4 bg-red-500 rounded-full"></span>
               <span className="w-4 h-4 bg-yellow-500 rounded-full"></span>
             </div>
 
