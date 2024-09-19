@@ -11,13 +11,12 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <div className="container mx-auto mt-20 space-y-20">
-
-                <CustomerReview></CustomerReview>
-                <div className="container mx-auto mt-20">
+            
                     <ChooseOurPlatform></ChooseOurPlatform>
                     <WeDeliverBest></WeDeliverBest>
                     <Testimonials></Testimonials>
-                </div>
+                    <CustomerReview></CustomerReview>
+                
             </div>
         </div>
     );
