@@ -10,7 +10,8 @@ const SignUp = () => {
         const pass = e.target.pass.value;
         const name = e.target.name.value;
         const photo = e.target.photo.value;
-        console.log(email,pass,name,photo)
+        alert( name,email,pass)
+        
     }
     return (
         <div className=" flex  items-center py-3 md:py-5 lg:py-10 justify-center ">
