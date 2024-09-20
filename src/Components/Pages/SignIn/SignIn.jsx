@@ -6,7 +6,7 @@ const handleLogin =e=> {
 
     const email = e.target.email.value;
     const pass = e.target.pass.value;
-    console.log(email,pass)
+   alert(email,pass)
 }
 
 const SingIn = () => {
