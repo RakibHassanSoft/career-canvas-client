@@ -5,7 +5,7 @@ import Testimonials from "./Testimonials/Testimonials";
 import WeDeliverBest from "./WeDeliverBest/WeDeliverBest";
 
 import CustomerReview from "./CustomerReview/CustomerReview";
-import ResumeTemplatePreview from "./ResumeTemplatePreview/ResumeTemplatePreview";
+// import ResumeTemplatePreview from "./ResumeTemplatePreview/ResumeTemplatePreview";
 
 const Home = () => {
     return (
@@ -15,7 +15,7 @@ const Home = () => {
             
                     <ChooseOurPlatform></ChooseOurPlatform>
                     <WeDeliverBest></WeDeliverBest>
-                    <ResumeTemplatePreview></ResumeTemplatePreview>
+                    {/* <ResumeTemplatePreview></ResumeTemplatePreview> */}
                     <Testimonials></Testimonials>
                     <CustomerReview></CustomerReview>
                 
