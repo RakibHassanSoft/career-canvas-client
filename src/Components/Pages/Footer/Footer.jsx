@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900">
+    <footer className="bg-white md:mt-20 mt-6 dark:bg-gray-900 border-t-4 border-green-100">
       <div className="container px-6 py-12 mx-auto">
         <div className="md:flex md:-mx-3 md:items-center md:justify-between">
-          <h1 className="text-xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-4xl dark:text-white">
+          <h1 className="text-xl font-semibold tracking-tight text-green-500 md:mx-3 xl:text-4xl dark:text-white">
             Subscribe our newsletter to get update.
           </h1>
           <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
@@ -29,7 +29,7 @@ const Footer = () => {
         <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-green-500 dark:text-white">
               Quick Link
             </p>
             <div className="flex flex-col items-start mt-5 space-y-2">
@@ -54,7 +54,7 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-green-500 dark:text-white">
               Industries
             </p>
             <div className="flex flex-col items-start mt-5 space-y-2">
@@ -79,7 +79,7 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-green-500 dark:text-white">
               Services
             </p>
             <div className="flex flex-col items-start mt-5 space-y-2">
@@ -105,7 +105,7 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-green-500 dark:text-white">
               Contact Us
             </p>
             <div className="flex flex-col items-start mt-5 space-y-2">
@@ -134,7 +134,7 @@ const Footer = () => {
               />
               <p className="bg-gradient-to-r from-green-500 via-lime-500 to-emerald-500 bg-clip-text text-transparent text-4xl font-semibold">Career Canvas</p>
           </div>
-          <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">
+          <p className="mt-4 text-sm text-green-500 sm:mt-0 dark:text-gray-300">
             © Copyright 2024. All Rights Reserved.
           </p>
         </div>

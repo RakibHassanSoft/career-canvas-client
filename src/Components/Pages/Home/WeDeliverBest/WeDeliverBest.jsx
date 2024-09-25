@@ -1,7 +1,7 @@
 const WeDeliverBest = () => {
   return (
-    <section className="md:mt-20 mt-8 bg-white">
-      <div className="container mx-auto px-4 text-center">
+    <section className="md:mt-20 mt-8 bg-white  md:px-16 md:py-14">
+      <div className="px-4 text-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left side content */}
           <div className="space-y-10">
