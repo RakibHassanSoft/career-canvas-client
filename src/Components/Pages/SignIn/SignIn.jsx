@@ -1,18 +1,56 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import signinAnimation from "../../../../public/lotti-animation/signin-animation.json"
 import 'animate.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const handleLogin = e => {
-  e.preventDefault();
 
-  const email = e.target.email.value;
-  const pass = e.target.pass.value;
-  alert(email, pass);
-}
+
 
 const SingIn = () => {
+
+const {signIn,signInWithGoogle}=useContext(AuthContext)
+const navigate=useNavigate()
+
+
+  const handleLogin = e => {
+    e.preventDefault();
+  
+    const email = e.target.email.value;
+    const pass = e.target.pass.value;
+    console.log(email, pass);
+
+    signIn(email,pass)
+    .then((result)=>{
+      console.log(result.user)
+      toast.success('Login Successful!!')
+      navigate('/')
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+
+  }
+
+  // google Login
+
+  const handleGoogle=()=>{
+    signInWithGoogle()
+    .then(result=>{
+      console.log(result)
+      toast.success('Login Successful!!')
+      navigate('/')
+    
+    })
+    .catch(error=>console.log(error))
+    }
+
+
+
   return (
     <div className="flex  items-center py-6 md:py-10 lg:py-16 justify-center ">
       <div className=" lg:w-full lg:max-w-6xl flex flex-col-reverse lg:flex-row bg-white rounded-lg  ">
@@ -62,7 +100,7 @@ const SingIn = () => {
               Sign In
             </button>
 
-            <button className="animate__animated animate__lightSpeedInLeft mt-4 w-full text-black font-bold py-2 px-4 rounded-lg border border-green-500 shadow-md hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 flex items-center justify-center">
+            <button onClick={handleGoogle} className="animate__animated animate__lightSpeedInLeft mt-4 w-full text-black font-bold py-2 px-4 rounded-lg border border-green-500 shadow-md hover:bg-green-500 hover:text-white hover:shadow-lg transition-all duration-300 flex items-center justify-center">
               <FaGoogle className='mr-3 text-green-500 hover:text-black' />
               Sign In with Google
             </button>

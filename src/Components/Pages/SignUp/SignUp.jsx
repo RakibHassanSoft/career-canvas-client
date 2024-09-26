@@ -1,17 +1,67 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import signup_Animation from "../../../../public/lotti-animation/signup-animation.json"
 import 'animate.css';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const SignUp = () => {
-  const handleSignIn = e => {
-    e.preventDefault();
+
+
+  const {createUser, signInWithGoogle}=useContext(AuthContext)
+const [signUpError,setSignUpError]=useState('')
+const navigate=useNavigate()
+  
+
+const handleSignUp = e => {
+ e.preventDefault();
 
     const email = e.target.email.value;
     const pass = e.target.pass.value;
     const name = e.target.name.value;
-    alert(name, email, pass);
+    console.log(name, email, pass);
+
+  if(pass.length<5){
+toast.error('Password Must be 5 Character')
+return
   }
+  else if(!/[A-Z]/.test(pass)){
+    toast.error('Password must have One Capital letter!!')
+    return
+  }
+  else if(!/[a-z]/.test(pass)){
+    toast.error('Password must have One Small letter!!')
+    return
+  }
+  else if(!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(pass)){
+    toast.error('Password must have One Special Character!!')
+    return
+  }
+  createUser(email,pass)
+  .then(result=>{
+    console.log(result.user)
+    toast.success('User Created Successfully!!')
+    navigate('/')
+  })
+  .catch(error=>{
+toast.error(error.message)
+  })
+
+  }
+
+  // google
+  const handleGoogle=()=>{
+    signInWithGoogle()
+    .then(result=>{
+      console.log(result)
+      toast.success('User Created Successfully!!')
+      navigate('/')
+    
+    })
+    .catch(error=>console.log(error))
+    }
 
   return (
     <div className="flex items-center py-6 md:py-10 lg:py-16 justify-center">
@@ -26,7 +76,7 @@ const SignUp = () => {
             The faster you Sign Up, the faster you can build your resume.
           </p>
           
-          <form onSubmit={handleSignIn} className="mt-6">
+          <form onSubmit={handleSignUp} className="mt-6">
             <div className="mb-4 animate__animated animate__lightSpeedInLeft">
               <label className="block text-sm font-bold mb-2" htmlFor="name">
                 Name
@@ -35,24 +85,13 @@ const SignUp = () => {
                 type="text"
                 id="name"
                 name="name"
-                required
+                
                 placeholder="Enter your Name"
                 className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
               />
             </div>
 
-            <div className="mb-4 animate__animated animate__lightSpeedInRight">
-              <label className="block text-sm font-bold mb-2" htmlFor="photo">
-                Photo
-              </label>
-              <input
-                type="text"
-                id="photo"
-                name="photo"
-                placeholder="Enter your Photo URL"
-                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
-              />
-            </div>
+            
 
             <div className="mb-4 animate__animated animate__lightSpeedInLeft">
               <label className="block text-sm font-bold mb-2" htmlFor="email">
@@ -89,7 +128,7 @@ const SignUp = () => {
               Sign Up
             </button>
 
-            <button
+            <button onClick={handleGoogle}
               className="animate__animated animate__lightSpeedInRight mt-4 w-full text-green-600 bg-white border border-green-500 font-bold py-2 px-4 rounded-lg hover:bg-green-500 hover:text-white flex items-center justify-center"
             >
               <FaGoogle className="mr-3 text-green-800" />
@@ -103,6 +142,7 @@ const SignUp = () => {
               Sign In
             </Link>
           </p>
+          
         </div>
 
         {/* Lottie Animation Section */}
