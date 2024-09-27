@@ -36,6 +36,8 @@ const ResumeTemplatePreview = () => {
             slidesPerView: 3,
           },
         }}
+        modules={[FreeMode, Pagination]}
+        className="mySwiper"
       >
         <SwiperSlide className="shadow-xl ">
         <div
