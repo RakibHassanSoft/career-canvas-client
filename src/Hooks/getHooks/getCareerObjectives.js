@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import useAxiosPublic from '../AxiosHooks/useAxiosPublic';
 
 export const getCareerObjectives = () => {
+  const axiosPublic=useAxiosPublic()
   return useQuery(['careerObjectives'], async () => {
-    const { data } = await axios.get('/api/CareerObjective');
+    const { data } = await axiosPublic.get('/CareerObjective');
     return data;
   });
 };

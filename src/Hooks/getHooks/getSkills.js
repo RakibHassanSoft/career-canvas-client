@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import useAxiosPublic from '../AxiosHooks/useAxiosPublic';
 
 export const getSkills = () => {
+  const axiosPublic = useAxiosPublic()
   return useQuery(['skills'], async () => {
-    const { data } = await axios.get('/skills');
+    const { data } = await axiosPublic.get('/skills');
     return data;
   });
 };

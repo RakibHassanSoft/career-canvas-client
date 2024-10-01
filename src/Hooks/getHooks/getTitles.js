@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import useAxiosPublic from '../AxiosHooks/useAxiosPublic';
 
 export const getTitles = () => {
+  const axiosPublic = useAxiosPublic()
   return useQuery(['titles'], async () => {
-    const { data } = await axios.get('/api/titles');
+    const { data } = await axiosPublic.get('/api/titles');
     return data;
   });
 };

@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import useAxiosPublic from '../AxiosHooks/useAxiosPublic';
 
 export const getLanguages = () => {
+  const axiosPublic = useAxiosPublic()
   return useQuery(['languages'], async () => {
-    const { data } = await axios.get('/getLanguagesByUserId');
+    const { data } = await axiosPublic.get('/getLanguagesByUserId');
     return data;
   });
 };

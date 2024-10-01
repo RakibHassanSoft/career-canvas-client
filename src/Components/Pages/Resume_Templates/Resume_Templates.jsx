@@ -7,6 +7,7 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import './styles.css';
 
 
+
 const images = [
     { id: 1, name: "Resume1", url: "/resume-images/Resume1.png" },
     { id: 2, name: "Resume2", url: "/resume-images/Resume2.png" },
@@ -23,6 +24,7 @@ const images = [
 ];
 
 const Resume_Templates = () => {
+  
     return (
         <div>
             <h1 className="text-4xl font-extrabold text-center">Get dream jobs with our resume builder</h1>
