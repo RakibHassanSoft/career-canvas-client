@@ -1,9 +1,12 @@
 
-
+import Resume1 from "../../../templatesColllection/Resume1"
 const User_Profile = () => {
+
     return (
         <div>
-            This is user profile
+
+            <Resume1/>
+
         </div>
     );
 };

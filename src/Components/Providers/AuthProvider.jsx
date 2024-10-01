@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import app from "../Firebase/firebase.config";
 import {
   GoogleAuthProvider,
@@ -17,6 +17,13 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [templateId, setTemplateId] = useState(null);
+
+  // Function to update the templateId state
+  const handleUpdateTemplateId = (newTemplateId) => {
+    setTemplateId(newTemplateId); // This will save the templateId in the component state
+  };
+
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -45,6 +52,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log('current user', currentUser);
+      console.log('TempalteId', templateId);
       setLoading(false);
     });
     return () => {
@@ -57,7 +65,9 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     signInWithGoogle,
-    user, loading
+    user, loading,
+    handleUpdateTemplateId,
+    templateId
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

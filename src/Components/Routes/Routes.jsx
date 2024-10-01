@@ -8,7 +8,14 @@ import Job_Posting from "../Pages/Job_Posting/Job_Posting"
 import Premium_Membership from "../Pages/Premium_Membership/Premium_Membership";
 import Resume_Review from "../Pages/Resume_Review/Resume_Review";
 import User_Profile from "../Pages/User_Profile/User_Profile";
-
+import Main from "../../Main/Main";
+import PersonalInfoForm from '../../PageWise/PersonalInfoForm'
+import CareerObjectiveForm from '../../PageWise/CareerObjectiveForm'
+import SkillsForm from '../../PageWise/SkillsForm'
+import ProjectsForm from '../../PageWise/ProjectsForm'
+import EducationForm from '../../PageWise/EducationForm'
+import LanguagesForm from '../../PageWise/LanguagesForm'
+import TemplateForm from '../../PageWise/TemplateForm'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +28,37 @@ const router = createBrowserRouter([
       },
       {
         path: '/resume-templates',
-        element: <Resume_Templates></Resume_Templates>
+        element: <Main></Main>,  // Main component contains <Outlet />
+        children: [
+          {
+            path: "template-form",  // Notice no leading "/"
+            element: <TemplateForm/>,
+          },
+          {
+            path: "personal-info-form",  // Notice no leading "/"
+            element: <PersonalInfoForm></PersonalInfoForm>,
+          },
+          {
+            path: "career-objective-form", // Add the new route here
+            element: <CareerObjectiveForm />,
+          },
+          {
+            path: "skills-form", // Add the new route here
+            element: <SkillsForm />,
+          },
+          {
+            path: "peronal-project", // Add the new route here
+            element: <ProjectsForm />,
+          },
+          {
+            path: "Education-form", // Add the new route here
+            element: <EducationForm />,
+          },
+          {
+            path: "Languages-form", // Add the new route here
+            element: <LanguagesForm />,
+          },
+        ],
       },
       {
         path: '/job-posting',
