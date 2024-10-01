@@ -1,6 +1,8 @@
 
 
+
 const Job_Posting = () => {
+
     return (
         <div>
             This is job posting page

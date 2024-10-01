@@ -1,0 +1,48 @@
+#app {
+    height: 100%;
+  }
+  
+  html,
+  body {
+    position: relative;
+    height: 100%;
+  }
+  
+  body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: auto; /* Changed from 300px to auto */
+    padding-bottom: 20px; /* Added padding to ensure space for the button */
+    display: flex; /* Ensure content is flexed */
+    flex-direction: column; /* Stack image and button vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto; /* Ensure image keeps aspect ratio */
+    margin-bottom: 10px; /* Add some space between the image and the button */
+  }
+  
+  a.relative.inline-block {
+    margin-top: 10px; /* Add space above the button */
+  }
+  
