@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'api-example'
+    baseURL: '/'
 })
 
 const useAxiosPublic = () => {

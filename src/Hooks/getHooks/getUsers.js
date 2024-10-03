@@ -5,8 +5,7 @@ import useAxiosPublic from '../AxiosHooks/useAxiosPublic';
 export const getUsers = () => {
   const axiosPublic = useAxiosPublic()
   return useQuery(['users'], async () => {
-    const { data } = await axiosPublic.get('/users');
-    // console.log(data)
+    const { data } = await axiosPublic.get('../../../public/user.json');
     return data;
   });
 };

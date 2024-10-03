@@ -5,6 +5,7 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import './styles.css';
+import { Outlet, useNavigate } from "react-router-dom";
 
 
 
@@ -24,13 +25,18 @@ const images = [
 ];
 
 const Resume_Templates = () => {
-  
+    const navigate = useNavigate();
+
+    const handleImageClick = (resumeType) => {
+        // console.log(resumeType)
+        navigate('/resume-templates/personal-info-form', { state: { resumeType } });
+    };
     return (
         <div>
-            <h1 className="text-4xl font-extrabold text-center">Get dream jobs with our resume builder</h1>
+            <h1 className="text-3xl font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-center">Get dream jobs with our resume builder</h1>
             <div className="flex items-center gap-2">
                 <FaRegStar className="text-green-500" />
-                <h1 className="text-2xl font-bold">Popular</h1>
+                <h1 className="text-3xl font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent">Popular</h1>
             </div>
 
             <Swiper
@@ -60,6 +66,7 @@ const Resume_Templates = () => {
                             <a
                                 href="#_"
                                 className="relative inline-block text-lg group mt-4"
+                                onClick={(e) => { e.preventDefault(); handleImageClick(image.name.toLowerCase()); }}
                             >
                                 <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-green-500 rounded-lg group-hover:text-white">
                                     <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
@@ -72,6 +79,7 @@ const Resume_Templates = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <Outlet/>
         </div>
     );
 };
