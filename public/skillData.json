@@ -1,0 +1,14 @@
+{
+    "skills": {
+        "webDesign": "Web Design",
+        "frontEndCoding": "Front End Coding",
+        "technologies": [
+            "Web Design",
+            "Front End Coding",
+            "React, TypeScript, JavaScript",
+            "Node.js & Express",
+            "Database Management (MongoDB, MySQL)",
+            "Responsive Web Design"
+        ]
+    }
+}

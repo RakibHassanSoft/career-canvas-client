@@ -1,6 +1,8 @@
-import React from 'react';
+import getSkills from "../../../../Hooks/getHooks/getSkills";
+
 
 const Resume2 = () => {
+  let { skillData } = getSkills()
   return (
     <div className="w-full mx-auto bg-white p-10 shadow-lg">
       {/* Resume Title and Contact Information */}
@@ -75,13 +77,13 @@ const Resume2 = () => {
       {/* Skills */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Skills</h3>
-        <ul className="list-disc ml-6 text-gray-600">
-          <li>HTML, CSS, JavaScript, React</li>
-          <li>Node.js, Express, MongoDB</li>
-          <li>Responsive Web Design</li>
-          <li>Version Control (Git)</li>
-          <li>RESTful API Integration</li>
-        </ul>
+        {
+          skillData?.length > 0 && skillData.map((item, index) => (
+            <ul key={index} className="list-disc ml-4">
+              <li>{item}</li>
+            </ul>
+          ))
+        }
       </section>
 
       {/* Awards */}

@@ -1,5 +1,6 @@
 import  { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ImArrowLeft } from 'react-icons/im';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProjectsForm = () => {
     const navigate = useNavigate();
@@ -39,10 +40,16 @@ const ProjectsForm = () => {
     const handleSkip = () => {
         navigate('/resume-templates/education-form');  // Change this to your desired navigation path for skipping
     };
-
+    const handleBack = () => {
+        navigate('/resume-templates/skills-form')
+      }
     return (
         <div className="flex flex-col max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
             <div className="w-full p-6 bg-white rounded-lg shadow-md">
+            <Link onClick={handleBack}>
+          <ImArrowLeft />
+        </Link>
+
                 <h2 className="text-3xl font-bold mb-6 text-center text-green-700">Projects</h2>
                 
                 {/* Tips Section */}

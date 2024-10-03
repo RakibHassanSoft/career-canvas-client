@@ -1,6 +1,7 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { FaRegLightbulb, FaCheckCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { ImArrowLeft } from 'react-icons/im';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LanguagesForm = () => {
     const [formData, setFormData] = useState({
@@ -34,11 +35,17 @@ const LanguagesForm = () => {
             navigate('/user-profile'); // Change '/next-page' to your desired route
         }
     };
-
+    const handleBack = () => {
+        navigate('/resume-templates/education-form')
+    }
     return (
         <div className="flex max-w-6xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
             {/* Form Section */}
             <div className="w-full p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
+                <Link onClick={handleBack}>
+                    <ImArrowLeft />
+                </Link>
+
                 <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Languages</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -52,9 +59,8 @@ const LanguagesForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="e.g. English, Spanish"
-                            className={`mt-1 block w-full border ${
-                                errors.languages ? 'border-red-500' : 'border-gray-300'
-                            } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
+                            className={`mt-1 block w-full border ${errors.languages ? 'border-red-500' : 'border-gray-300'
+                                } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
                             aria-label="Languages"
                         />
                         {errors.languages && <p className="text-red-500 text-sm mt-1">{errors.languages}</p>}

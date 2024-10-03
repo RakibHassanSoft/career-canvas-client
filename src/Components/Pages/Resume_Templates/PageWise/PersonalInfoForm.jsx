@@ -1,10 +1,11 @@
 // src/Components/PersonalInfoForm.jsx
 
 import { useContext } from "react";
-import {  useState } from "react";
+import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormContext } from "../../../Providers/FormContext";
+import { ImArrowLeft } from "react-icons/im";
 
 
 
@@ -39,15 +40,22 @@ const PersonalInfoForm = () => {
     if (Object.keys(validationErrors).length) {
       setErrors(validationErrors);
     } else {
-      updatePersonalInfo(form); 
-      navigate('/resume-templates/career-objective-form'); 
+      updatePersonalInfo(form);
+      navigate('/resume-templates/career-objective-form');
     }
   };
+  const handleBack = () => {
+    navigate('/resume-templates/Resume_Templates')
+  }
 
   return (
     <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
       {/* Form Section */}
       <div className="w-1/2 p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
+        <Link onClick={handleBack}>
+          <ImArrowLeft />
+        </Link>
+
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Personal Information</h2>
         <form onSubmit={handleSubmit}>
           {Object.keys(form).map((key) => (
@@ -62,9 +70,8 @@ const PersonalInfoForm = () => {
                 onChange={handleChange}
                 required
                 placeholder={key === 'phone' ? '(123) 456-7890' : `your.${key}@example.com`}
-                className={`mt-1 block w-full border ${
-                  errors[key] ? 'border-red-500' : 'border-gray-300'
-                } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={`mt-1 block w-full border ${errors[key] ? 'border-red-500' : 'border-gray-300'
+                  } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
                 aria-label={key.charAt(0).toUpperCase() + key.slice(1)}
               />
               {errors[key] && <p className="text-red-500 text-sm mt-1">{errors[key]}</p>}

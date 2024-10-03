@@ -1,7 +1,8 @@
 // src/Components/CareerObjectiveForm.jsx
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FormContext } from '../../../Providers/FormContext';
+import { ImArrowLeft } from 'react-icons/im';
 
 
 const CareerObjectiveForm = () => {
@@ -38,11 +39,18 @@ const CareerObjectiveForm = () => {
       navigate('/resume-templates/skills-form');
     }
   };
+  const handleBack = () => {
+    navigate('/resume-templates/personal-info-form')
+  }
 
   return (
     <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
       {/* Form Section */}
       <div className="w-full p-6 bg-white rounded-lg shadow-md">
+      <Link onClick={handleBack}>
+          <ImArrowLeft />
+        </Link>
+
         <h2 className="text-3xl font-bold mb-6 text-center text-green-700">Career Objective</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import {  FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { ImArrowLeft } from 'react-icons/im';
+import { Link, useNavigate } from 'react-router-dom';
 
 const EducationForm = () => {
     const navigate = useNavigate();
@@ -54,11 +55,17 @@ const EducationForm = () => {
         const newEducationList = educationList.filter((_, i) => i !== index);
         setEducationList(newEducationList);
     };
-
+    const handleBack = () => {
+        navigate('/resume-templates/peronal-project')
+      }
     return (
         <div className="flex flex-row max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
             {/* Form Section */}
             <div className="w-full p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
+            <Link onClick={handleBack}>
+          <ImArrowLeft />
+        </Link>
+
                 <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Education Information</h2>
                 <form onSubmit={handleSubmit}>
                     {educationList.map((entry, index) => (

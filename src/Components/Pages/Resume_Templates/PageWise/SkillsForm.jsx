@@ -1,13 +1,14 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { FaRegLightbulb, FaCheckCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player'; // Import Lottie Player
 
 // If you're using a local file stored in the public folder, adjust the path
 import skillAnimation from '../../../../../public/skill-animation.json.json';
+import { ImArrowLeft } from 'react-icons/im';
 
 const SkillsForm = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [skills, setSkills] = useState('');
     const [errors, setErrors] = useState('');
 
@@ -30,14 +31,20 @@ const SkillsForm = () => {
             setErrors(validationError);
         } else {
             console.log('Skills submitted successfully:', skills);
-            navigate('/resume-templates/peronal-project'); 
+            navigate('/resume-templates/peronal-project');
         }
     };
-
+    const handleBack = () => {
+        navigate('/resume-templates/career-objective-form')
+    }
     return (
         <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
             {/* Form Section */}
             <div className="w-full p-6 bg-white rounded-lg shadow-md">
+                <Link onClick={handleBack}>
+                    <ImArrowLeft />
+                </Link>
+
                 <h2 className="text-3xl font-bold mb-6 text-center text-green-700">Skills</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-6">
@@ -50,9 +57,8 @@ const SkillsForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="JavaScript, React, Node.js, Express, MongoDB"
-                            className={`mt-1 block w-full border ${
-                                errors ? 'border-red-500' : 'border-gray-300'
-                            } rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200`}
+                            className={`mt-1 block w-full border ${errors ? 'border-red-500' : 'border-gray-300'
+                                } rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200`}
                             aria-label="Skills"
                         />
                         {errors && <p className="text-red-500 text-sm mt-1">{errors}</p>}
