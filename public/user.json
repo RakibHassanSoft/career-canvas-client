@@ -1,0 +1,14 @@
+[
+    {
+        "name": "John Doe",
+        "contact": {
+            "phone": "123-456-7890",
+            "email": "john.doe@example.com",
+            "website": "https://johndoe.com"
+        },
+        "userId": "user123",
+        "templateId": "template001",
+        "createdAt": "2024-10-02T12:34:56.789Z",
+        "updatedAt": "2024-10-02T12:34:56.789Z"
+    }
+]

@@ -8,6 +8,13 @@ import Job_Posting from "../Pages/Job_Posting/Job_Posting"
 import Premium_Membership from "../Pages/Premium_Membership/Premium_Membership";
 import Resume_Review from "../Pages/Resume_Review/Resume_Review";
 import User_Profile from "../Pages/User_Profile/User_Profile";
+import PersonalInfoForm from "../Pages/Resume_Templates/PageWise/PersonalInfoForm";
+import CareerObjectiveForm from "../Pages/Resume_Templates/PageWise/CareerObjectiveForm";
+import SkillsForm from "../Pages/Resume_Templates/PageWise/SkillsForm";
+import ProjectsForm from "../Pages/Resume_Templates/PageWise/ProjectsForm";
+import EducationForm from "../Pages/Resume_Templates/PageWise/EducationForm";
+import LanguagesForm from "../Pages/Resume_Templates/PageWise/LanguagesForm";
+import Main from "../Pages/Resume_Templates/Main/Main";
 
 
 const router = createBrowserRouter([
@@ -21,7 +28,38 @@ const router = createBrowserRouter([
       },
       {
         path: '/resume-templates',
-        element: <Resume_Templates></Resume_Templates>
+        element: <Main></Main>,
+        
+        children: [
+          {
+            path: 'Resume_Templates',
+            element: <Resume_Templates></Resume_Templates>,
+          },
+          {
+            path: "personal-info-form",
+            element: <PersonalInfoForm />,
+          },
+          {
+            path: "career-objective-form",
+            element: <CareerObjectiveForm />,
+          },
+          {
+            path: "skills-form",
+            element: <SkillsForm />,
+          },
+          {
+            path: "peronal-project",
+            element: <ProjectsForm />,
+          },
+          {
+            path: "education-form",
+            element: <EducationForm />,
+          },
+          {
+            path: "languages-form",
+            element: <LanguagesForm />,
+          },
+        ]
       },
       {
         path: '/job-posting',
@@ -29,15 +67,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/premium-membership',
-        element:<Premium_Membership></Premium_Membership>
+        element: <Premium_Membership></Premium_Membership>
       },
       {
         path: '/resume-review',
-        element:<Resume_Review></Resume_Review>
+        element: <Resume_Review></Resume_Review>
       },
       {
         path: '/user-profile',
-        element:<User_Profile></User_Profile>
+        element: <User_Profile></User_Profile>
       },
       {
         path: '/signin',
