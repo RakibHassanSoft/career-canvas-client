@@ -34,13 +34,7 @@ const Resume1 = () => {
           <h1 className="text-4xl font-bold">{name}</h1>
           <h2 className="text-lg font-light text-gray-500">Web Developer</h2>
         </div>
-        <div className="w-24 h-24 rounded-full overflow-hidden">
-          <img
-            src="https://via.placeholder.com/100"
-            alt="Profile"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        
       </header>
 
       {/* Contract Summary */}

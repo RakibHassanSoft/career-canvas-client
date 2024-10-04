@@ -1,10 +1,10 @@
 import { FaRegStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/effect-coverflow';
+import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
-import { EffectCoverflow, Pagination } from 'swiper/modules';
-import './styles.css';
+import { Autoplay, Pagination } from 'swiper/modules';
+
 import { Outlet, useNavigate } from "react-router-dom";
 
 const images = [
@@ -22,7 +22,7 @@ const images = [
     { id: 12, name: "Resume12", url: "/resume-images/Resume12.png" }
 ];
 
-const Resume_Templates = () => {
+const Resume_templates_row = () => {
     const navigate = useNavigate();
 
     const handleImageClick = (resumeType) => {
@@ -30,7 +30,7 @@ const Resume_Templates = () => {
     };
 
     return (
-        <div className="shadow-md border-b-4  mt-12 border-b-green-500 border-r-2 border-r-green-500 p-10 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="shadow-md border-b-4 border-b-green-500 border-r-2 border-r-green-500 p-10 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900">
             <h1 className="text-4xl font-extrabold bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent text-center mb-6">
                 Get Your Dream Job with Our Resume Builder
             </h1>
@@ -42,23 +42,23 @@ const Resume_Templates = () => {
             </div>
 
             <Swiper
-                effect={'coverflow'}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={'auto'}
-                coverflowEffect={{
-                    rotate: 30,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
+                slidesPerView={4}
+                spaceBetween={30}
+                autoplay={{
+                    delay: 3000,  // Auto scroll after 3 seconds
+                    disableOnInteraction: false,  // Keep autoplay even after user interacts
                 }}
                 pagination={{ clickable: true }}
-                modules={[EffectCoverflow, Pagination]}
+                modules={[Autoplay, Pagination]}
                 className="mySwiper"
+                breakpoints={{
+                    640: { slidesPerView: 1 }, // For smaller screens
+                    768: { slidesPerView: 2 }, // For medium screens
+                    1024: { slidesPerView: 3 }, // For large screens
+                }}
             >
                 {images.map((image) => (
-                    <SwiperSlide key={image.id} className="relative">
+                    <SwiperSlide key={image.id}>
                         <div className="flex flex-col items-center justify-center p-4 shadow-lg rounded-lg bg-white dark:bg-gray-800 transform hover:scale-105 transition-transform duration-300 ease-in-out">
                             <img
                                 src={image.url}
@@ -87,4 +87,6 @@ const Resume_Templates = () => {
     );
 };
 
-export default Resume_Templates;
+export default Resume_templates_row;
+
+

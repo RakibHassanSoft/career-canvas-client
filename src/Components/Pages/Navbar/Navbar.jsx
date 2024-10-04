@@ -119,7 +119,8 @@ const Navbar = () => {
             >
               Resume Review
             </NavLink>
-            <NavLink
+            {
+              user &&   <NavLink
               to="/user-profile"
               className={({ isActive }) =>
                 `ml-4 ${isActive
@@ -130,17 +131,19 @@ const Navbar = () => {
             >
               User Profile
             </NavLink>
+            }
+          
           </ul>
         </div>
         <div className="hidden lg:flex justify-center items-center">
-          <Link
+          {/* <Link
             to="/"
             className="btn btn-ghost text-3xl font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent"
           >
             Career Canvas
-          </Link>
+          </Link> */}
           <img
-            className="w-16 h-16"
+            className="w-24 h-20  rounded-full"
             src="/Blue White Modern Minimalist Name Logo.png"
             alt="Career Canvas Logo"
           />
@@ -221,6 +224,17 @@ const Navbar = () => {
           }
         >
           User Profile
+        </NavLink>
+        <NavLink
+          to="/ai-chat"
+          className={({ isActive }) =>
+            `ml-4 ${isActive
+              ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+              : "text-lg font-semibold"
+            }`
+          }
+        >
+          CC Ai
         </NavLink>
       </div>
       <div className="navbar-end">
