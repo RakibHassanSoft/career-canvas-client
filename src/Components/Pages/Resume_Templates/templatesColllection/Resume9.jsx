@@ -1,118 +1,185 @@
-import React from 'react';
+// src/Components/Pages/Resume/Resume2.jsx
 
-const Resume9 = () => {
+import getAwards from "../../../../Hooks/getHooks/getAwards";
+import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
+import getCertificates from "../../../../Hooks/getHooks/getCertificates";
+import getEducation from "../../../../Hooks/getHooks/getEducation";
+import getExperience from "../../../../Hooks/getHooks/getExperience";
+import getLanguages from "../../../../Hooks/getHooks/getLanguages";
+import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
+import getProjects from "../../../../Hooks/getHooks/getProjects";
+import getSkills from "../../../../Hooks/getHooks/getSkills";
+
+const Resume2 = () => {
+  // Fetch data using custom hooks
+  const { contactInfo, name } = getNameContacts();
+  const { skillData } = getSkills();
+  const { careerObjective } = getCareerObjectives();
+  const { projects } = getProjects();
+  const { education } = getEducation();
+  const { experience } = getExperience();
+  const { languages } = getLanguages();
+  const { certificates } = getCertificates();
+  const { awards } = getAwards();
+
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-md p-8">
       {/* Title and Contact */}
-      <div className="flex justify-between items-center border-b pb-4 mb-6">
+      <header className="flex justify-between items-center border-b pb-4 mb-6">
         <div>
-          <h1 className="text-4xl font-bold">Jamie Chastain</h1>
-          <h2 className="text-lg text-gray-600">Project Manager</h2>
+          <h1 className="text-4xl font-bold">{name}</h1>
+          <h2 className="text-lg text-gray-600">Web Developer</h2>
         </div>
         <div className="text-right">
-          <p>📞 123-456-7890</p>
-          <p>✉️ hello@reallygreatsite.com</p>
-          <p>🌍 reallygreatsite.com</p>
+          <p>📞 {contactInfo?.phone}</p>
+          <p>✉️ {contactInfo?.email}</p>
+          <p>🌍 <a href={contactInfo?.website} className="text-blue-500 underline">{contactInfo?.website}</a></p>
         </div>
-      </div>
+      </header>
 
       {/* Career Objective */}
       <section className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Career Objective</h3>
-        <p className="text-gray-700">
-          I am a qualified and professional web developer with five years of experience in database administration and website design. Strong creative and analytical skills. Team player with an eye for detail.
-        </p>
+        <p className="text-gray-700">{careerObjective || "Your career objective goes here."}</p>
       </section>
 
       {/* Summary */}
       <section className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Summary</h3>
         <p className="text-gray-700">
-          Over 5 years of experience as a web developer with a focus on database administration, web content management, and project leadership.
+          A dedicated and result-driven developer with a solid understanding of front-end and
+          back-end development. Experienced in working in agile environments and using JavaScript,
+          React, Node.js, and other modern technologies to build efficient and scalable applications.
         </p>
       </section>
 
       {/* Skills */}
       <section className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Skills</h3>
-        <ul className="list-disc pl-5 space-y-1 text-gray-700">
-          <li>Web Design</li>
-          <li>Design Thinking</li>
-          <li>Wireframe Creation</li>
-          <li>Front End Coding</li>
-          <li>Problem-Solving</li>
-          <li>Computer Literacy</li>
-          <li>Project Management Tools</li>
-          <li>Strong Communication</li>
-        </ul>
-      </section>
-
-      {/* Experience */}
-      <section className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Experience</h3>
-        <div className="space-y-4">
-          <div>
-            <h4 className="text-lg font-bold">Applications Developer</h4>
-            <p className="text-gray-600">Really Great Company | 2016 - Present</p>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>Database administration and website design</li>
-              <li>Built the logic for a streamlined ad-serving platform</li>
-              <li>Educational institutions and online classroom management</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-bold">Web Content Manager</h4>
-            <p className="text-gray-600">Really Great Company | 2014 - 2016</p>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>Database administration and website design</li>
-              <li>Built the logic for a streamlined ad-serving platform</li>
-              <li>Educational institutions and online classroom management</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Education */}
-      <section className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Education</h3>
-        <div>
-          <h4 className="text-lg font-bold">Bachelor of Technology</h4>
-          <p className="text-gray-600">Really Great University | 2014 - 2016</p>
-        </div>
-        <div>
-          <h4 className="text-lg font-bold">Secondary School</h4>
-          <p className="text-gray-600">Really Great High School | 2010 - 2014</p>
-        </div>
-      </section>
-
-      {/* Languages */}
-      <section className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Languages</h3>
-        <ul className="list-disc pl-5 space-y-1 text-gray-700">
-          <li>English</li>
-          <li>Spanish</li>
-        </ul>
-      </section>
-
-      {/* Awards */}
-      <section className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Awards</h3>
-        <p className="text-gray-700">Best Project Manager 2019 - Really Great Company</p>
-      </section>
-
-      {/* Certificates */}
-      <section className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Certificates</h3>
-        <p className="text-gray-700">Certified Web Developer - Web Development Institute</p>
+        {skillData && skillData.length > 0 ? (
+          <ul className="list-disc pl-5 space-y-1 text-gray-700">
+            {skillData.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-700">No skills data available.</p>
+        )}
       </section>
 
       {/* Projects */}
       <section className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Projects</h3>
-        <p className="text-gray-700">Developed an ad-serving platform for online classrooms with scalable infrastructure.</p>
+        {projects && projects.length > 0 ? (
+          projects.map((project, index) => (
+            <div key={project._id || index} className="mb-4">
+              <h4 className="text-lg font-bold">{project.title || `Project ${index + 1}`}</h4>
+              <p className="text-gray-700">{project.description || "Project description goes here."}</p>
+              {project.features && project.features.length > 0 ? (
+                <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                  {project.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                  <li>Feature 1 of the project</li>
+                  <li>Feature 2 of the project</li>
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-700">No projects data available.</p>
+        )}
+      </section>
+
+      {/* Experience */}
+      <section className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">Experience</h3>
+        {experience && experience.length > 0 ? (
+          experience.map((exp) => (
+            <div key={exp._id || exp.jobTitle} className="mb-6">
+              <h4 className="text-lg font-bold">{exp.jobTitle}</h4>
+              <p className="text-gray-600">{exp.company}, {exp.duration}</p>
+              {exp.description && <p className="text-gray-700 mt-2">{exp.description}</p>}
+              {exp.responsibilities && exp.responsibilities.length > 0 && (
+                <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                  {exp.responsibilities.map((responsibility, index) => (
+                    <li key={index}>{responsibility}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-700">No experience data available.</p>
+        )}
+      </section>
+
+      {/* Education */}
+      <section className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">Education</h3>
+        {education && education.length > 0 ? (
+          education.map((edu) => (
+            <div key={edu._id || edu.degree} className="mb-4">
+              <h4 className="text-lg font-bold">{edu.degree}</h4>
+              <p className="text-gray-600">{edu.institution}, {edu.startYear} - {edu.endYear}</p>
+              {edu.description && <p className="text-gray-700 mt-2">{edu.description}</p>}
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-700">No education data available.</p>
+        )}
+      </section>
+
+      {/* Languages */}
+      <section className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">Languages</h3>
+        {languages && languages.length > 0 ? (
+          <ul className="list-disc pl-5 space-y-1 text-gray-700">
+            {languages.map((language, index) => (
+              <li key={index}>{language}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-700">No languages data available.</p>
+        )}
+      </section>
+
+      {/* Certificates */}
+      <section className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">Certificates</h3>
+        {certificates && certificates.length > 0 ? (
+          <ul className="list-disc pl-5 space-y-1 text-gray-700">
+            {certificates.map(cert => (
+              <li key={cert._id || cert.title}>
+                {cert.title} by {cert.institution}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-700">No certificates available.</p>
+        )}
+      </section>
+
+      {/* Awards */}
+      <section className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">Awards</h3>
+        {awards && awards.length > 0 ? (
+          <ul className="list-disc pl-5 space-y-1 text-gray-700">
+            {awards.map((award) => (
+              <li key={award._id || award.title}>
+                {award.title} - {award.organization} ({award.year})
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-700">No awards data available.</p>
+        )}
       </section>
     </div>
   );
 };
 
-export default Resume9;
+export default Resume2;

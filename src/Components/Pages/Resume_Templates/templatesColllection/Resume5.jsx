@@ -1,120 +1,174 @@
-import React from 'react';
+
+
+// Import your custom hooks
+import getAwards from "../../../../Hooks/getHooks/getAwards";
+import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
+import getCertificates from "../../../../Hooks/getHooks/getCertificates";
+import getEducation from "../../../../Hooks/getHooks/getEducation";
+import getExperience from "../../../../Hooks/getHooks/getExperience";
+import getLanguages from "../../../../Hooks/getHooks/getLanguages";
+import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
+import getProjects from "../../../../Hooks/getHooks/getProjects";
+import getSkills from "../../../../Hooks/getHooks/getSkills";
 
 const Resume5 = () => {
+  // Fetch data using custom hooks
+  const { contactInfo, name } = getNameContacts();
+  const { skillData } = getSkills();
+  const { careerObjective } = getCareerObjectives();
+  const { projects } = getProjects();
+  const { education } = getEducation();
+  const { experience } = getExperience();
+  const { languages } = getLanguages();
+  const { certificates } = getCertificates();
+  const { awards } = getAwards();
+
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 shadow-md rounded-md">
       {/* Header */}
       <div className="flex items-center justify-between border-b pb-4 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Jane Doe, MSc</h1>
-          <p className="text-lg text-gray-600">UX Designer</p>
-          <p className="mt-2 text-gray-500">jane.doe@email.com</p>
+          <h1 className="text-3xl font-bold text-gray-900">{name}</h1>
+          <p className="text-lg text-gray-600">{contactInfo?.title || "Web Developer"}</p>
+          <p className="mt-2 text-gray-500">
+            {contactInfo?.phone} — {contactInfo?.email} —{" "}
+            <a href={contactInfo?.website} className="text-blue-500 underline">
+              {contactInfo?.website}
+            </a>
+          </p>
         </div>
-        <img
-          className="h-24 w-24 rounded-full object-cover"
-          src="/path-to-profile-photo.jpg" // Replace with the actual path or state
-          alt="Profile"
-        />
+        {contactInfo?.profilePhoto && (
+          <img
+            className="h-24 w-24 rounded-full object-cover"
+            src={contactInfo.profilePhoto} // Ensure this path is correct
+            alt={`${name}'s Profile`}
+          />
+        )}
       </div>
 
       {/* Professional Summary */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-gray-900">Profile</h2>
         <p className="mt-2 text-gray-700">
-          A UX Designer with a passion for creating intuitive and seamless user experiences. I leverage my strong design and research background to develop user-centric solutions that drive engagement and satisfaction. Proven ability to collaborate across teams to deliver high-quality products in fast-paced environments.
+          {careerObjective || "A passionate professional with expertise in various domains, committed to delivering high-quality results."}
         </p>
       </div>
 
       {/* Skills */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Skills</h2>
-        <div className="flex flex-wrap mt-2">
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">Design</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">Productivity Software</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">Soft Skills</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">Web Development</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">UX Research</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">Rapid Prototyping</span>
+      {skillData && skillData.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Skills</h2>
+          <div className="flex flex-wrap mt-2">
+            {skillData.map((skill, index) => (
+              <span key={index} className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Work Experience */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Professional Experience</h2>
-        <div className="mt-4">
-          <h3 className="font-bold">Umbrella Inc. - UX & UI Designer</h3>
-          <p className="text-gray-600 italic">Aug 2022 - Present | New York, USA</p>
-          <ul className="list-disc list-inside mt-2">
-            <li>Designed intuitive interfaces that improved user experience for 10+ projects.</li>
-            <li>Led usability testing sessions, gathering actionable insights to optimize product performance.</li>
-          </ul>
+      {/* Professional Experience */}
+      {experience && experience.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Professional Experience</h2>
+          {experience.map((exp) => (
+            <div key={exp._id} className="mt-4">
+              <h3 className="font-bold">{exp.company} - {exp.jobTitle}</h3>
+              <p className="text-gray-600 italic">{exp.duration} | {exp.location || "Location"}</p>
+              <p className="text-gray-700 mt-2">{exp.description || "Job description goes here."}</p>
+              {exp.responsibilities && exp.responsibilities.length > 0 && (
+                <ul className="list-disc list-inside mt-2 text-gray-700">
+                  {exp.responsibilities.map((resp, index) => (
+                    <li key={index}>{resp}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
         </div>
-        <div className="mt-4">
-          <h3 className="font-bold">Acme Designs SARL - Product Design Intern</h3>
-          <p className="text-gray-600 italic">Nov 2016 - Jun 2022 | Paris, France</p>
-          <ul className="list-disc list-inside mt-2">
-            <li>Collaborated with cross-functional teams to define design strategy for mobile applications.</li>
-            <li>Created prototypes and conducted A/B testing for key design iterations.</li>
-          </ul>
-        </div>
-        <div className="mt-4">
-          <h3 className="font-bold">Black Mesa Labs - UX Research Assistant</h3>
-          <p className="text-gray-600 italic">Aug 2011 - Oct 2016 | Berlin, Germany</p>
-          <ul className="list-disc list-inside mt-2">
-            <li>Assisted in user research and data analysis to influence design decisions.</li>
-            <li>Presented research findings to senior designers to inform project development.</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Education */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Education</h2>
-        <div className="mt-4">
-          <h3 className="font-bold">MSc - Carnegie Mellon University</h3>
-          <p className="text-gray-600 italic">Feb 2020 - Present | Pittsburgh, USA</p>
-        </div>
-        <div className="mt-4">
-          <h3 className="font-bold">BA in Human-Centered Design & Engineering</h3>
-          <p className="text-gray-600 italic">Sep 2011 - Dec 2019 | University of Washington, USA</p>
-        </div>
-      </div>
-
-      {/* Languages */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Languages</h2>
-        <div className="flex flex-wrap mt-2">
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">English (Native)</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">German (Fluent)</span>
-          <span className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">Spanish (Intermediate)</span>
-        </div>
-      </div>
-
-      {/* Certifications */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Certifications</h2>
-        <ul className="list-disc list-inside mt-2">
-          <li>UX & UI Master Certification - CUA</li>
-        </ul>
-      </div>
+      )}
 
       {/* Projects */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Projects</h2>
-        <ul className="list-disc list-inside mt-2">
-          <li>Developed and launched a new dashboard interface for SaaS platform, improving user engagement by 25%.</li>
-          <li>Led a team of 5 designers to create a seamless user journey for an e-commerce website.</li>
-        </ul>
-      </div>
+      {projects && projects.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Projects</h2>
+          {projects.map((project, index) => (
+            <div key={project._id} className="mt-4">
+              <h3 className="font-bold">{project.title || `Project ${index + 1}`}</h3>
+              <p className="text-gray-700 mt-2">{project.description || "Project description goes here."}</p>
+              {project.features && project.features.length > 0 ? (
+                <ul className="list-disc list-inside mt-2 text-gray-700">
+                  {project.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="list-disc list-inside mt-2 text-gray-700">
+                  <li>Feature 1 of the project</li>
+                  <li>Feature 2 of the project</li>
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Education */}
+      {education && education.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Education</h2>
+          {education.map((edu) => (
+            <div key={edu._id} className="mt-4">
+              <h3 className="font-bold">{edu.degree}</h3>
+              <p className="text-gray-600 italic">{edu.institution} • {edu.startYear} - {edu.endYear}</p>
+              <p className="text-gray-700 mt-2">{edu.description || "Education description goes here."}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Languages */}
+      {languages && languages.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Languages</h2>
+          <div className="flex flex-wrap mt-2">
+            {languages.map((language, index) => (
+              <span key={index} className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">
+                {language}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Certifications */}
+      {certificates && certificates.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Certifications</h2>
+          <ul className="list-disc list-inside mt-2 text-gray-700">
+            {certificates.map((cert) => (
+              <li key={cert._id}>
+                {cert.title} - {cert.institution} ({cert.year || "Year"})
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Awards */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Awards</h2>
-        <ul className="list-disc list-inside mt-2">
-          <li>Best UX Design Award - 2022</li>
-          <li>Design Excellence Recognition - 2021</li>
-        </ul>
-      </div>
+      {awards && awards.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">Awards</h2>
+          <ul className="list-disc list-inside mt-2 text-gray-700">
+            {awards.map((award) => (
+              <li key={award._id}>
+                {award.title} - {award.organization} ({award.year || "Year"})
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
