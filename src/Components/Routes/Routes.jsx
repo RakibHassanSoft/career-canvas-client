@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
-import Resume_Templates from "../Pages/Resume_Templates/Resume_Templates";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Premium_Membership from "../Pages/Premium_Membership/Premium_Membership";
@@ -15,6 +14,8 @@ import EducationForm from "../Pages/Resume_Templates/PageWise/EducationForm";
 import LanguagesForm from "../Pages/Resume_Templates/PageWise/LanguagesForm";
 import Main from "../Pages/Resume_Templates/Main/Main";
 import JobPosting from "../Pages/Job_Posting/JobPosting";
+import Chat from "../Pages/Chat/Chat";
+import Resume_templates_row from "../Pages/Resume_Templates/templatesColllection/Resume_templates_row";
 
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'Resume_Templates',
-            element: <Resume_Templates></Resume_Templates>,
+            element: <Resume_templates_row></Resume_templates_row>,
           },
           {
             path: "personal-info-form",
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp></SignUp>
+      },
+      {
+        path: '/ai-chat',
+        element: <Chat/>
       },
     ]
   },

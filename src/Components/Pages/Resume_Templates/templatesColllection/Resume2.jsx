@@ -1,27 +1,44 @@
+
+import getAwards from "../../../../Hooks/getHooks/getAwards";
+import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
+import getCertificates from "../../../../Hooks/getHooks/getCertificates";
+import getEducation from "../../../../Hooks/getHooks/getEducation";
+import getExperience from "../../../../Hooks/getHooks/getExperience";
+import getLanguages from "../../../../Hooks/getHooks/getLanguages";
+import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
+import getProjects from "../../../../Hooks/getHooks/getProjects";
 import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-
 const Resume2 = () => {
-  let { skillData } = getSkills()
+  // Fetch data using custom hooks
+  const { contactInfo, name } = getNameContacts();
+  const { skillData } = getSkills();
+  const { careerObjective } = getCareerObjectives();
+  const { projects } = getProjects();
+  const { education } = getEducation();
+  const { experience } = getExperience();
+  const { languages } = getLanguages();
+  const { certificates } = getCertificates();
+  const { awards } = getAwards();
+console.log(awards)
   return (
     <div className="w-full mx-auto bg-white p-10 shadow-lg">
       {/* Resume Title and Contact Information */}
       <header className="flex flex-col items-center mb-10">
-        <h1 className="text-5xl font-bold text-orange-600 mb-2">Your Name</h1>
+        <h1 className="text-5xl font-bold text-orange-600 mb-2">{name}</h1>
         <h2 className="text-lg text-gray-500 font-light">Web Developer</h2>
         <p className="text-gray-600 text-center mt-2">
-          (123) 456 78 99 — email@example.com — www.yourwebsite.com
+          {contactInfo?.phone} — {contactInfo?.email} —{" "}
+          <a href={contactInfo?.website} className="text-blue-500 underline">
+            {contactInfo?.website}
+          </a>
         </p>
       </header>
 
       {/* Career Objective */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Career Objective</h3>
-        <p className="text-gray-600">
-          Passionate web developer with extensive experience in building dynamic web applications and
-          responsive websites. Looking for a challenging position where I can contribute to projects
-          using modern web technologies and innovative solutions.
-        </p>
+        <p className="text-gray-600">{careerObjective || "Your career objective goes here."}</p>
       </section>
 
       {/* Summary */}
@@ -37,89 +54,131 @@ const Resume2 = () => {
       {/* Experience */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Experience</h3>
-        <div className="mb-6">
-          <h4 className="text-lg font-bold">Creative Web Solutions</h4>
-          <p className="text-gray-500 font-medium">Senior Developer • 2018 – Present</p>
-          <p className="text-gray-600 mt-2">
-            Led a team of developers in building scalable web applications for multiple clients,
-            implemented modern web standards, and improved project workflows.
-          </p>
-        </div>
-        <div className="mb-6">
-          <h4 className="text-lg font-bold">Tech Innovations</h4>
-          <p className="text-gray-500 font-medium">Frontend Developer • 2015 – 2018</p>
-          <p className="text-gray-600 mt-2">
-            Developed user-friendly interfaces for various websites and optimized performance to
-            enhance the user experience.
-          </p>
-        </div>
+        {experience && experience.length > 0 ? (
+          experience.map((exp) => (
+            <div key={exp._id} className="mb-6">
+              <h4 className="text-lg font-bold">{exp.jobTitle}</h4>
+              <p className="text-gray-500 font-medium">
+                {exp.company} • {exp.duration}
+              </p>
+              <p className="text-gray-600 mt-2">{exp.description || "Job description goes here."}</p>
+              {exp.responsibilities && exp.responsibilities.length > 0 && (
+                <ul className="list-disc ml-6 mt-2 text-gray-600">
+                  {exp.responsibilities.map((resp, index) => (
+                    <li key={index}>{resp}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No experience data available.</p>
+        )}
       </section>
 
       {/* Projects */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Projects</h3>
-        <div className="mb-4">
-          <h4 className="text-lg font-bold">E-Commerce Platform</h4>
-          <p className="text-gray-600">
-            Built a full-stack e-commerce platform using the MERN stack, implementing a dynamic
-            product filter and user authentication with Firebase.
-          </p>
-        </div>
-        <div>
-          <h4 className="text-lg font-bold">Task Management App</h4>
-          <p className="text-gray-600">
-            Developed a task management application with React, allowing users to manage their tasks
-            with a clean and intuitive interface.
-          </p>
-        </div>
+        {projects && projects.length > 0 ? (
+          projects.map((project, index) => (
+            <div key={project._id} className="mb-4">
+              <h4 className="text-lg font-bold">{project.title || `Project ${index + 1}`}</h4>
+              <p className="text-gray-600">{project.description || "Project description goes here."}</p>
+              {project.features && project.features.length > 0 ? (
+                <ul className="list-disc ml-6 mt-2 text-gray-600">
+                  {project.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="list-disc ml-6 mt-2 text-gray-600">
+                  <li>Feature 1 of the project</li>
+                  <li>Feature 2 of the project</li>
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No projects data available.</p>
+        )}
       </section>
 
       {/* Skills */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Skills</h3>
-        {
-          skillData?.length > 0 && skillData.map((item, index) => (
-            <ul key={index} className="list-disc ml-4">
-              <li>{item}</li>
-            </ul>
-          ))
-        }
+        {skillData && skillData.length > 0 ? (
+          <ul className="list-disc ml-6 text-gray-600">
+            {skillData.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-600">No skills data available.</p>
+        )}
       </section>
 
       {/* Awards */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Awards</h3>
-        <ul className="list-disc ml-6 text-gray-600">
-          <li>Best Web Developer Award – 2021, XYZ Organization</li>
-          <li>Top 10 Developer in National Hackathon – 2020</li>
-        </ul>
+        {awards && awards.length > 0 ? (
+          <ul className="list-disc ml-6 text-gray-600">
+            {awards.map((award) => (
+              <li key={award._id}>
+                {award.title} - {award.organization} ({award.year})
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-600">No awards data available.</p>
+        )}
       </section>
 
       {/* Certificates */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Certificates</h3>
-        <ul className="list-disc ml-6 text-gray-600">
-          <li>Certified React Developer, Udemy</li>
-          <li>Full-Stack JavaScript Certification, FreeCodeCamp</li>
-        </ul>
+        {certificates && certificates.length > 0 ? (
+          <ul className="list-disc ml-6 text-gray-600">
+            {certificates.map((cert) => (
+              <li key={cert._id}>
+                {cert.title} by {cert.institution}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-600">No certificates available.</p>
+        )}
       </section>
 
       {/* Education Details */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Education</h3>
-        <div className="mb-4">
-          <h4 className="text-lg font-bold">Bachelor of Science in Computer Science</h4>
-          <p className="text-gray-500">Your University • 2010 – 2014</p>
-        </div>
+        {education && education.length > 0 ? (
+          education.map((edu) => (
+            <div key={edu._id} className="mb-4">
+              <h4 className="text-lg font-bold">{edu.degree}</h4>
+              <p className="text-gray-500">
+                {edu.institution} • {edu.startYear} - {edu.endYear}
+              </p>
+              <p className="text-gray-600 mt-2">{edu.description || "Education description goes here."}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No education data available.</p>
+        )}
       </section>
 
       {/* Languages */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-orange-600 mb-4">Languages</h3>
-        <ul className="list-disc ml-6 text-gray-600">
-          <li>English (Fluent)</li>
-          <li>Spanish (Intermediate)</li>
-        </ul>
+        {languages && languages.length > 0 ? (
+          <ul className="list-disc ml-6 text-gray-600">
+            {languages.map((language, index) => (
+              <li key={index}>{language}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-600">No languages data available.</p>
+        )}
       </section>
     </div>
   );
