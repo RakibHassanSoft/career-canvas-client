@@ -80,7 +80,7 @@ const Template1 = () => {
     };
 
     return (
-        <div className='m-auto'>
+        <div className='w-8/12 m-auto'>
             <div className='shadow-xl border-2 m-auto p-10'>
                 {components.map((component, index) => (
                     <div

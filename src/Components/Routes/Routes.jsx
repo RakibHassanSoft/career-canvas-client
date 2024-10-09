@@ -16,6 +16,7 @@ import Main from "../Pages/Resume_Templates/Main/Main";
 import JobPosting from "../Pages/Job_Posting/JobPosting";
 import Chat from "../Pages/Chat/Chat";
 import Resume_templates_row from "../Pages/Resume_Templates/templatesColllection/Resume_templates_row";
+import Template1 from "../Pages/dragAndDrop/Template1";
 
 
 const router = createBrowserRouter([
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: '/ai-chat',
         element: <Chat/>
+      },
+      {
+        path: '/drag-and-drop',
+        element: <Template1/>
       },
     ]
   },
