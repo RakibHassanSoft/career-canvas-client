@@ -2,7 +2,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { PiBrainFill, PiMapPinAreaFill } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
 import { TbReportMoney } from "react-icons/tb";
-import hiringImage from "../../../public/images/HiringConfirmed.png";
+import hiringImage from "../../../../public/HiringConfirmed.png";
 
 const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
   if (!job) {
