@@ -14,7 +14,6 @@ const Home = () => {
             <Banner></Banner>
             <Resume_Templates/>
             <div className="container w-[98%] m-auto mt-20 space-y-20">
-                    
             
                     <ChooseOurPlatform></ChooseOurPlatform>
                     <WeDeliverBest></WeDeliverBest>
