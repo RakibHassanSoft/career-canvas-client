@@ -1,76 +1,163 @@
-import React from 'react';
+
+import getAwards from "../../../../Hooks/getHooks/getAwards";
+import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
+import getCertificates from "../../../../Hooks/getHooks/getCertificates";
+import getEducation from "../../../../Hooks/getHooks/getEducation";
+import getExperience from "../../../../Hooks/getHooks/getExperience";
+import getLanguages from "../../../../Hooks/getHooks/getLanguages";
+import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
+import getProjects from "../../../../Hooks/getHooks/getProjects";
+import getSkills from "../../../../Hooks/getHooks/getSkills";
 
 const Resume12 = () => {
+  // Fetch data using custom hooks
+  const { contactInfo, name } = getNameContacts();
+  const { skillData } = getSkills();
+  const { careerObjective } = getCareerObjectives();
+  const { projects } = getProjects();
+  const { education } = getEducation();
+  const { experience } = getExperience();
+  const { languages } = getLanguages();
+  const { certificates } = getCertificates();
+  const { awards } = getAwards();
+
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-md p-8 flex flex-col md:flex-row">
       {/* Left Column */}
       <div className="md:w-1/2 pr-4">
         {/* Title and Contact */}
         <div className="flex items-center mb-6">
-          <img
-            src="image"
+          {/* <img
+            src={contactInfo?.profileImage || "default-profile.png"} // Use profile image from contactInfo or a default image
             alt="Profile"
             className="w-24 h-24 rounded-full shadow-md mr-4"
-          />
+          /> */}
           <div>
-            <h1 className="text-4xl font-bold">Elijah Williams</h1>
-            <h2 className="text-lg text-gray-600">Sales Executive</h2>
+            <h1 className="text-4xl font-bold">{name || "Your Name"}</h1>
+            <h2 className="text-lg text-gray-600">
+              {contactInfo?.title || "Your Profession"}
+            </h2>
           </div>
         </div>
         <div className="mb-6">
-          <p>📞 123-456-7890</p>
-          <p>✉️ hello@yourgreatsite.com</p>
-          <p>🌍 linkedin.com/in/name</p>
+          <p>📞 {contactInfo?.phone || "123-456-7890"}</p>
+          <p>✉️ {contactInfo?.email || "email@example.com"}</p>
+          <p>
+            🌍{" "}
+            <a
+              href={contactInfo?.website || "#"}
+              className="text-blue-500 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {contactInfo?.website || "yourwebsite.com"}
+            </a>
+          </p>
         </div>
 
         {/* Career Objective */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Career Objective</h3>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">
+            Career Objective
+          </h3>
           <p className="text-gray-700">
-            Driven and passionate sales executive with over 5 years of experience in account management, customer relationship management, and supply chain services. Looking to leverage my expertise to help companies achieve revenue growth and customer satisfaction.
+            {careerObjective || "Your career objective goes here."}
           </p>
         </section>
 
         {/* Skills */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Skills</h3>
-          <ul className="list-disc pl-5 space-y-1 text-gray-700">
-            <li>Account Management</li>
-            <li>Customer Relationship Management Software</li>
-            <li>Strategic and Social Selling</li>
-            <li>Team Leadership</li>
-            <li>Adobe Photoshop</li>
-            <li>Salesforce</li>
-          </ul>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">Skills</h3>
+          {skillData && skillData.length > 0 ? (
+            <ul className="list-disc pl-5 space-y-1 text-gray-700">
+              {skillData.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-700">No skills data available.</p>
+          )}
         </section>
-        
+
         {/* Languages */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Languages</h3>
-          <ul className="list-disc pl-5 space-y-1 text-gray-700">
-            <li>English</li>
-            <li>Spanish</li>
-          </ul>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">
+            Languages
+          </h3>
+          {languages && languages.length > 0 ? (
+            <ul className="list-disc pl-5 space-y-1 text-gray-700">
+              {languages.map((language, index) => (
+                <li key={index}>{language}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-700">No languages data available.</p>
+          )}
         </section>
 
         {/* Awards */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Awards</h3>
-          <p className="text-gray-700">Top Sales Executive 2021 - SaaS Company, LLC</p>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">Awards</h3>
+          {awards && awards.length > 0 ? (
+            <ul className="list-disc pl-5 space-y-1 text-gray-700">
+              {awards.map((award) => (
+                <li key={award._id}>
+                  {award.title} - {award.organization} ({award.year})
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-700">No awards data available.</p>
+          )}
         </section>
 
         {/* Certificates */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Certificates</h3>
-          <p className="text-gray-700">Certified Salesforce Administrator - Salesforce Academy</p>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">
+            Certificates
+          </h3>
+          {certificates && certificates.length > 0 ? (
+            <ul className="list-disc pl-5 space-y-1 text-gray-700">
+              {certificates.map((cert) => (
+                <li key={cert._id}>
+                  {cert.title} by {cert.institution}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-700">No certificates available.</p>
+          )}
         </section>
 
         {/* Projects */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Projects</h3>
-          <p className="text-gray-700">
-            Led the development of a CRM tool integration for sales tracking and analysis, improving workflow efficiency by 15%.
-          </p>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">Projects</h3>
+          {projects && projects.length > 0 ? (
+            projects.map((project, index) => (
+              <div key={project._id} className="mb-4">
+                <h4 className="text-lg font-bold">
+                  {project.title || `Project ${index + 1}`}
+                </h4>
+                <p className="text-gray-700">
+                  {project.description || "Project description goes here."}
+                </p>
+                {project.features && project.features.length > 0 ? (
+                  <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
+                    {project.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
+                    <li>Feature 1 of the project</li>
+                    <li>Feature 2 of the project</li>
+                  </ul>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-700">No projects data available.</p>
+          )}
         </section>
       </div>
 
@@ -81,64 +168,59 @@ const Resume12 = () => {
       <div className="md:w-1/2 pl-4">
         {/* Summary */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Summary</h3>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">Summary</h3>
           <p className="text-gray-700">
-            Sales executive with a proven track record in increasing sales, boosting customer satisfaction, and opening new accounts in competitive markets. Adept at collaborating with teams to achieve business goals.
+            {careerObjective ||
+              "A dedicated and result-driven developer with a solid understanding of front-end and back-end development. Experienced in working in agile environments and using JavaScript, React, Node.js, and other modern technologies to build efficient and scalable applications."}
           </p>
         </section>
 
         {/* Experience */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Experience</h3>
-          <div className="space-y-4">
-            <div>
-              <h4 className="text-lg font-bold">Account Sales Executive</h4>
-              <p className="text-gray-600">SaaS Company, LLC | Jan 2020 - Aug 2022</p>
-              <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                <li>Boosted sales activities by 30% in the west coast region.</li>
-                <li>Maintained a 100% client satisfaction rating and grew sales by 10% annually.</li>
-                <li>Opened five new accounts by providing consistent customer service.</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold">Field Sales Manager</h4>
-              <p className="text-gray-600">Content Company, Inc. | Jan 2018 - Jan 2020</p>
-              <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                <li>Increased customer loyalty by 40% in six months.</li>
-                <li>Achieved 10% growth in client base through strategic partnerships.</li>
-                <li>Boosted customer satisfaction by 33% within six months.</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold">Sales Intern</h4>
-              <p className="text-gray-600">Technology Company, Inc. | Jan 2016 - Dec 2017</p>
-              <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                <li>Boosted sales activities by 30% in the west coast region.</li>
-                <li>Maintained a 100% client satisfaction rating.</li>
-                <li>Generated a 10% growth in annual sales revenue by working closely with sales and support teams.</li>
-              </ul>
-            </div>
-          </div>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">Experience</h3>
+          {experience && experience.length > 0 ? (
+            experience.map((exp) => (
+              <div key={exp._id} className="mb-4">
+                <h4 className="text-lg font-bold">{exp.jobTitle}</h4>
+                <p className="text-gray-600">
+                  {exp.company} • {exp.duration}
+                </p>
+                {exp.description && (
+                  <p className="text-gray-700 mt-2">{exp.description}</p>
+                )}
+                {exp.responsibilities && exp.responsibilities.length > 0 && (
+                  <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
+                    {exp.responsibilities.map((resp, index) => (
+                      <li key={index}>{resp}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-700">No experience data available.</p>
+          )}
         </section>
 
         {/* Education */}
         <section className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Education</h3>
-          <div>
-            <h4 className="text-lg font-bold">Bachelor of Science in Business Administration</h4>
-            <p className="text-gray-600">Harvard University | May 2020</p>
-            <p>Major: Supply Chain Management</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-bold">Associate's Degree in Sales and Marketing</h4>
-            <p className="text-gray-600">North Shore Community College | May 2018</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-bold">4.0 GPA</h4>
-            <p className="text-gray-600">North Centennial Private | May 2016</p>
-          </div>
+          <h3 className="text-xl font-semibold text-orange-600 mb-2">Education</h3>
+          {education && education.length > 0 ? (
+            education.map((edu) => (
+              <div key={edu._id} className="mb-4">
+                <h4 className="text-lg font-bold">{edu.degree}</h4>
+                <p className="text-gray-600">
+                  {edu.institution} • {edu.startYear} - {edu.endYear}
+                </p>
+                {edu.description && (
+                  <p className="text-gray-700 mt-2">{edu.description}</p>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-700">No education data available.</p>
+          )}
         </section>
-
       </div>
     </div>
   );

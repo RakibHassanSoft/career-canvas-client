@@ -6,6 +6,8 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import './styles.css';
 import { Outlet, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const images = [
     { id: 1, name: "Resume1", url: "/resume-images/Resume1.png" },
@@ -24,10 +26,18 @@ const images = [
 
 const Resume_Templates = () => {
     const navigate = useNavigate();
-
-    const handleImageClick = (resumeType) => {
+    const { resumeId } = useContext(AuthContext)
+    console.log(resumeId)
+    const handleImageClick = (resumeType,r) => {
         navigate('/resume-templates/personal-info-form', { state: { resumeType } });
+       
     };
+
+    // const handleResumeId = (r) => {
+    //      // directly set the new value of 'r'
+    // };
+    
+    
 
     return (
         <div className="shadow-md border-b-4  mt-12 border-b-green-500 border-r-2 border-r-green-500 p-10 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900">
@@ -68,7 +78,7 @@ const Resume_Templates = () => {
                             <a
                                 href="#_"
                                 className="relative inline-block text-lg group mt-4"
-                                onClick={(e) => { e.preventDefault(); handleImageClick(image.name.toLowerCase()); }}
+                                onClick={(e) => { e.preventDefault(); handleImageClick(image.name.toLowerCase(),image.id);}}
                             >
                                 <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 dark:text-gray-300 transition-colors duration-300 ease-out border-2 border-green-500 rounded-lg group-hover:text-white">
                                     <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50 dark:bg-gray-700"></span>

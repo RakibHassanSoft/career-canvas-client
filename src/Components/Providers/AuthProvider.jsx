@@ -17,6 +17,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [resumeId, setResumeId] = useState('')
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -40,11 +41,15 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+  const handleResumeTempalte = async(id) => {
+     await setResumeId(id);
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log('current user', currentUser);
+      console.log('current template', resumeId);
       setLoading(false);
     });
     return () => {
@@ -57,7 +62,10 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     signInWithGoogle,
-    user, loading
+    user, 
+    loading,
+    resumeId,
+    handleResumeTempalte
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

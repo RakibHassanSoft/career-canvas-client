@@ -9,7 +9,7 @@ export const getNameContacts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axiosPublic.get('https://clean-server.onrender.com/api/name/name-contact/k7Fs6Hfy9CWjLe2h6A42H2DAZxg2/1');
+        const { data } = await axiosPublic.get('https://clean-server.onrender.com/api/name/name-contact/k7Fs6Hfy9CWjLe2h6A42H2DAZxg2/12');
         setNameContact(data); // Store the data in the state
       } catch (error) {
         console.error("Error fetching data:", error);

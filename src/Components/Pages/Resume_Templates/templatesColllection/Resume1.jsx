@@ -21,7 +21,7 @@ const Resume1 = () => {
   let { awards } = getAwards()
 
 
-  console.log(experience)
+  // console.log(experience)
   // console.log(skillData)
 
 

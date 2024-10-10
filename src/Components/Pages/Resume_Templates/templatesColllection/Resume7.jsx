@@ -1,128 +1,168 @@
-import React from 'react';
+
+import getAwards from "../../../../Hooks/getHooks/getAwards";
+import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
+import getCertificates from "../../../../Hooks/getHooks/getCertificates";
+import getEducation from "../../../../Hooks/getHooks/getEducation";
+import getExperience from "../../../../Hooks/getHooks/getExperience";
+import getLanguages from "../../../../Hooks/getHooks/getLanguages";
+import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
+import getProjects from "../../../../Hooks/getHooks/getProjects";
+import getSkills from "../../../../Hooks/getHooks/getSkills";
 
 const Resume7 = () => {
+  // Fetch data using custom hooks
+  const { contactInfo, name } = getNameContacts();
+  const { skillData } = getSkills();
+  const { careerObjective } = getCareerObjectives();
+  const { projects } = getProjects();
+  const { education } = getEducation();
+  const { experience } = getExperience();
+  const { languages } = getLanguages();
+  const { certificates } = getCertificates();
+  const { awards } = getAwards();
+
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg border-t-8 border-yellow-400">
       {/* Header: Name and Contact */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold">Melanie Robinson</h1>
-          <p className="text-lg text-gray-600">Qualified Customer Service Representative</p>
-          <p className="text-gray-500 mt-2">📞 +1 (970) 333-383-999</p>
-          <p className="text-gray-500">📧 melanie.robinson@mail.com</p>
-          <a href="https://linkedin.com/in/mrobinson" className="text-blue-500">LinkedIn: mrobinson</a>
+          <h1 className="text-4xl font-bold">{name}</h1>
+          <p className="text-lg text-gray-600">{careerObjective || "Your Job Title"}</p>
+          <p className="text-gray-500 mt-2">📞 {contactInfo?.phone || "Phone Number"}</p>
+          <p className="text-gray-500">📧 {contactInfo?.email || "email@example.com"}</p>
+          {contactInfo?.website && (
+            <p className="text-gray-500">
+              🌐 <a href={contactInfo.website} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">Website</a>
+            </p>
+          )}
+          {contactInfo?.linkedin && (
+            <p className="text-gray-500">
+              🔗 <a href={contactInfo.linkedin} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">LinkedIn: {contactInfo.linkedin}</a>
+            </p>
+          )}
         </div>
-        <div>
-          <img src="https://via.placeholder.com/80" alt="Profile" className="rounded-full" />
-        </div>
+        {contactInfo?.profileImage && (
+          <div>
+            <img src={contactInfo.profileImage} alt={`${name}'s Profile`} className="rounded-full w-20 h-20" />
+          </div>
+        )}
       </div>
 
       {/* Summary */}
       <section className="mb-8">
         <h2 className="text-xl font-semibold">Summary</h2>
         <p className="text-gray-700 mt-2">
-          Qualified Customer Service Representative with over 4 years in fast-paced customer service and call center environments.
-          Skilled at building strong relationships, resolving problems, and driving sales. Adept at articulating product benefits and
-          creating solutions that provide value to the customer.
+          {careerObjective || "A dedicated and result-driven professional with expertise in your field. Experienced in working in dynamic environments and committed to delivering high-quality results."}
         </p>
       </section>
 
-      {/* Skills and Experience */}
-      <div className="grid grid-cols-2 gap-8 mb-8">
-        {/* Skills */}
-        <section>
+      {/* Skills */}
+      {skillData && skillData.length > 0 && (
+        <section className="mb-8">
           <h2 className="text-xl font-semibold">Skills</h2>
           <ul className="list-disc ml-5 mt-2 text-gray-700">
-            <li>International sales support</li>
-            <li>Strategic sales knowledge</li>
-            <li>Exceptional communication skills</li>
-            <li>CRM/Records management</li>
-            <li>Customer service expertise</li>
+            {skillData.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
           </ul>
         </section>
+      )}
 
-        {/* Experience */}
-        <section>
+      {/* Experience */}
+      {experience && experience.length > 0 && (
+        <section className="mb-8">
           <h2 className="text-xl font-semibold">Work History</h2>
-          <div className="mt-2">
-            <h3 className="font-bold">Customer Service Representative</h3>
-            <p className="text-gray-500">BATS Global Markets Inc, Chicago (04/2017 - 09/2018)</p>
-            <ul className="list-disc ml-5 mt-2 text-gray-700">
-              <li>Contact customers to follow up on purchases and new merchandise offers.</li>
-              <li>Promoted existing services as a superior provider to customers.</li>
-              <li>Answered all customer questions and managed the complaint resolution process.</li>
-            </ul>
-          </div>
-          <div className="mt-4">
-            <h3 className="font-bold">Customer Service Representative</h3>
-            <p className="text-gray-500">Foodspotting Inc, Chicago (04/2015 - 09/2016)</p>
-            <ul className="list-disc ml-5 mt-2 text-gray-700">
-              <li>Responded to customer inquiries and service selection.</li>
-              <li>Increased sales and customer satisfaction through fast response times.</li>
-            </ul>
-          </div>
+          {experience.map((exp) => (
+            <div key={exp._id} className="mt-4">
+              <h3 className="font-bold">{exp.jobTitle}</h3>
+              <p className="text-gray-500">{exp.company} • {exp.duration}</p>
+              <ul className="list-disc ml-5 mt-2 text-gray-700">
+                {exp.responsibilities && exp.responsibilities.length > 0 ? (
+                  exp.responsibilities.map((resp, idx) => (
+                    <li key={idx}>{resp}</li>
+                  ))
+                ) : (
+                  <li>Description of responsibilities goes here.</li>
+                )}
+              </ul>
+            </div>
+          ))}
         </section>
-      </div>
-
-      {/* Education */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold">Education</h2>
-        <p className="mt-2 text-gray-700">Bachelor of Arts: Marketing - Oregon University (2018)</p>
-        <p className="text-gray-700">Bachelor of Arts: Marketing - Oregon University (2014)</p>
-      </section>
+      )}
 
       {/* Projects */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold">Projects</h2>
-        <ul className="list-disc ml-5 mt-2 text-gray-700">
-          <li>Implemented customer feedback system that reduced complaints by 15%.</li>
-          <li>Led a team to improve sales strategy for customer service, resulting in a 20% revenue boost.</li>
-        </ul>
-      </section>
+      {projects && projects.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold">Projects</h2>
+          {projects.map((project, index) => (
+            <div key={project._id || index} className="mt-4">
+              <h3 className="font-bold">{project.title || `Project ${index + 1}`}</h3>
+              <p className="text-gray-500">{project.description || "Project description goes here."}</p>
+              {project.features && project.features.length > 0 && (
+                <ul className="list-disc ml-5 mt-2 text-gray-700">
+                  {project.features.map((feature, idx) => (
+                    <li key={idx}>{feature}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
 
-      {/* Awards */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold">Awards</h2>
-        <ul className="list-disc ml-5 mt-2 text-gray-700">
-          <li>Best Customer Service Team, BATS Global Markets Inc (2018)</li>
-          <li>Customer Service Star Performer, Foodspotting Inc (2017)</li>
-        </ul>
-      </section>
+      {/* Education */}
+      {education && education.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold">Education</h2>
+          {education.map((edu) => (
+            <div key={edu._id} className="mt-4">
+              <h3 className="font-bold">{edu.degree}</h3>
+              <p className="text-gray-500">{edu.institution} • {edu.startYear} - {edu.endYear}</p>
+              <p className="text-gray-700 mt-2">{edu.description || "Education description goes here."}</p>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* Certificates */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold">Certificates</h2>
-        <ul className="list-disc ml-5 mt-2 text-gray-700">
-          <li>Certified Customer Service Professional (2018)</li>
-          <li>Salesforce Certified Administrator (2017)</li>
-        </ul>
-      </section>
+      {certificates && certificates.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold">Certificates</h2>
+          <ul className="list-disc ml-5 mt-2 text-gray-700">
+            {certificates.map(cert => (
+              <li key={cert._id || cert.title}>
+                {cert.title} by {cert.institution} ({cert.year})
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Awards */}
+      {awards && awards.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold">Awards</h2>
+          <ul className="list-disc ml-5 mt-2 text-gray-700">
+            {awards.map(award => (
+              <li key={award._id || award.title}>
+                {award.title} - {award.organization} ({award.year})
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Languages */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold">Languages</h2>
-        <ul className="list-disc ml-5 mt-2 text-gray-700">
-          <li>English (Native)</li>
-          <li>Spanish (Proficient)</li>
-        </ul>
-      </section>
-
-      {/* Career Objective */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold">Career Objective</h2>
-        <p className="text-gray-700 mt-2">
-          Seeking a Customer Success role where I can utilize my strong communication skills and customer service experience to drive growth and maintain customer satisfaction.
-        </p>
-      </section>
-
-      {/* Reference */}
-      <section>
-        <h2 className="text-xl font-semibold">Reference</h2>
-        <p className="text-gray-700 mt-2">
-          Steve Halloway - Business Consultant at SX Solutions <br />
-          shalloway@sxsolutions.com | 305-300-7891
-        </p>
-      </section>
+      {languages && languages.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold">Languages</h2>
+          <ul className="list-disc ml-5 mt-2 text-gray-700">
+            {languages.map((language, index) => (
+              <li key={index}>{language}</li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 };

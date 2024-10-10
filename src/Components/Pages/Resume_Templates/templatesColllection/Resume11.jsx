@@ -1,18 +1,44 @@
-import React from 'react';
+// Resume11.jsx
+
+import getAwards from "../../../../Hooks/getHooks/getAwards";
+import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
+import getCertificates from "../../../../Hooks/getHooks/getCertificates";
+import getEducation from "../../../../Hooks/getHooks/getEducation";
+import getExperience from "../../../../Hooks/getHooks/getExperience";
+import getLanguages from "../../../../Hooks/getHooks/getLanguages";
+import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
+import getProjects from "../../../../Hooks/getHooks/getProjects";
+import getSkills from "../../../../Hooks/getHooks/getSkills";
 
 const Resume11 = () => {
+  // Fetch data using custom hooks
+  const { contactInfo, name } = getNameContacts();
+  const { skillData } = getSkills();
+  const { careerObjective } = getCareerObjectives();
+  const { projects } = getProjects();
+  const { education } = getEducation();
+  const { experience } = getExperience();
+  const { languages } = getLanguages();
+  const { certificates } = getCertificates();
+  const { awards } = getAwards();
+
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-md p-8">
       {/* Header: Title and Contact */}
       <div className="flex justify-between items-center border-b pb-4 mb-6">
         <div>
-          <h1 className="text-4xl font-bold text-purple-600">Abigail Williams</h1>
+          <h1 className="text-4xl font-bold text-purple-600">{name || "Your Name"}</h1>
           <h2 className="text-lg text-gray-600">Senior Project Manager</h2>
         </div>
         <div className="text-right">
-          <p>📞 (123) 456-7890</p>
-          <p>✉️ abigail2williams@email.com</p>
-          <p>🌍 Minneapolis, MN | <a href="#" className="text-blue-500">LinkedIn</a></p>
+          <p>📞 {contactInfo?.phone || "(123) 456-7890"}</p>
+          <p>✉️ {contactInfo?.email || "email@example.com"}</p>
+          <p>
+            🌍 {contactInfo?.location || "Minneapolis, MN"} |{" "}
+            <a href={contactInfo?.website || "#"} className="text-blue-500 underline">
+              {contactInfo?.website || "LinkedIn"}
+            </a>
+          </p>
         </div>
       </div>
 
@@ -22,43 +48,65 @@ const Resume11 = () => {
           {/* Education */}
           <section className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Education</h3>
-            <div className="mb-4">
-              <p className="font-bold">Bachelor of Business Administration</p>
-              <p className="text-gray-600">Hamline University, Minneapolis, MN</p>
-              <p>GPA: 3.6 | Aug 2008 - June 2012</p>
-            </div>
+            {education && education.length > 0 ? (
+              education.map((edu) => (
+                <div key={edu._id} className="mb-4">
+                  <p className="font-bold">{edu.degree}</p>
+                  <p className="text-gray-600">
+                    {edu.institution} • {edu.startYear} - {edu.endYear}
+                  </p>
+                  <p className="text-gray-600 mt-1">{edu.description}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-600">No education data available.</p>
+            )}
           </section>
 
           {/* Skills */}
           <section className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Skills</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>Leadership</li>
-              <li>Risk Management</li>
-              <li>Team Development</li>
-              <li>Stakeholder Management</li>
-              <li>Asana</li>
-              <li>Jira</li>
-              <li>ClickUp</li>
-            </ul>
+            {skillData && skillData.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                {skillData.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No skills data available.</p>
+            )}
           </section>
 
           {/* Certifications */}
           <section className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Certifications</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>Certified ScrumMaster (CSM)</li>
-              <li>Agile Certified Practitioner (PMI-ACP)</li>
-            </ul>
+            {certificates && certificates.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                {certificates.map((cert) => (
+                  <li key={cert._id}>
+                    {cert.title} by {cert.institution}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No certifications available.</p>
+            )}
           </section>
 
           {/* Awards */}
           <section className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Awards</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>PMI Fellow Award</li>
-              <li>PMI Rising Leader</li>
-            </ul>
+            {awards && awards.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                {awards.map((award) => (
+                  <li key={award._id}>
+                    {award.title} - {award.organization} ({award.year})
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No awards data available.</p>
+            )}
           </section>
         </div>
 
@@ -66,60 +114,76 @@ const Resume11 = () => {
         <div className="col-span-2">
           {/* Career Objective */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold mb-2">Career Objective</h3>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">Career Objective</h3>
             <p className="text-gray-700">
-              Dynamic senior project manager with 11 years of experience in fast-paced work environments, seeking a position at Target. Best known for managing a portfolio of high-value projects while maintaining a 97% satisfaction rate among all stakeholders. I aim to drive sales growth through effective leadership and maintain the brand's reputation as the first choice for all retail consumers.
+              {careerObjective || "Dynamic senior project manager with extensive experience seeking a challenging position where I can contribute to organizational growth and success."}
             </p>
           </section>
 
           {/* Work Experience */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold mb-2">Work Experience</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-lg font-bold">Senior Project Manager</h4>
-                <p className="text-gray-600">Best Buy | May 2019 - Present | Richfield, MN</p>
-                <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                  <li>Managed Agile ceremonies, sprint reviews, and Scrum meetings, achieving 97% satisfaction rate.</li>
-                  <li>Handled a portfolio of 8 projects valued at $439K+, delivering all projects before deadlines.</li>
-                  <li>Proposed a real-time project tracking dashboard that visualized the impact of 9 KPIs.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">Project Manager</h4>
-                <p className="text-gray-600">Jamf | Sept 2015 - Feb 2019 | Minneapolis, MN</p>
-                <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                  <li>Created a risk management framework that reduced project risks by 31%.</li>
-                  <li>Led the introduction of ClickUp as the primary project tool, resulting in 57% fewer missed deadlines.</li>
-                  <li>Adopted Agile methodologies that allowed product teams to launch new products 2 weeks faster.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">Project Manager Intern</h4>
-                <p className="text-gray-600">Leadpages | Jan 2013 - Aug 2015 | Minneapolis, MN</p>
-                <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                  <li>Used Jira to track project progress, decreasing unresolved issues by 11%.</li>
-                  <li>Assisted in launching 3 major projects for Leadpages, helping them attract 26% more clients within one quarter.</li>
-                </ul>
-              </div>
-            </div>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">Work Experience</h3>
+            {experience && experience.length > 0 ? (
+              experience.map((exp) => (
+                <div key={exp._id} className="mb-6">
+                  <h4 className="text-lg font-bold">{exp.jobTitle}</h4>
+                  <p className="text-gray-600">
+                    {exp.company} • {exp.duration}
+                  </p>
+                  <p className="text-gray-700 mt-2">{exp.description || "Job description goes here."}</p>
+                  {exp.responsibilities && exp.responsibilities.length > 0 && (
+                    <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
+                      {exp.responsibilities.map((resp, index) => (
+                        <li key={index}>{resp}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-600">No work experience data available.</p>
+            )}
           </section>
 
           {/* Projects */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold mb-2">Projects</h3>
-            <p className="text-gray-700">
-              Led the development of an AI-powered dashboard for real-time project tracking at Best Buy, which improved decision-making by providing clear, actionable KPIs. The project was completed under budget and within the deadline.
-            </p>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">Projects</h3>
+            {projects && projects.length > 0 ? (
+              projects.map((project, index) => (
+                <div key={project._id} className="mb-4">
+                  <h4 className="text-lg font-bold">{project.title || `Project ${index + 1}`}</h4>
+                  <p className="text-gray-700">{project.description || "Project description goes here."}</p>
+                  {project.features && project.features.length > 0 ? (
+                    <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
+                      {project.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
+                      <li>Feature 1 of the project</li>
+                      <li>Feature 2 of the project</li>
+                    </ul>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-600">No projects data available.</p>
+            )}
           </section>
 
           {/* Languages */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold mb-2">Languages</h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              <li>English</li>
-              <li>Spanish</li>
-            </ul>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">Languages</h3>
+            {languages && languages.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                {languages.map((language, index) => (
+                  <li key={index}>{language}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No languages data available.</p>
+            )}
           </section>
         </div>
       </div>

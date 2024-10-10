@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FaRegLightbulb, FaCheckCircle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player'; // Import Lottie Player
-
-// If you're using a local file stored in the public folder, adjust the path
 import skillAnimation from '../../../../../public/skill-animation.json.json';
 import { ImArrowLeft } from 'react-icons/im';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import { FormContext } from '../../../Providers/FormContext';
 
 const SkillsForm = () => {
     const navigate = useNavigate();
+    const { user,resumeId  } = useContext(AuthContext); // Get user from context
     const [skills, setSkills] = useState('');
     const [errors, setErrors] = useState('');
+    const axiosPublic = useAxiosPublic(); // Axios instance for API calls
+    const { updateSkills } = useContext(FormContext);
 
+  
     const handleChange = (e) => {
         setSkills(e.target.value);
         if (errors) {
@@ -24,19 +29,37 @@ const SkillsForm = () => {
         return '';
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationError = validate();
         if (validationError) {
             setErrors(validationError);
         } else {
-            console.log('Skills submitted successfully:', skills);
-            navigate('/resume-templates/peronal-project');
+            try {
+                const requestData = {
+                    userId: user.uid,
+                    templateId: resumeId, // Replace with actual template ID as needed
+                    skills: skills.split(',').map(skill => skill.trim()), // Convert comma-separated string to array
+                };
+                updateSkills(skills.split(',').map(skill => skill.trim()))
+                // const response = await axiosPublic.post('/api/skills', requestData); // Adjust endpoint as necessary
+
+                // if (response.status === 201) {
+                //     console.log('Skills submitted successfully:', response.data);
+                //     navigate('/resume-templates/peronal-project');
+                // }
+                navigate('/resume-templates/peronal-project');
+            } catch (error) {
+                console.error('Error submitting skills:', error.response ? error.response.data : error.message);
+                setErrors('Failed to submit skills. Please try again.');
+            }
         }
     };
+
     const handleBack = () => {
-        navigate('/resume-templates/career-objective-form')
-    }
+        navigate('/resume-templates/career-objective-form');
+    };
+
     return (
         <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
             {/* Form Section */}
@@ -82,7 +105,7 @@ const SkillsForm = () => {
                 <Player
                     autoplay
                     loop
-                    src={skillAnimation} // You can also use a URL like 'https://assets.lottiefiles.com/packages/lf20_jcikwtux.json'
+                    src={skillAnimation} // Use correct path or URL for the Lottie animation
                     className="w-48 h-48 mb-4"
                 />
 
