@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
+// import Resume_Templates from "../Pages/Resume_Templates/Resume_Templates";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Premium_Membership from "../Pages/Premium_Membership/Premium_Membership";
@@ -17,9 +18,10 @@ import JobPosting from "../Pages/Job_Posting_admin/JobPosting";
 import Chat from "../Pages/Chat/Chat";
 import Resume_templates_row from "../Pages/Resume_Templates/templatesColllection/Resume_templates_row";
 import Template1 from "../Pages/dragAndDrop/Template1";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+// import Dashboard from "../Pages/Dashboard/Dashboard";
 import AdminSidebar from "../Pages/Dashboard/AdminSidebar";
 import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
+import JobsSection from "../Pages/JobPosting/JobsSection";
 
 
 const router = createBrowserRouter([
@@ -70,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: '/job-posting',
         element: <JobPosting></JobPosting>
+      },
+      {
+        path: '/job-section',
+        element: <JobsSection></JobsSection>
       },
       {
         path: '/premium-membership',
