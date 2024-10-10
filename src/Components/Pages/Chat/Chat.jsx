@@ -19,7 +19,7 @@ const Chat = () => {
         setInput('');
 
         try {
-            const response = await fetch('https://ai-api-for-career-canvas.onrender.com/chat', {
+            const response = await fetch('https://ai-api-for-career-canvas.vercel.app/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: input }),
