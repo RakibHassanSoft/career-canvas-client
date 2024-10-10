@@ -1,143 +1,413 @@
 [
-    {
-      "blogId": 1,
-      "title": "React & Tailwind CSS Developer for Feature Implementation",
-      "shortDescription": "The new design already exists in Figma. Animations are already implemented but have to be extended into the new elements.",
-      "tags": ["React", "Tailwind CSS", "JavaScript"],
-      "datePosted": "2023-09-25",
-      "experienceLevel": "Intermediate",
-      "jobType": "Hourly",
-      "priceRange": "$12.00 - $29.00/hr"
+  {
+    "blogId": 1,
+    "jobTitle": "Frontend Developer",
+    "company": "Tech Innovations Inc.",
+    "location": "New York, NY",
+    "employmentType": "Full-time",
+    "salaryRange": "$80,000 - $100,000",
+    "remoteOption": "Hybrid",
+    "experience": "2-4 years",
+    "jobDescription": "We are looking for a skilled Frontend Developer to join our team and work on exciting projects.",
+    "responsibilities": [
+      "Develop user interfaces for web applications.",
+      "Collaborate with designers to implement responsive designs.",
+      "Optimize applications for maximum speed and scalability."
+    ],
+    "requirements": [
+      "Proficient in HTML, CSS, and JavaScript.",
+      "Experience with React or Angular.",
+      "Strong problem-solving skills."
+    ],
+    "skills": [
+      "JavaScript",
+      "React",
+      "CSS",
+      "HTML",
+      "Git"
+    ],
+    "applySection": {
+      "callToAction": "Ready to apply?",
+      "applyLinkText": "Submit your application",
+      "applyLink": "https://techinnovations.com/careers/frontend-developer"
     },
-    {
-      "blogId": 2,
-      "title": "UI Developer with Expertise in React & React Native",
-      "shortDescription": "We are looking for an experienced UI Developer proficient in React and React Native to improve our eCommerce platform.",
-      "tags": ["React", "React Native", "JavaScript"],
-      "datePosted": "2023-09-23",
-      "experienceLevel": "Expert",
-      "jobType": "Fixed-Price",
-      "priceRange": "$500 - $1K"
+    "postedDate": "24-09-24",
+    "longDescription": "As a Frontend Developer at Tech Innovations Inc., you'll be at the forefront of creating intuitive and interactive user interfaces for our clients' web applications. Working alongside a talented team of designers and developers, you'll have the opportunity to contribute to large-scale projects, optimizing them for performance and scalability. With a focus on responsive design, your role will include close collaboration with other teams, ensuring seamless integration of new features and designs."
+  },
+  {
+    "blogId": 2,
+    "jobTitle": "Backend Developer",
+    "company": "Cloud Solutions Ltd.",
+    "location": "San Francisco, CA",
+    "employmentType": "Contract",
+    "salaryRange": "$90,000 - $120,000",
+    "remoteOption": "Remote",
+    "experience": "3-5 years",
+    "jobDescription": "Seeking a Backend Developer with experience in building scalable applications.",
+    "responsibilities": [
+      "Design and maintain APIs.",
+      "Ensure performance, quality, and responsiveness of applications.",
+      "Collaborate with front-end developers to integrate user-facing elements."
+    ],
+    "requirements": [
+      "Experience with Node.js and Express.",
+      "Knowledge of database systems (MongoDB, MySQL).",
+      "Familiarity with RESTful APIs."
+    ],
+    "skills": [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "API development"
+    ],
+    "applySection": {
+      "callToAction": "Join our team!",
+      "applyLinkText": "Apply now",
+      "applyLink": "https://cloudsolutions.com/jobs/backend-developer"
     },
-    {
-      "blogId": 3,
-      "title": "Full Stack Developer Needed for E-commerce Site",
-      "shortDescription": "Seeking a full-stack developer to enhance the performance and scalability of our online retail platform.",
-      "tags": ["Node.js", "React", "MongoDB"],
-      "datePosted": "2023-09-22",
-      "experienceLevel": "Expert",
-      "jobType": "Hourly",
-      "priceRange": "$25.00 - $50.00/hr"
+    "postedDate": "24-09-22",
+    "longDescription": "At Cloud Solutions Ltd., the Backend Developer role involves working with modern server-side technologies, building and maintaining scalable APIs to support web and mobile applications. You will collaborate closely with frontend developers to ensure seamless integration and performance across all systems. Additionally, you'll be responsible for optimizing databases and troubleshooting any back-end issues, ensuring smooth operation for users worldwide."
+  },
+  {
+    "blogId": 3,
+    "jobTitle": "UI/UX Designer",
+    "company": "Creative Agency",
+    "location": "Austin, TX",
+    "employmentType": "Full-time",
+    "salaryRange": "$70,000 - $90,000",
+    "remoteOption": "Flexible",
+    "experience": "2-5 years",
+    "jobDescription": "Looking for a creative UI/UX Designer to enhance user satisfaction.",
+    "responsibilities": [
+      "Conduct user research and testing.",
+      "Create wireframes, prototypes, and UI specifications.",
+      "Collaborate with product and engineering teams."
+    ],
+    "requirements": [
+      "Proficiency in design tools (Figma, Sketch).",
+      "Strong portfolio showcasing design projects.",
+      "Experience with user-centered design."
+    ],
+    "skills": [
+      "UI/UX Design",
+      "Prototyping",
+      "User Research",
+      "Figma",
+      "Sketch"
+    ],
+    "applySection": {
+      "callToAction": "Interested in this role?",
+      "applyLinkText": "Submit your portfolio",
+      "applyLink": "https://creativeagency.com/careers/uiux-designer"
     },
-    {
-      "blogId": 4,
-      "title": "Mobile App Developer for Cross-Platform App",
-      "shortDescription": "Develop a cross-platform mobile app with a focus on usability and responsiveness for an e-learning platform.",
-      "tags": ["Flutter", "Dart", "Firebase"],
-      "datePosted": "2023-09-21",
-      "experienceLevel": "Intermediate",
-      "jobType": "Fixed-Price",
-      "priceRange": "$1K - $2.5K"
+    "postedDate": "24-09-21",
+    "longDescription": "As a UI/UX Designer at Creative Agency, you will work on projects that define user experience across multiple digital platforms. Your work will include conducting user research, creating wireframes, and working closely with clients and development teams to translate business needs into user-friendly designs. By leveraging tools like Figma and Sketch, you'll design intuitive interfaces that improve user interaction, ensuring that our products provide a seamless user experience."
+  },
+  {
+    "blogId": 4,
+    "jobTitle": "Data Scientist",
+    "company": "Data Analytics Corp.",
+    "location": "Boston, MA",
+    "employmentType": "Full-time",
+    "salaryRange": "$100,000 - $130,000",
+    "remoteOption": "Remote",
+    "experience": "3-6 years",
+    "jobDescription": "Join us as a Data Scientist and help us make data-driven decisions.",
+    "responsibilities": [
+      "Analyze large datasets to identify trends.",
+      "Build predictive models and machine learning algorithms.",
+      "Collaborate with cross-functional teams."
+    ],
+    "requirements": [
+      "Experience with Python and R.",
+      "Strong statistical analysis skills.",
+      "Knowledge of machine learning techniques."
+    ],
+    "skills": [
+      "Python",
+      "R",
+      "Machine Learning",
+      "Data Analysis",
+      "Statistics"
+    ],
+    "applySection": {
+      "callToAction": "Ready to make an impact?",
+      "applyLinkText": "Apply here",
+      "applyLink": "https://dataanalytics.com/careers/data-scientist"
     },
-    {
-      "blogId": 5,
-      "title": "WordPress Developer for Custom Plugin Creation",
-      "shortDescription": "Create a custom plugin for managing event bookings and payments on our WordPress site.",
-      "tags": ["WordPress", "PHP", "MySQL"],
-      "datePosted": "2023-09-20",
-      "experienceLevel": "Beginner",
-      "jobType": "Fixed-Price",
-      "priceRange": "$200 - $500"
+    "postedDate": "24-09-20",
+    "longDescription": "Data Analytics Corp. is seeking a Data Scientist who is passionate about working with large datasets and creating predictive models. You will analyze complex data from multiple sources, build machine learning models, and work with stakeholders across various departments to provide actionable insights. Your work will directly impact decision-making processes, helping to shape our company’s strategy using data-driven solutions."
+  },
+  {
+    "blogId": 5,
+    "jobTitle": "Product Manager",
+    "company": "Innovatech",
+    "location": "Seattle, WA",
+    "employmentType": "Full-time",
+    "salaryRange": "$110,000 - $140,000",
+    "remoteOption": "Hybrid",
+    "experience": "5+ years",
+    "jobDescription": "Seeking a Product Manager to lead product strategy and development.",
+    "responsibilities": [
+      "Define product vision and strategy.",
+      "Conduct market research and competitor analysis.",
+      "Collaborate with engineering and design teams."
+    ],
+    "requirements": [
+      "Proven experience in product management.",
+      "Strong analytical and problem-solving skills.",
+      "Excellent communication skills."
+    ],
+    "skills": [
+      "Product Management",
+      "Market Research",
+      "Agile Methodologies",
+      "Communication"
+    ],
+    "applySection": {
+      "callToAction": "Join our innovative team!",
+      "applyLinkText": "Apply now",
+      "applyLink": "https://innovatech.com/careers/product-manager"
     },
-    {
-      "blogId": 6,
-      "title": "Front-End Developer for Travel Website Redesign",
-      "shortDescription": "Looking for a front-end developer to redesign our travel website and implement new UI/UX improvements.",
-      "tags": ["HTML", "CSS", "JavaScript"],
-      "datePosted": "2023-09-19",
-      "experienceLevel": "Intermediate",
-      "jobType": "Hourly",
-      "priceRange": "$15.00 - $35.00/hr"
+    "postedDate": "24-09-18",
+    "longDescription": "At Innovatech, the Product Manager will be responsible for overseeing the full product lifecycle, from ideation to launch. You will work with cross-functional teams to develop and implement product strategies, conduct market research, and ensure that the product meets customer needs. Your role will involve close collaboration with engineering and design teams to prioritize features, improve processes, and deliver high-quality products to the market."
+  },
+  {
+    "blogId": 6,
+    "jobTitle": "Digital Marketing Specialist",
+    "company": "Marketing Gurus",
+    "location": "Chicago, IL",
+    "employmentType": "Part-time",
+    "salaryRange": "$50,000 - $70,000",
+    "remoteOption": "Remote",
+    "experience": "2-4 years",
+    "jobDescription": "Looking for a Digital Marketing Specialist to enhance our online presence.",
+    "responsibilities": [
+      "Develop and implement digital marketing strategies.",
+      "Manage social media accounts and campaigns.",
+      "Analyze performance metrics and optimize campaigns."
+    ],
+    "requirements": [
+      "Experience with SEO and Google Analytics.",
+      "Familiarity with content management systems.",
+      "Strong writing and communication skills."
+    ],
+    "skills": [
+      "Digital Marketing",
+      "SEO",
+      "Google Analytics",
+      "Social Media Management"
+    ],
+    "applySection": {
+      "callToAction": "Excited to join us?",
+      "applyLinkText": "Apply here",
+      "applyLink": "https://marketinggurus.com/careers/digital-marketing-specialist"
     },
-    {
-      "blogId": 7,
-      "title": "Backend Developer for API Integration",
-      "shortDescription": "Implement and integrate third-party APIs for our healthcare platform, ensuring security and efficiency.",
-      "tags": ["Node.js", "Express", "API"],
-      "datePosted": "2023-09-18",
-      "experienceLevel": "Expert",
-      "jobType": "Hourly",
-      "priceRange": "$40.00 - $80.00/hr"
+    "postedDate": "24-09-17",
+    "longDescription": "As a Digital Marketing Specialist at Marketing Gurus, you will play a key role in shaping our online presence and brand identity. Your work will involve creating and executing digital marketing campaigns, managing social media accounts, and using analytics tools to track and improve performance. You'll collaborate with our content and design teams to produce high-quality marketing materials that resonate with our target audience, driving engagement and conversions."
+  },
+  {
+    "blogId": 7,
+    "jobTitle": "Software Engineer",
+    "company": "NextGen Technologies",
+    "location": "Los Angeles, CA",
+    "employmentType": "Full-time",
+    "salaryRange": "$95,000 - $115,000",
+    "remoteOption": "Remote",
+    "experience": "3-5 years",
+    "jobDescription": "We are seeking a Software Engineer to develop and maintain scalable software solutions.",
+    "responsibilities": [
+      "Design, develop, and maintain software applications.",
+      "Troubleshoot and debug applications.",
+      "Collaborate with other engineers and product managers."
+    ],
+    "requirements": [
+      "Proficient in Java or C#.",
+      "Experience with cloud technologies (AWS, Azure).",
+      "Strong understanding of algorithms and data structures."
+    ],
+    "skills": [
+      "Java",
+      "C#",
+      "Cloud Computing",
+      "Software Development"
+    ],
+    "applySection": {
+      "callToAction": "Ready to join us?",
+      "applyLinkText": "Apply today",
+      "applyLink": "https://nextgentech.com/careers/software-engineer"
     },
-    {
-      "blogId": 8,
-      "title": "Shopify Developer for Custom E-commerce Solutions",
-      "shortDescription": "Create custom Shopify themes and functionalities for our expanding online retail business.",
-      "tags": ["Shopify", "Liquid", "JavaScript"],
-      "datePosted": "2023-09-17",
-      "experienceLevel": "Expert",
-      "jobType": "Fixed-Price",
-      "priceRange": "$1K - $3K"
+    "postedDate": "24-09-16",
+    "longDescription": "At NextGen Technologies, we are looking for a passionate Software Engineer to join our dynamic team. In this role, you will be responsible for designing and developing innovative software solutions while collaborating with cross-functional teams. Your problem-solving skills will be essential in troubleshooting and optimizing our applications for better performance and user experience."
+  },
+  {
+    "blogId": 8,
+    "jobTitle": "Network Administrator",
+    "company": "Tech Connect",
+    "location": "Miami, FL",
+    "employmentType": "Full-time",
+    "salaryRange": "$70,000 - $90,000",
+    "remoteOption": "On-site",
+    "experience": "2-4 years",
+    "jobDescription": "Join our team as a Network Administrator and manage our network systems.",
+    "responsibilities": [
+      "Monitor network performance and security.",
+      "Troubleshoot network issues and provide support.",
+      "Install and configure network equipment."
+    ],
+    "requirements": [
+      "Experience with network administration tools.",
+      "Knowledge of firewalls and security protocols.",
+      "Strong problem-solving abilities."
+    ],
+    "skills": [
+      "Network Administration",
+      "Firewall Management",
+      "Troubleshooting",
+      "Security Protocols"
+    ],
+    "applySection": {
+      "callToAction": "Excited about networking?",
+      "applyLinkText": "Join us",
+      "applyLink": "https://techconnect.com/careers/network-administrator"
     },
-    {
-      "blogId": 9,
-      "title": "React Native Developer for Fitness App",
-      "shortDescription": "Develop new features for our fitness app, focusing on smooth user experience and performance optimization.",
-      "tags": ["React Native", "JavaScript", "Firebase"],
-      "datePosted": "2023-09-16",
-      "experienceLevel": "Intermediate",
-      "jobType": "Hourly",
-      "priceRange": "$20.00 - $45.00/hr"
+    "postedDate": "24-09-15",
+    "longDescription": "As a Network Administrator at Tech Connect, you will play a critical role in managing our network systems and ensuring optimal performance. You will be responsible for monitoring network security, troubleshooting issues, and configuring network equipment. Your expertise will help us maintain a secure and efficient network environment for all employees."
+  },
+  {
+    "blogId": 9,
+    "jobTitle": "Content Writer",
+    "company": "Content Creators Co.",
+    "location": "Denver, CO",
+    "employmentType": "Part-time",
+    "salaryRange": "$40,000 - $60,000",
+    "remoteOption": "Remote",
+    "experience": "1-3 years",
+    "jobDescription": "Seeking a talented Content Writer to create engaging content.",
+    "responsibilities": [
+      "Write articles, blogs, and marketing content.",
+      "Conduct research to support content development.",
+      "Edit and proofread content for clarity and accuracy."
+    ],
+    "requirements": [
+      "Strong writing and editing skills.",
+      "Experience with SEO best practices.",
+      "Ability to work independently and meet deadlines."
+    ],
+    "skills": [
+      "Content Writing",
+      "SEO",
+      "Research",
+      "Editing"
+    ],
+    "applySection": {
+      "callToAction": "Have a way with words?",
+      "applyLinkText": "Apply now",
+      "applyLink": "https://contentcreators.com/careers/content-writer"
     },
-    {
-      "blogId": 10,
-      "title": "DevOps Engineer for Cloud Migration",
-      "shortDescription": "Migrate our existing infrastructure to AWS, ensuring scalability, security, and high availability.",
-      "tags": ["AWS", "Docker", "Kubernetes"],
-      "datePosted": "2023-09-15",
-      "experienceLevel": "Expert",
-      "jobType": "Hourly",
-      "priceRange": "$50.00 - $100.00/hr"
+    "postedDate": "24-09-14",
+    "longDescription": "At Content Creators Co., we are looking for a passionate Content Writer to join our creative team. In this role, you will create high-quality content that resonates with our audience, including articles, blogs, and marketing materials. You will also conduct research to support your writing and collaborate with other team members to ensure that all content meets our standards for quality and effectiveness."
+  },
+  {
+    "blogId": 10,
+    "jobTitle": "Graphic Designer",
+    "company": "Design Studio",
+    "location": "Seattle, WA",
+    "employmentType": "Freelance",
+    "salaryRange": "$45,000 - $65,000",
+    "remoteOption": "Flexible",
+    "experience": "2-4 years",
+    "jobDescription": "We are looking for a creative Graphic Designer to help us create stunning visuals.",
+    "responsibilities": [
+      "Design graphics for print and digital media.",
+      "Collaborate with clients to understand their design needs.",
+      "Manage multiple design projects simultaneously."
+    ],
+    "requirements": [
+      "Proficient in Adobe Creative Suite.",
+      "Strong portfolio showcasing previous work.",
+      "Excellent time management skills."
+    ],
+    "skills": [
+      "Graphic Design",
+      "Adobe Creative Suite",
+      "Time Management",
+      "Client Collaboration"
+    ],
+    "applySection": {
+      "callToAction": "Are you a design pro?",
+      "applyLinkText": "Join us",
+      "applyLink": "https://designstudio.com/careers/graphic-designer"
     },
-    {
-      "blogId": 11,
-      "title": "Game Developer for 2D Multiplayer Game",
-      "shortDescription": "Looking for an experienced game developer to create a 2D multiplayer game using Unity or Unreal Engine.",
-      "tags": ["Unity", "Unreal Engine", "C#"],
-      "datePosted": "2023-09-14",
-      "experienceLevel": "Expert",
-      "jobType": "Fixed-Price",
-      "priceRange": "$5K - $10K"
+    "postedDate": "24-09-12",
+    "longDescription": "As a Graphic Designer at Design Studio, you'll be responsible for creating visually appealing designs for both print and digital media. You will work closely with clients to understand their needs and translate them into effective design solutions. Your strong portfolio will showcase your creativity and attention to detail as you manage multiple projects and deadlines."
+  },
+  {
+    "blogId": 11,
+    "jobTitle": "Quality Assurance Engineer",
+    "company": "Quality Solutions",
+    "location": "Phoenix, AZ",
+    "employmentType": "Full-time",
+    "salaryRange": "$75,000 - $95,000",
+    "remoteOption": "Hybrid",
+    "experience": "3-5 years",
+    "jobDescription": "Join our team as a Quality Assurance Engineer to ensure product quality.",
+    "responsibilities": [
+      "Design and execute test plans and test cases.",
+      "Identify, document, and track defects.",
+      "Collaborate with development teams to improve quality."
+    ],
+    "requirements": [
+      "Experience with automated testing tools.",
+      "Strong analytical and problem-solving skills.",
+      "Knowledge of software development lifecycle."
+    ],
+    "skills": [
+      "Quality Assurance",
+      "Automated Testing",
+      "Analytical Skills",
+      "Problem-Solving"
+    ],
+    "applySection": {
+      "callToAction": "Passionate about quality?",
+      "applyLinkText": "Apply today",
+      "applyLink": "https://qualitysolutions.com/careers/qa-engineer"
     },
-    {
-      "blogId": 12,
-      "title": "Python Developer for Machine Learning Project",
-      "shortDescription": "We are seeking a Python developer to build and optimize machine learning models for our data analytics platform.",
-      "tags": ["Python", "Machine Learning", "TensorFlow"],
-      "datePosted": "2023-09-13",
-      "experienceLevel": "Expert",
-      "jobType": "Hourly",
-      "priceRange": "$35.00 - $75.00/hr"
+    "postedDate": "24-09-11",
+    "longDescription": "At Quality Solutions, we are seeking a dedicated Quality Assurance Engineer to join our team. Your role will involve designing and executing test plans, identifying defects, and working closely with development teams to ensure that our products meet the highest quality standards. Your attention to detail and analytical skills will help us deliver reliable and high-quality software solutions."
+  },
+  {
+    "blogId": 12,
+    "jobTitle": "Mobile App Developer",
+    "company": "App Innovations",
+    "location": "Austin, TX",
+    "employmentType": "Full-time",
+    "salaryRange": "$90,000 - $110,000",
+    "remoteOption": "Remote",
+    "experience": "2-4 years",
+    "jobDescription": "We are looking for a Mobile App Developer to create innovative applications.",
+    "responsibilities": [
+      "Develop and maintain mobile applications.",
+      "Collaborate with UI/UX designers for optimal user experience.",
+      "Conduct code reviews and ensure best practices."
+    ],
+    "requirements": [
+      "Proficient in Swift and/or Kotlin.",
+      "Experience with mobile development frameworks.",
+      "Strong debugging skills."
+    ],
+    "skills": [
+      "Mobile Development",
+      "Swift",
+      "Kotlin",
+      "UI/UX Collaboration"
+    ],
+    "applySection": {
+      "callToAction": "Want to build apps?",
+      "applyLinkText": "Join our team",
+      "applyLink": "https://appinnovations.com/careers/mobile-app-developer"
     },
-    {
-      "blogId": 13,
-      "title": "Database Administrator for Performance Tuning",
-      "shortDescription": "Improve the performance and query optimization of our existing MySQL database for our SaaS product.",
-      "tags": ["MySQL", "Database", "Performance"],
-      "datePosted": "2023-09-12",
-      "experienceLevel": "Expert",
-      "jobType": "Hourly",
-      "priceRange": "$40.00 - $90.00/hr"
-    },
-    {
-      "blogId": 14,
-      "title": "iOS Developer for Health Monitoring App",
-      "shortDescription": "Develop and implement new features for a health monitoring app with Bluetooth device integration.",
-      "tags": ["iOS", "Swift", "Bluetooth"],
-      "datePosted": "2023-09-11",
-      "experienceLevel": "Intermediate",
-      "jobType": "Fixed-Price",
-      "priceRange": "$1K - $3K"
-    }
-  ]
-  
+    "postedDate": "24-09-10",
+    "longDescription": "As a Mobile App Developer at App Innovations, you'll be at the forefront of creating cutting-edge mobile applications. You'll work closely with UI/UX designers to deliver exceptional user experiences, while also ensuring that your code adheres to best practices. Your passion for mobile technology and strong debugging skills will contribute to the success of our innovative applications."
+  }
+]

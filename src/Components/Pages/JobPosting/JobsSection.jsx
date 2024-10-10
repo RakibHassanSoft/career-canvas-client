@@ -19,10 +19,16 @@ const JobsSection = () => {
       .then((data) => setJobs(data));
   }, []);
 
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split("-");
+    const fullYear = year.length === 2 ? `20${year}` : year; // Ensure the year is in 'yyyy' format
+    return new Date(`${fullYear}-${month}-${day}`);
+  };
+
   const sortedJobs = [...jobs].sort((a, b) => {
     return sortBy === "newest"
-      ? new Date(b.datePosted) - new Date(a.datePosted)
-      : new Date(a.datePosted) - new Date(b.datePosted);
+      ? parseDate(b.postedDate) - parseDate(a.postedDate)
+      : parseDate(a.postedDate) - parseDate(b.postedDate);
   });
 
   // Function to open the sidebar with the selected blog
@@ -33,10 +39,14 @@ const JobsSection = () => {
   return (
     <div>
       {/* Header Section */}
-      <div className="bg-green-50 p-6 md:p-14">
+      <div className=" p-6 md:p-14 flex flex-col items-center border-b-4 border-green-500">
         <h1 className="text-center text-3xl md:text-5xl font-semibold text-green-500">
           Job Posting Page
         </h1>
+        <p className="text-center text-lg w-2/3 text-gray-600 mt-4">
+          Find your next opportunity or hire top talent for your team. Discover
+          a range of jobs that suit your skills and career aspirations.
+        </p>
       </div>
 
       {/* Sort by Section */}
