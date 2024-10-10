@@ -6,6 +6,7 @@ import skillAnimation from '../../../../../public/skill-animation.json.json';
 import { ImArrowLeft } from 'react-icons/im';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import { FormContext } from '../../../Providers/FormContext';
 
 const SkillsForm = () => {
     const navigate = useNavigate();
@@ -13,7 +14,9 @@ const SkillsForm = () => {
     const [skills, setSkills] = useState('');
     const [errors, setErrors] = useState('');
     const axiosPublic = useAxiosPublic(); // Axios instance for API calls
+    const { updateSkills } = useContext(FormContext);
 
+  
     const handleChange = (e) => {
         setSkills(e.target.value);
         if (errors) {
@@ -33,12 +36,12 @@ const SkillsForm = () => {
             setErrors(validationError);
         } else {
             try {
-                // const requestData = {
-                //     userId: user.uid,
-                //     templateId: resumeId, // Replace with actual template ID as needed
-                //     skills: skills.split(',').map(skill => skill.trim()), // Convert comma-separated string to array
-                // };
-
+                const requestData = {
+                    userId: user.uid,
+                    templateId: resumeId, // Replace with actual template ID as needed
+                    skills: skills.split(',').map(skill => skill.trim()), // Convert comma-separated string to array
+                };
+                updateSkills(skills.split(',').map(skill => skill.trim()))
                 // const response = await axiosPublic.post('/api/skills', requestData); // Adjust endpoint as necessary
 
                 // if (response.status === 201) {

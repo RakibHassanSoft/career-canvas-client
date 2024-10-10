@@ -8,6 +8,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { useContext } from "react";
+import { FormContext } from "../../../Providers/FormContext";
 
 const images = [
     { id: 1, name: "Resume1", url: "/resume-images/Resume1.png" },
@@ -26,11 +27,13 @@ const images = [
 
 const Resume_templates_row = () => {
     const navigate = useNavigate();
-    const { user, resumeId,handleResumeTempalte } = useContext(AuthContext); 
+    const { user, resumeId,handleResumeTempalte } = useContext(AuthContext);
+    const { setTemplateId } = useContext(FormContext);
     const handleImageClick = (resumeType) => {
         console.log('Selected Resume:', resumeType);  
         // Logs the selected resume
         handleResumeTempalte(resumeType);
+        setTemplateId(resumeType)
         navigate('/resume-templates/personal-info-form', { state: { resumeType } });
     };
     

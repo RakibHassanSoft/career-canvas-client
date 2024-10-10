@@ -4,10 +4,12 @@ import { ImArrowLeft } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import { FormContext } from '../../../Providers/FormContext';
 
 const LanguagesForm = () => {
     const [formData, setFormData] = useState({ languages: '' });
     const { user, resumeId } = useContext(AuthContext); // Access userId and resumeId from context
+    const { updateLanguages } = useContext(FormContext);
     const axiosPublic = useAxiosPublic();
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -33,18 +35,21 @@ const LanguagesForm = () => {
             setErrors(validationErrors);
         } else {
             try {
-                const requestData = {
-                    userId: user.uid, // Get userId from context
-                    templateId: resumeId, // Get templateId from context
-                    languages: formData.languages.split(',').map(lang => lang.trim()), // Convert input string to array
-                };
+                updateLanguages(formData.languages);
+                // const requestData = {
+                //     userId: user.uid, // Get userId from context
+                //     templateId: resumeId, // Get templateId from context
+                //     languages: formData.languages.split(',').map(lang => lang.trim()), // Convert input string to array
+                // };
 
-                const response = await axiosPublic.post('/api/Language', requestData); // Adjust endpoint as necessary
+                // const response = await axiosPublic.post('/api/Language', requestData); // Adjust endpoint as necessary
 
-                if (response.status === 201) {
-                    console.log('Languages submitted successfully:', response.data);
-                    navigate('/user-profile'); // Change to your desired route
-                }
+                // if (response.status === 201) {
+                //     console.log('Languages submitted successfully:', response.data);
+                //     navigate('/user-profile'); // Change to your desired route
+                    
+                // }
+                navigate('/user-profile'); // Change to your desired route
 
             } catch (error) {
                 console.error('Error submitting languages:', error.response ? error.response.data : error.message);

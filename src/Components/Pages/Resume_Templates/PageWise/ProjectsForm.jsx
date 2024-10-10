@@ -1,18 +1,16 @@
-
-//// has big probelm
-
-
 import { useContext, useState } from 'react';
 import { ImArrowLeft } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
 import { AuthContext } from '../../../Providers/AuthProvider';
+import { FormContext } from '../../../Providers/FormContext';
 
 const ProjectsForm = () => {
     const navigate = useNavigate();
-    const {user,resumeId} = useContext(AuthContext);
-    const axiosPublic =useAxiosPublic()
+    const { user, resumeId } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
+    const { updateProjects } = useContext(FormContext);
     const [projects, setProjects] = useState([
         {
             title: '',
@@ -42,18 +40,18 @@ const ProjectsForm = () => {
 
         // Prepare the data for submission according to your schema
         const requestData = {
-            userId: user.uid, // Replace with the actual user ID
-            templateId: resumeId, // Replace with the actual template ID
+            userId: user.uid, // User ID
+            templateId: String(resumeId), // Ensure templateId is a string
             projects: projects.map((project) => ({
                 title: project.title,
                 description: project.description,
             })),
         };
-
+        updateProjects(projects);
         try {
             // Submit the data to your API using Axios
-            const response = await axiosPublic.post('/api/projects', requestData);
-            console.log('Success:', response.data);
+            // const response = await axiosPublic.post('/api/projects', requestData);
+            // console.log('Success:', response.data);
             navigate('/resume-templates/Education-form'); // Navigate after successful submission
         } catch (error) {
             console.error('Error:', error);
@@ -103,7 +101,7 @@ const ProjectsForm = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
                                 <input
                                     type="text"
-                                    name="title" // Updated name attribute
+                                    name="title"
                                     value={project.title}
                                     onChange={(e) => handleChange(index, e)}
                                     placeholder="Enter project name"
@@ -114,7 +112,7 @@ const ProjectsForm = () => {
                             <div className="mb-4">
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                                 <textarea
-                                    name="description" // Updated name attribute
+                                    name="description"
                                     value={project.description}
                                     onChange={(e) => handleChange(index, e)}
                                     placeholder="Enter project description"

@@ -6,10 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import { FormContext } from '../../../Providers/FormContext';
 
 const EducationForm = () => {
     const navigate = useNavigate();
-    const { userId, resumeId } = useContext(AuthContext);
+    const { user, resumeId } = useContext(AuthContext);
+    const { updateEducation } = useContext(FormContext);
     const axiosPublic = useAxiosPublic();
     const [educationList, setEducationList] = useState([
         { degree: '', institution: '', duration: '' }
@@ -50,18 +52,19 @@ const EducationForm = () => {
             setErrors(validationErrors);
         } else {
             try {
+                updateEducation(educationList);
                 // Prepare the data to send to the backend
-                const data = {
-                    userId,
-                    templateId,
-                    education: educationList.map(entry => ({
-                        degree: entry.degree,
-                        institution: entry.institution,
-                        duration: entry.duration
-                    }))
-                };
+                // const data = {
+                //     userId :user.uid,
+                //     templateId,
+                //     education: educationList.map(entry => ({
+                //         degree: entry.degree,
+                //         institution: entry.institution,
+                //         duration: entry.duration
+                //     }))
+                // };
                 
-                // Send the data to the backend
+                // // // Send the data to the backend
                 // const response = await axiosPublic.post('/api/CreateEducation', data); // Adjust the URL as necessary
                 // console.log('Education submitted successfully:', response.data);
                 

@@ -9,8 +9,8 @@ import useAxiosPublic from "../../../../Hooks/AxiosHooks/useAxiosPublic";
 const PersonalInfoForm = () => {
   const navigate = useNavigate();
   const { user, resumeId } = useContext(AuthContext);
-  const { updatePersonalInfo } = useContext(FormContext);
-  
+  const { updatePersonalInfo ,submitFormData} = useContext(FormContext);
+  const axiosInstance = useAxiosPublic();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -53,7 +53,7 @@ const PersonalInfoForm = () => {
       //   templateId: resumeId,
       // };
       
-      // const axiosInstance = useAxiosPublic();
+      
       // const response = await axiosInstance.post("api/NameAndContact", requestData);
       
       // if (response.status === 201) {
@@ -64,6 +64,8 @@ const PersonalInfoForm = () => {
       //   setWebsite("");
       //   navigate('/resume-templates/career-objective-form');
       // }
+      updatePersonalInfo({ name, contact: { phone, email, website } });
+      submitFormData();
       navigate('/resume-templates/career-objective-form');
     } catch (error) {
       setSubmissionError("Failed to submit the form. Please try again.");
