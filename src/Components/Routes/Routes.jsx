@@ -22,6 +22,9 @@ import Template1 from "../Pages/dragAndDrop/Template1";
 import AdminSidebar from "../Pages/Dashboard/AdminSidebar";
 import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
 import JobsSection from "../Pages/JobPosting/JobsSection";
+import GoogleDocAdvanced from "../Pages/GoogleDocLikeEdit/GoogleDocLikeEdit";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import ResumeReview from "../Pages/Dashboard/ResumeReview/ResumeReview";
 
 
 const router = createBrowserRouter([
@@ -68,11 +71,6 @@ const router = createBrowserRouter([
           },
         ]
       },
-     
-      {
-        path: '/job-posting',
-        element: <JobPosting></JobPosting>
-      },
       {
         path: '/job-section',
         element: <JobsSection></JobsSection>
@@ -105,6 +103,10 @@ const router = createBrowserRouter([
         path: '/drag-and-drop',
         element: <Template1/>
       },
+      {
+        path: '/google-doc',
+        element: <GoogleDocAdvanced/>
+      },
     ]
   },
   {
@@ -112,8 +114,20 @@ const router = createBrowserRouter([
    element:<AdminSidebar/>,
    children:[
     {
+      path:'',
+      element:<Dashboard/>
+    },
+    {
       path:'manage-users',
       element:<ManageUser/>
+    },
+    {
+      path:'job-posting',
+      element:<JobPosting></JobPosting>
+    },
+    {
+      path:'resume-review',
+      element:<ResumeReview/>
     }
 
    ]

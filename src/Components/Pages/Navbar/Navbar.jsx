@@ -175,7 +175,7 @@ const Navbar = () => {
             <label tabIndex={0} className="ml-4 cursor-pointer text-lg font-semibold">
               Resume Templates
             </label>
-            <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-y-3">
               <NavLink
                 to="/resume-templates/Resume_Templates"
                 className={({ isActive }) =>
@@ -198,21 +198,22 @@ const Navbar = () => {
               >
                 Drag and drop
               </NavLink>
+              <NavLink
+                to="/google-doc"
+                className={({ isActive }) =>
+                  `ml-4 ${isActive
+                    ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                    : "text-lg font-semibold"
+                  }`
+                }
+              >
+               Use Google doc
+              </NavLink>
 
             </ul>
           </div>
         }
-        <NavLink
-          to="/job-posting"
-          className={({ isActive }) =>
-            `ml-4 ${isActive
-              ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-              : "text-lg font-semibold"
-            }`
-          }
-        >
-          Job Postings
-        </NavLink>
+        
         <NavLink
           to="/premium-membership"
           className={({ isActive }) =>

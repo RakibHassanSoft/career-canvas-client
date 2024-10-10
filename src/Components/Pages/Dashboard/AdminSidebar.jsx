@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaFile, FaHome, FaUser } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 
 const AdminSidebar = () => {
@@ -17,7 +18,7 @@ const AdminSidebar = () => {
                     <nav className="mt-10">
                         <ul>
                             <li>
-                                <Link to="/" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                <Link to="/dashboard" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10 3a7 7 0 00-5.874 11.164A7.001 7.001 0 0010 17a7.001 7.001 0 005.874-2.836A7 7 0 0010 3zm0 10a3 3 0 110-6 3 3 0 010 6z" />
                                     </svg>
@@ -26,26 +27,22 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <Link to="/dashboard/manage-users" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6 2a1 1 0 011-1h6a1 1 0 011 1v4h-2V3H8v3H6V2zM4 8a1 1 0 011-1h10a1 1 0 011 1v10a1 1 0 01-1 1H5a1 1 0 01-1-1V8zm2 2v8h8V10H6z" />
-                                    </svg>
+                                   <FaUser/>
                                     <span className="ml-3">Manage Users</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/manage-products" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2 10h4l3 8h6l3-8h4l-7-8H9L2 10zm4 2l2-4 2 4H6zm2 0h4l-2 4h-4l2-4z" />
-                                    </svg>
-                                    <span className="ml-3">Manage Products</span>
+                                <Link to="/dashboard/job-posting" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                   <FaFile/>
+                                    <span className="ml-3">Post Job</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/orders" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                <Link to="/dashboard/resume-review" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10 2a1 1 0 011 1v3a1 1 0 11-2 0V3a1 1 0 011-1zM2 10a1 1 0 011-1h3a1 1 0 110 2H3a1 1 0 01-1-1zm14-1a1 1 0 100 2h3a1 1 0 100-2h-3zM5.293 14.293a1 1 0 011.414 0L10 17.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                                     </svg>
-                                    <span className="ml-3">Orders</span>
+                                    <span className="ml-3">Review request</span>
                                 </Link>
                             </li>
                             <li>
@@ -64,24 +61,35 @@ const AdminSidebar = () => {
                                     <span className="ml-3">Logout</span>
                                 </Link>
                             </li>
+                            <hr />
+                            <li>
+                                <Link to="/" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                   
+                                    <FaHome></FaHome>
+                                    <span className="ml-3">Home</span>
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
                 </div>
             </aside>
 
             {/* Main Content Area */}
-            <div className="w-full p-10 h-full">
+            {/* Main Content Area */}
+            <div className="w-full p-10 h-full flex flex-col">
                 <div className='flex justify-end'>
-                <button
-                    className="md:hidden p-2 text-gray-300 hover:bg-gray-700"
-                    onClick={toggleSidebar}
-                >
-                    {isOpen ? 'Close Sidebar' : 'Open Sidebar'}
-                </button>
+                    <button
+                        className="md:hidden p-2 text-gray-300 hover:bg-gray-700"
+                        onClick={toggleSidebar}
+                    >
+                        {isOpen ? 'Close Sidebar' : 'Open Sidebar'}
+                    </button>
                 </div>
-                <h2 className="text-3xl font-semibold">Welcome to Admin Dashboard</h2>
-                <Outlet /> {/* This will render child routes here */}
+                <div className="flex-1 overflow-auto">
+                    <Outlet /> {/* This will render child routes here */}
+                </div>
             </div>
+
         </div>
     );
 };

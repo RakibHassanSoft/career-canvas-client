@@ -4,7 +4,7 @@ import { motion } from "framer-motion"; // Import Framer Motion
 const Banner = () => {
   return (
     <div>
-      <header className="bg-white w-11/12 m-auto dark:bg-gray-900 mt-12">
+      <header className="bg-white w-11/12 m-auto mt-12 overflow-hidden">
         <div className="lg:flex">
           {/* Text section with animated slide-in effect */}
           <motion.div
@@ -15,24 +15,23 @@ const Banner = () => {
           >
             <div className="max-w-xl">
               <motion.h2
-                className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                className="text-3xl font-semibold text-gray-800 lg:text-4xl"
+                initial={{ opacity: 0, y: -20 }} // Initial position: slightly above
+                animate={{ opacity: 1, y: 0 }} // Animate to normal position
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
                 Build Your Professional{" "}
-                <span className="text-green-600 dark:text-green-400">Resume</span>{" "}
-                with Ease
+                <span className="text-green-600">Resume</span> with Ease
               </motion.h2>
 
               <motion.p
-                className="mt-4 text-sm text-gray-500 dark:text-gray-400 lg:text-base"
+                className="mt-4 text-sm text-gray-600 lg:text-base"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.8 }}
               >
                 At{" "}
-                <span className="bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
                   Career Canvas
                 </span>
                 , we provide you with the tools to create a standout resume in minutes.
@@ -48,13 +47,13 @@ const Banner = () => {
               >
                 <a
                   href="#"
-                  className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-transform duration-300 transform bg-green-500 rounded-md hover:scale-105"
+                  className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-transform duration-300 transform bg-green-500 rounded-md shadow-md hover:scale-105 hover:shadow-lg"
                 >
                   Get Started
                 </a>
                 <a
                   href="#"
-                  className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-transform duration-300 transform bg-green-500 rounded-md lg:mx-4 hover:scale-105"
+                  className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-transform duration-300 transform bg-blue-500 rounded-md shadow-md lg:mx-4 hover:scale-105 hover:shadow-lg"
                 >
                   Learn More
                 </a>
@@ -76,7 +75,7 @@ const Banner = () => {
                   "url('https://i.ibb.co/qdj6Y73/banner-image.webp')",
               }}
             >
-              <div className="w-full h-full"></div>
+              <div className="w-full h-full bg-white opacity-40"></div> {/* Light overlay for contrast */}
             </div>
           </motion.div>
         </div>
