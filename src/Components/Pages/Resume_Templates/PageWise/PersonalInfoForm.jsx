@@ -65,7 +65,7 @@ const PersonalInfoForm = () => {
       //   navigate('/resume-templates/career-objective-form');
       // }
       updatePersonalInfo({ name, contact: { phone, email, website } });
-      submitFormData();
+     
       navigate('/resume-templates/career-objective-form');
     } catch (error) {
       setSubmissionError("Failed to submit the form. Please try again.");

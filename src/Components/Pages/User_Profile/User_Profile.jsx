@@ -4,6 +4,7 @@ import Resume1 from "../Resume_Templates/templatesColllection/Resume1";
 import Resume2 from "../Resume_Templates/templatesColllection/Resume9";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import ResumeMe from "../Resume_Templates/templatesColllection/ResumeMe";
 
 const User_Profile = () => {
   const { resumeId } = useContext(AuthContext);
@@ -59,14 +60,15 @@ const User_Profile = () => {
 
       {/* Profile Content */}
       <div className="p-6">
-        <div ref={inputRef} className="bg-gray-100 p-4 rounded-lg">
-          {/* Resume template rendering based on resumeId */}
+        {/* <div ref={inputRef} className="bg-gray-100 p-4 rounded-lg">
+
           {resumeId === 1 && <Resume1 />}
           {resumeId === 2 && <Resume2 />}
           {resumeId === 3 && <p>Hello</p>}
           {resumeId === undefined && <h1>Loading.....</h1>}
-        </div>
+        </div> */}
 
+       <ResumeMe/>
         {/* Download Button */}
         <button
           onClick={downloadPDF}

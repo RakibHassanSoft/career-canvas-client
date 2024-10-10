@@ -47,16 +47,18 @@ const CareerObjectiveForm = () => {
 
         console.log("Submitting data: ", requestData); // Log the data here
 
-        const axiosPublic = useAxiosPublic();  // Assuming useAxiosPublic() is correctly set up
-        const response = await axiosPublic.post("api/CareerObjective", requestData);
+        // const axiosPublic = useAxiosPublic();  // Assuming useAxiosPublic() is correctly set up
+        // const response = await axiosPublic.post("api/CareerObjective", requestData);
         
-        console.log("Response: ", response.data); // Log the response data
+        // console.log("Response: ", response.data); // Log the response data
 
-        // Handle successful response
-        if (response.status === 201) {
-          updateCareerObjective(objective); // Update context with the career objective
-          navigate('/resume-templates/skills-form'); // Navigate to the next step
-        }
+        // // Handle successful response
+        // if (response.status === 201) {
+        //   updateCareerObjective(objective); // Update context with the career objective
+        //   navigate('/resume-templates/skills-form'); // Navigate to the next step
+        // }
+        updateCareerObjective(objective); // Update context with the career objective
+          navigate('/resume-templates/skills-form');
         // navigate('/resume-templates/skills-form'); 
       } catch (error) {
         console.error("Error submitting form: ", error.response ? error.response.data : error.message); // Improved error logging

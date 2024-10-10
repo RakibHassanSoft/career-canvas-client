@@ -2,9 +2,11 @@ import React, { useCallback, useContext, useState } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import useAxiosPublic from '../../../Hooks/AxiosHooks/useAxiosPublic';
 import { AuthContext } from '../../Providers/AuthProvider';
-
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 const JobPosting = () => {
   // State for the job posting details
+  const navigate = useNavigate();
   const {user}= useContext(AuthContext);
   const axiosPublic = useAxiosPublic()
   const [jobDetails, setJobDetails] = useState({
@@ -67,9 +69,27 @@ const JobPosting = () => {
     jobDetails.userId =  user.uid;
     const response = await axiosPublic.post('/api/jobs', jobDetails); // Send job details to the server
     console.log(response);
+    e.target.reset(); 
+    navigate('/premium-membership');
     try {
       // Log the response from the server
+
+      // Show SweetAlert modal upon success
+      Swal.fire({
+        title: 'Success!',
+        text: 'Form data submitted successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      
     } catch (error) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error submitting the form data.',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
       console.error('Error submitting job details:', error); // Handle any errors
     }
   };

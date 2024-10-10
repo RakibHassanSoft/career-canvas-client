@@ -9,7 +9,7 @@ import { FormContext } from '../../../Providers/FormContext';
 const LanguagesForm = () => {
     const [formData, setFormData] = useState({ languages: '' });
     const { user, resumeId } = useContext(AuthContext); // Access userId and resumeId from context
-    const { updateLanguages } = useContext(FormContext);
+    const { updateLanguages, submitFormData } = useContext(FormContext);
     const axiosPublic = useAxiosPublic();
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -47,9 +47,16 @@ const LanguagesForm = () => {
                 // if (response.status === 201) {
                 //     console.log('Languages submitted successfully:', response.data);
                 //     navigate('/user-profile'); // Change to your desired route
-                    
+
                 // }
-                navigate('/user-profile'); // Change to your desired route
+                const result = await submitFormData();
+                if (result) {
+                    console.log('Received response:', result);
+                    // Handle the response as needed
+                } else {
+                    console.log('Failed to submit the form.');
+                }
+                // Change to your desired route
 
             } catch (error) {
                 console.error('Error submitting languages:', error.response ? error.response.data : error.message);

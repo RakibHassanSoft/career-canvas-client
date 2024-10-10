@@ -1,7 +1,7 @@
 // src/Context/FormContext.js
 import { createContext, useContext, useState } from 'react';
 import { AuthContext } from './AuthProvider';
-
+import Swal from 'sweetalert2';
 export const FormContext = createContext();
 import axios from 'axios';
 import useAxiosPublic from '../../Hooks/AxiosHooks/useAxiosPublic';
@@ -10,7 +10,7 @@ export const FormProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosPublic();
   const [formData, setFormData] = useState({
-    tempalteId:'',
+    tempalteId: '',
     personalInfo: {
       name: '',
       phone: '',
@@ -56,20 +56,40 @@ export const FormProvider = ({ children }) => {
     setFormData((prev) => ({ ...prev, tempalteId: id }));
   };
 
-   // Function to send all data to the server
-   const submitFormData = async () => {
+  // Function to send all data to the server
+  const submitFormData = async () => {
     // Get user context
     const formDataWithUserId = { ...formData, userId: user.uid }; // Add userId to formData
-    
+  
     try {
       const response = await axiosInstance.post('/api/formdata', formDataWithUserId);
       console.log('Form data submitted successfully:', response.data);
-      // Handle successful response here
+  
+      // Show SweetAlert modal upon success
+      Swal.fire({
+        title: 'Success!',
+        text: 'Form data submitted successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+  
+      // Return the response data to the caller
+      return response.data; // Send back the response data
     } catch (error) {
       console.error('Error submitting form data:', error);
-      // Handle error response here
+  
+      // Show SweetAlert error modal
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error submitting the form data.',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
+  
+      return null; // Return null or any error indicator
     }
   };
+  
   // const submitFormData = async () => {
   //   // Prepare dummy data
   //   const dummyData = {
@@ -116,7 +136,7 @@ export const FormProvider = ({ children }) => {
 
   //   // Add userId to dummy data
   //   const formDataWithUserId = { ...dummyData, userId: user.uid }; // Add userId to formData
-    
+
   //   try {
   //     const response = await axiosInstance.post('/api/formdata', formDataWithUserId);
   //     console.log('Form data submitted successfully:', response.data);
@@ -135,7 +155,7 @@ export const FormProvider = ({ children }) => {
       updateSkills,
       updateProjects,
       updateLanguages,
-     
+
       setTemplateId,
       submitFormData
     }}>
