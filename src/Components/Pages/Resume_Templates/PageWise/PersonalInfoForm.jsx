@@ -1,92 +1,159 @@
-// src/Components/PersonalInfoForm.jsx
-
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { FormContext } from "../../../Providers/FormContext";
 import { ImArrowLeft } from "react-icons/im";
-
-
+import { AuthContext } from "../../../Providers/AuthProvider";
+import useAxiosPublic from "../../../../Hooks/AxiosHooks/useAxiosPublic";
 
 const PersonalInfoForm = () => {
   const navigate = useNavigate();
-  const { formData, updatePersonalInfo } = useContext(FormContext)
-
-  const [form, setForm] = useState(formData.personalInfo);
+  const { user, resumeId } = useContext(AuthContext);
+  const { updatePersonalInfo } = useContext(FormContext);
+  
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  
   const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: '' });
-    }
-  };
+  const [submissionError, setSubmissionError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     const newErrors = {};
-    if (!form.name) newErrors.name = 'Name is required';
-    if (!form.phone) newErrors.phone = 'Phone is required';
-    if (!form.email) newErrors.email = 'Email is required';
-    if (!form.linkedin) newErrors.linkedin = 'LinkedIn URL is required';
-    if (!form.github) newErrors.github = 'GitHub URL is required';
+    if (!name) newErrors.name = 'Name is required';
+    if (!phone) newErrors.phone = 'Phone is required';
+    if (!email) newErrors.email = 'Email is required';
+    if (!website) newErrors.website = 'Website is required';
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const validationErrors = validate();
     if (Object.keys(validationErrors).length) {
       setErrors(validationErrors);
-    } else {
-      updatePersonalInfo(form);
+      return;
+    }
+
+    setLoading(true); // Start loading
+    setSubmissionError(""); // Clear previous errors
+
+    try {
+      // const requestData = {
+      //   name,
+      //   contact: {
+      //     phone,
+      //     email,
+      //     website
+      //   },
+      //   userId: user.uid,
+      //   templateId: resumeId,
+      // };
+      
+      // const axiosInstance = useAxiosPublic();
+      // const response = await axiosInstance.post("api/NameAndContact", requestData);
+      
+      // if (response.status === 201) {
+      //   updatePersonalInfo({ name, contact: { phone, email, website } });
+      //   setName("");
+      //   setPhone("");
+      //   setEmail("");
+      //   setWebsite("");
+      //   navigate('/resume-templates/career-objective-form');
+      // }
       navigate('/resume-templates/career-objective-form');
+    } catch (error) {
+      setSubmissionError("Failed to submit the form. Please try again.");
+      console.error("Error submitting form: ", error.response ? error.response.data : error.message);
+    } finally {
+      setLoading(false); // End loading
     }
   };
+
   const handleBack = () => {
-    navigate('/resume-templates/Resume_Templates')
-  }
+    navigate('/resume-templates/Resume_Templates');
+  };
 
   return (
     <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
-      {/* Form Section */}
       <div className="w-1/2 p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
-        <Link onClick={handleBack}>
+        <Link onClick={handleBack} aria-label="Go back">
           <ImArrowLeft />
         </Link>
 
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Personal Information</h2>
         <form onSubmit={handleSubmit}>
-          {Object.keys(form).map((key) => (
-            <div className="mb-4" key={key}>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </label>
-              <input
-                type={key === 'phone' ? 'tel' : 'text'}
-                name={key}
-                value={form[key]}
-                onChange={handleChange}
-                required
-                placeholder={key === 'phone' ? '(123) 456-7890' : `your.${key}@example.com`}
-                className={`mt-1 block w-full border ${errors[key] ? 'border-red-500' : 'border-gray-300'
-                  } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
-                aria-label={key.charAt(0).toUpperCase() + key.slice(1)}
-              />
-              {errors[key] && <p className="text-red-500 text-sm mt-1">{errors[key]}</p>}
-            </div>
-          ))}
+          {/* Name Input */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="John Doe"
+              className={`mt-1 block w-full border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
+            />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+          </div>
+
+          {/* Phone Input */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              placeholder="(123) 456-7890"
+              className={`mt-1 block w-full border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
+            />
+            {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+          </div>
+
+          {/* Email Input */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="johndoe@example.com"
+              className={`mt-1 block w-full border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
+            />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          </div>
+
+          {/* Website Input */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+            <input
+              type="url"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              required
+              placeholder="https://johndoe.com"
+              className={`mt-1 block w-full border ${errors.website ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
+            />
+            {errors.website && <p className="text-red-500 text-sm mt-1">{errors.website}</p>}
+          </div>
+
+          {submissionError && <p className="text-red-500 text-sm mt-1">{submissionError}</p>}
+
           <button
             type="submit"
-            className="w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition duration-200 transform hover:scale-105"
+            className={`w-full bg-green-600 text-white font-semibold py-2 rounded-md hover:bg-green-700 transition duration-200 transform hover:scale-105 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={loading} // Disable button during loading
           >
-            Next
+            {loading ? 'Submitting...' : 'Next'}
           </button>
         </form>
       </div>
 
-      {/* Tips Section */}
       <div className="w-1/2 p-6 ml-4 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
         <h2 className="text-2xl font-semibold mb-4 flex items-center text-gray-800">
           💡 Tips for Filling Out the Form
@@ -98,24 +165,17 @@ const PersonalInfoForm = () => {
           </div>
           <div className="flex items-start">
             <FaCheckCircle className="text-green-500 mr-2 mt-1" />
-            <p><strong>Phone:</strong> Provide a valid phone number. Format: (123) 456-7890.</p>
+            <p><strong>Phone:</strong> Provide a valid phone number for contact purposes.</p>
           </div>
           <div className="flex items-start">
             <FaCheckCircle className="text-green-500 mr-2 mt-1" />
-            <p><strong>Email:</strong> Use a professional email address that you check regularly.</p>
+            <p><strong>Email:</strong> Use a professional email address.</p>
           </div>
           <div className="flex items-start">
             <FaCheckCircle className="text-green-500 mr-2 mt-1" />
-            <p><strong>LinkedIn:</strong> Include the full URL to your LinkedIn profile.</p>
-          </div>
-          <div className="flex items-start">
-            <FaCheckCircle className="text-green-500 mr-2 mt-1" />
-            <p><strong>GitHub:</strong> Share your GitHub profile link to showcase your projects.</p>
+            <p><strong>Website:</strong> Include a personal website or portfolio link if available.</p>
           </div>
         </div>
-        <p className="mt-4 text-gray-600">
-          Ensure all fields are completed accurately to avoid delays in processing your information.
-        </p>
       </div>
     </div>
   );

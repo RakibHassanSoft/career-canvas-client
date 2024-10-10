@@ -13,10 +13,13 @@ import ProjectsForm from "../Pages/Resume_Templates/PageWise/ProjectsForm";
 import EducationForm from "../Pages/Resume_Templates/PageWise/EducationForm";
 import LanguagesForm from "../Pages/Resume_Templates/PageWise/LanguagesForm";
 import Main from "../Pages/Resume_Templates/Main/Main";
-import JobPosting from "../Pages/Job_Posting/JobPosting";
+import JobPosting from "../Pages/Job_Posting_admin/JobPosting";
 import Chat from "../Pages/Chat/Chat";
 import Resume_templates_row from "../Pages/Resume_Templates/templatesColllection/Resume_templates_row";
 import Template1 from "../Pages/dragAndDrop/Template1";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import AdminSidebar from "../Pages/Dashboard/AdminSidebar";
+import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
 
 
 const router = createBrowserRouter([
@@ -97,6 +100,17 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+   path:'/dashboard',
+   element:<AdminSidebar/>,
+   children:[
+    {
+      path:'manage-users',
+      element:<ManageUser/>
+    }
+
+   ]
+  }
 ]);
 
 

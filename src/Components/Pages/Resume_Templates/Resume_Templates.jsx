@@ -26,11 +26,11 @@ const images = [
 
 const Resume_Templates = () => {
     const navigate = useNavigate();
-    const { resumeId, setResumeId } = useContext(AuthContext)
+    const { resumeId } = useContext(AuthContext)
     console.log(resumeId)
     const handleImageClick = (resumeType,r) => {
         navigate('/resume-templates/personal-info-form', { state: { resumeType } });
-        setResumeId(r);
+       
     };
 
     // const handleResumeId = (r) => {

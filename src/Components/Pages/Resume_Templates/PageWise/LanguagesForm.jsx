@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FaRegLightbulb, FaCheckCircle } from 'react-icons/fa';
 import { ImArrowLeft } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
 
 const LanguagesForm = () => {
-    const [formData, setFormData] = useState({
-        languages: ''
-    });
-
+    const [formData, setFormData] = useState({ languages: '' });
+    const { user, resumeId } = useContext(AuthContext); // Access userId and resumeId from context
+    const axiosPublic = useAxiosPublic();
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -25,19 +26,37 @@ const LanguagesForm = () => {
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length) {
             setErrors(validationErrors);
         } else {
-            console.log('Languages submitted successfully:', formData);
-            navigate('/user-profile'); // Change '/next-page' to your desired route
+            try {
+                const requestData = {
+                    userId: user.uid, // Get userId from context
+                    templateId: resumeId, // Get templateId from context
+                    languages: formData.languages.split(',').map(lang => lang.trim()), // Convert input string to array
+                };
+
+                const response = await axiosPublic.post('/api/Language', requestData); // Adjust endpoint as necessary
+
+                if (response.status === 201) {
+                    console.log('Languages submitted successfully:', response.data);
+                    navigate('/user-profile'); // Change to your desired route
+                }
+
+            } catch (error) {
+                console.error('Error submitting languages:', error.response ? error.response.data : error.message);
+                setErrors({ ...errors, submit: 'Failed to submit languages. Please try again.' });
+            }
         }
     };
+
     const handleBack = () => {
-        navigate('/resume-templates/education-form')
-    }
+        navigate('/resume-templates/education-form'); // Navigate back to the previous page
+    };
+
     return (
         <div className="flex max-w-6xl mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
             {/* Form Section */}
@@ -72,6 +91,7 @@ const LanguagesForm = () => {
                         Next
                     </button>
                 </form>
+                {errors.submit && <p className="text-red-500 text-sm mt-2">{errors.submit}</p>} {/* Error message for submission */}
             </div>
 
             {/* Tips Section */}

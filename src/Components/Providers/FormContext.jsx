@@ -20,6 +20,8 @@ export const FormProvider = ({ children }) => {
     resumeType: 'resume1' // Default value
   });
 
+  console.log(formData);
+
   const updatePersonalInfo = (data) => {
     setFormData((prev) => ({ ...prev, personalInfo: data }));
   };
