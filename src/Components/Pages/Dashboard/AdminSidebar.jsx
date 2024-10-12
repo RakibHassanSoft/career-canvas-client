@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaFile, FaHome, FaUser } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { logOut } = useContext(AuthContext);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
+    };
+
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.success('LogOut Successful!!');
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     };
 
     return (
@@ -27,14 +41,20 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <Link to="/dashboard/manage-users" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                   <FaUser/>
+                                    <FaUser />
                                     <span className="ml-3">Manage Users</span>
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/dashboard/job-posting" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                   <FaFile/>
+                                    <FaFile />
                                     <span className="ml-3">Post Job</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/dashboard/admin" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                    <FaFile />
+                                    <span className="ml-3">Add Admin</span>
                                 </Link>
                             </li>
                             <li>
@@ -54,7 +74,9 @@ const AdminSidebar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/logout" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                <Link
+                                    onClick={handleLogOut}
+                                    className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10 3a1 1 0 00-1 1v3H7a1 1 0 100 2h2v3a1 1 0 102 0v-3h2a1 1 0 100-2h-2V4a1 1 0 00-1-1z" />
                                     </svg>
@@ -64,7 +86,7 @@ const AdminSidebar = () => {
                             <hr />
                             <li>
                                 <Link to="/" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                   
+
                                     <FaHome></FaHome>
                                     <span className="ml-3">Home</span>
                                 </Link>

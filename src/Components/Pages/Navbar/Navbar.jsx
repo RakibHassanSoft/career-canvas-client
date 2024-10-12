@@ -3,11 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { isAdmin, loading, error } = useAdmin();
 
+ 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   }
@@ -20,7 +23,9 @@ const Navbar = () => {
         console.log(error.message);
       });
   };
-
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  console.log(isAdmin);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -207,13 +212,13 @@ const Navbar = () => {
                   }`
                 }
               >
-               Use Google doc
+                Use Google doc
               </NavLink>
 
             </ul>
           </div>
         }
-        
+
         <NavLink
           to="/premium-membership"
           className={({ isActive }) =>
@@ -278,6 +283,7 @@ const Navbar = () => {
         }
 
       </div>
+      
       <div className="navbar-end">
         {user ? (
           <div className="relative inline-block text-left">
@@ -308,14 +314,17 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-10">
                 <ul className="py-1">
-                  <li>
-                    <Link
-                      to="/dashboard"
-                      className="block px-4 text-lg py-2 text-gray-700 hover:bg-gray-200"
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
+                  
+                  {
+                    isAdmin && <li>
+                      <Link
+                        to="/dashboard"
+                        className="block px-4 text-lg py-2 text-gray-700 hover:bg-gray-200"
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                  }
                   <li>
                     <Link
                       to="/user-profile"
@@ -351,6 +360,7 @@ const Navbar = () => {
 
           </>
         )}
+
       </div>
     </div>
   );

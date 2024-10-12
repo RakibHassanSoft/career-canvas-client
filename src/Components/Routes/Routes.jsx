@@ -25,6 +25,8 @@ import JobsSection from "../Pages/JobPosting/JobsSection";
 import GoogleDocAdvanced from "../Pages/GoogleDocLikeEdit/GoogleDocLikeEdit";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import ResumeReview from "../Pages/Dashboard/ResumeReview/ResumeReview";
+import AddAdmin from "../Pages/Dashboard/AddAdmin/AddAdmin";
+import PrivateRouter from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -111,7 +113,7 @@ const router = createBrowserRouter([
   },
   {
    path:'/dashboard',
-   element:<AdminSidebar/>,
+   element:<PrivateRouter><AdminSidebar/></PrivateRouter> ,
    children:[
     {
       path:'',
@@ -128,6 +130,11 @@ const router = createBrowserRouter([
     {
       path:'resume-review',
       element:<ResumeReview/>
+    }
+    ,
+    {
+      path: 'admin',
+      element : <AddAdmin></AddAdmin>
     }
 
    ]

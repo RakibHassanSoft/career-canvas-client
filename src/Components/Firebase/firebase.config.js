@@ -1,19 +1,21 @@
-// Import the functions you need from the SDKs you need
+// Import the functions you need from the Firebase SDKs
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth"; // Import authentication service
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDn8dKGLHjZOUudmvdDGfCFpt08ilX7AKQ",
-  authDomain: "todo-app-a9cf8.firebaseapp.com",
-  projectId: "todo-app-a9cf8",
-  storageBucket: "todo-app-a9cf8.appspot.com",
-  messagingSenderId: "600833810525",
-  appId: "1:600833810525:web:1b04e244a9b124470a2db4"
+  apiKey: "AIzaSyBUJnonn0oUfRUBAAspS0DoVY_ZuBTiSm0",
+  authDomain: "carearcanvas.firebaseapp.com",
+  projectId: "carearcanvas",
+  storageBucket: "carearcanvas.appspot.com",
+  messagingSenderId: "185481169579",
+  appId: "1:185481169579:web:73f72e40b50c52d51c05ee",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export default app;
+// Initialize Firebase Authentication and export it
+const auth = getAuth(app);
+
+export { auth ,app };
