@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import app from "../Firebase/firebase.config";
+import {app} from "../Firebase/firebase.config";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -7,7 +7,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut
+  signOut,
+  updateProfile,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -16,45 +17,81 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(null);
-  const [resumeId, setResumeId] = useState('')
+  const [loading, setLoading] = useState(true);
+  const [resumeId, setResumeId] = useState('');
+  const [error, setError] = useState(null);
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    setError(null); // Reset error state
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      const token = await result.user.getIdToken();
+      localStorage.setItem('token', token);
+      return result;
+    } catch (error) {
+      setError("Error creating user: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const signIn = (email, password) => {
+  const signIn = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    setError(null);
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      const token = await result.user.getIdToken();
+      localStorage.setItem('token', token);
+      return result;
+    } catch (error) {
+      setError("Error signing in: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const logOut = () => {
+  const logOut = async () => {
     setLoading(true);
-    return signOut(auth);
+    await signOut(auth);
+    setUser(null); // Reset user state
+    localStorage.removeItem('token');
+    setLoading(false);
   };
 
-  //Sign In With Google
-
-
-  const signInWithGoogle = () => {
+  const signInWithGoogle = async () => {
     setLoading(true);
-    return signInWithPopup(auth, googleProvider);
+    setError(null);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const token = await result.user.getIdToken();
+      localStorage.setItem('token', token);
+      return result;
+    } catch (error) {
+      setError("Error signing in with Google: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
-  const handleResumeTempalte = async(id) => {
-     await setResumeId(id);
+
+  const handleResumeTemplate = (id) => {
+    setResumeId(id); 
   };
+  console.log(user);
+  
+  const UpdateProfile = (fullName , role) => {
+    return updateProfile(auth.currentUser, {
+        displayName: fullName, 
+        role : role
+    })
+};
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log('current user', currentUser);
-      console.log('current template', resumeId);
       setLoading(false);
     });
-    return () => {
-      return unSubscribe();
-    };
+    return () => unSubscribe();
   }, []);
 
   const authInfo = {
@@ -62,11 +99,14 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     signInWithGoogle,
-    user, 
+    user,
     loading,
+    UpdateProfile,
     resumeId,
-    handleResumeTempalte
+    handleResumeTemplate,
+    error, // Add error to context value
   };
+
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 

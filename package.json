@@ -33,7 +33,7 @@
     "react-to-print": "^3.0.1",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
-    "sweetalert2": "^11.14.2",
+    "sweetalert2": "^11.14.3",
     "swiper": "^11.1.14"
   },
   "devDependencies": {
@@ -51,5 +51,9 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "vite": "^5.4.1"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "author": "",
+  "license": "ISC"
 }
