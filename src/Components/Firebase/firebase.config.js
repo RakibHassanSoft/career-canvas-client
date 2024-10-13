@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: "carearcanvas",
   storageBucket: "carearcanvas.appspot.com",
   messagingSenderId: "185481169579",
-  appId: "1:185481169579:web:73f72e40b50c52d51c05ee",
+  appId: "1:185481169579:web:73f72e40b50c52d51c05ee"
 };
 
 // Initialize Firebase
@@ -18,4 +18,4 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and export it
 const auth = getAuth(app);
 
-export { auth ,app };
+export { auth, app };

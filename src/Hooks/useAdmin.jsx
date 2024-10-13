@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import useAxiosPublic from "./AxiosHooks/useAxiosPublic";
 import { AuthContext } from '../Components/Providers/AuthProvider';
 
 const useAdmin = () => {
@@ -7,17 +7,17 @@ const useAdmin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const axios = useAxiosPublic()
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (!user || !user.uid) {
         setLoading(false);
-        return; 
+        return;
       }
 
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/users/check-admin/${user.uid}`, {
+        const response = await axios.get(`/api/users/check-admin/${user.uid}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

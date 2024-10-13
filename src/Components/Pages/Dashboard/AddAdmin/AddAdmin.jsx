@@ -1,11 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState,  } from 'react';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../../../Providers/AuthProvider';
 import getAuthToken from '../../../../Hooks/getToken';
+import useAxiosPublic from "../../../../Hooks/AxiosHooks/useAxiosPublic";
 
 const AddAdmin = () => {
     const [email, setEmail] = useState('');
-    const { user } = useContext(AuthContext);
+    const axios = useAxiosPublic();
 
     // Handle form submission
     const handleAddAdmin = async (e) => {
@@ -20,30 +20,25 @@ const AddAdmin = () => {
         try {
             const token = await getAuthToken();
     
-            const response = await fetch("http://localhost:5000/api/users/role", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({
+            const response = await axios.put(
+                "/api/users/role",
+                {
                     email: email,
                     role: "admin",
-                }),
-            });
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                }
+            );
     
-            const responseBody = await response.text(); // Get the response as text
-            console.log("Response Body:", responseBody); // Log the raw response body
-    
-            if (!response.ok) {
+            if (!response.data) {
                 throw new Error("Failed to change user role");
             }
     
-            const result = JSON.parse(responseBody); // Parse as JSON only if response is ok
             toast.success(`Successfully made ${email} an admin!`);
-            console.log(result);
-    
-            // Reset the email field after successful submission
             setEmail('');
         } catch (error) {
             console.error("Error:", error);
@@ -51,7 +46,6 @@ const AddAdmin = () => {
         }
     };
     
-
     return (
         <div className="flex items-center justify-center min-h-screen">
             <div className="bg-white rounded-lg shadow-lg p-8">
@@ -65,7 +59,6 @@ const AddAdmin = () => {
                         required
                         className="mb-4 p-2 border rounded w-full"
                     />
-                    <div className="mb-4 text-gray-600">Your email: {user?.email}</div>
                     <button
                         type="submit"
                         className="w-full text-white bg-green-500 font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition"

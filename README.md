@@ -1,7 +1,7 @@
 # Career Canvas
 
 ```
-admin email : arafat@gmail.com
+admin email : arafat1@gmail.com
 
 admin pass : Arafat@
 

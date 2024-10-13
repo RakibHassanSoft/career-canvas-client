@@ -3,6 +3,7 @@ import { FaFile, FaHome, FaUser } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { RiAdminFill } from "react-icons/ri";
 
 const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -53,8 +54,8 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <Link to="/dashboard/admin" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <FaFile />
-                                    <span className="ml-3">Add Admin</span>
+                                    <RiAdminFill />
+                                    <span className="ml-3">Make Admin</span>
                                 </Link>
                             </li>
                             <li>
