@@ -26,18 +26,18 @@ const images = [
 
 const Resume_Templates = () => {
     const navigate = useNavigate();
-    const { resumeId, setResumeId } = useContext(AuthContext)
+    const { resumeId } = useContext(AuthContext)
     console.log(resumeId)
-    const handleImageClick = (resumeType,r) => {
+    const handleImageClick = (resumeType, r) => {
         navigate('/resume-templates/personal-info-form', { state: { resumeType } });
-        setResumeId(r);
+
     };
 
     // const handleResumeId = (r) => {
     //      // directly set the new value of 'r'
     // };
-    
-    
+
+
 
     return (
         <div className="shadow-md border-b-4  mt-12 border-b-green-500 border-r-2 border-r-green-500 p-10 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900">
@@ -55,7 +55,8 @@ const Resume_Templates = () => {
                 effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
-                slidesPerView={'auto'}
+                slidesPerView={4}
+                initialSlide={Math.floor(images.length / 2)} // Middle slide
                 coverflowEffect={{
                     rotate: 30,
                     stretch: 0,
@@ -78,7 +79,7 @@ const Resume_Templates = () => {
                             <a
                                 href="#_"
                                 className="relative inline-block text-lg group mt-4"
-                                onClick={(e) => { e.preventDefault(); handleImageClick(image.name.toLowerCase(),image.id);}}
+                                onClick={(e) => { e.preventDefault(); handleImageClick(image.name.toLowerCase(), image.id); }}
                             >
                                 <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 dark:text-gray-300 transition-colors duration-300 ease-out border-2 border-green-500 rounded-lg group-hover:text-white">
                                     <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50 dark:bg-gray-700"></span>
@@ -91,6 +92,7 @@ const Resume_Templates = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
+
 
             <Outlet />
         </div>

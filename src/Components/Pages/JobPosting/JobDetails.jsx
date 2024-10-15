@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import { IoArrowBackOutline } from "react-icons/io5";
-import { PiBrainFill, PiMapPinAreaFill } from "react-icons/pi";
-import { SlCalender } from "react-icons/sl";
+import {  PiMapPinAreaFill } from "react-icons/pi";
 import { TbReportMoney } from "react-icons/tb";
-// import hiringImage from "../../../public/images/HiringConfirmed.png";
+import hiringImage from "../../../../public/HiringConfirmed.png";
+import { MdOutlineAddHomeWork, MdWorkHistory } from "react-icons/md";
 
 const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
   if (!job) {
@@ -10,13 +11,17 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
   }
 
   const {
-    title,
-    // shortDescription,
-    // datePosted,
-    // experienceLevel,
-    // jobType,
-    // priceRange,
-    // tags,
+    jobTitle,
+    location,
+    postedDate,
+    longDescription,
+    responsibilities,
+    requirements,
+    salaryRange,
+    employmentType,
+    remoteOption,
+    experience,
+    // applySection
   } = job;
 
   return (
@@ -46,26 +51,20 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
             <h2 className="text-2xl font-bold">
               {/* Full-Stack Developer with Expertise in Next.js 14+,
               MakerKit/ShipFast, and AI Integration */}
-              {title}
+              {jobTitle}
             </h2>
-            <div className="flex gap-10">
-              <p>Posted Date</p>
+            <div className="flex justify-between">
+              <p>Posted Date: {postedDate}</p>
               <div className="flex items-center gap-2">
                 <PiMapPinAreaFill className="text-xl text-green-500" />
-                <p>Worldwide</p>
+                <p>{location}</p>
               </div>
             </div>
             <hr />
-            <h4 className="text-gray-500">
-              We are looking for an experienced Full-Stack Developer to
-              integrate two AI-driven applications into a unified SaaS platform
-              using MakerKit or ShipFast. You’ll need strong experience with
-              Next.js 14+, AI technologies, and familiarity with SaaS
-              frameworks.
-            </h4>
+            <h4 className="text-gray-500">{longDescription}</h4>
 
             {/* Project Overview */}
-            <div className="">
+            {/* <div className="">
               <p>
                 <strong>Project Overview:</strong>
               </p>
@@ -73,10 +72,10 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 <li>AI Search Engine (Next.js, Redis, Tailwind)</li>
                 <li>AI Chatbot (Next.js, Vercel KV DB, AI SDKs)</li>
               </ul>
-            </div>
+            </div> */}
 
             {/* Goal */}
-            <div className="">
+            {/* <div className="">
               <p>
                 <strong>Goal:</strong>
               </p>
@@ -86,7 +85,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 management, and unified authentication with PostgreSQL for
                 long-term storage.
               </p>
-            </div>
+            </div> */}
 
             {/* Responsibilities */}
             <div className="">
@@ -94,16 +93,11 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 <strong>Responsibilities:</strong>
               </p>
               <ul className="list-disc ml-6 text-gray-500">
-                <li>Integrate the two apps into MakerKit or ShipFast.</li>
                 <li>
-                  Refactor code and unify databases and authentication systems.
+                  {responsibilities.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </li>
-                <li>
-                  Customize UI using Tailwind CSS and component libraries like
-                  Radix UI.
-                </li>
-                <li>Ensure AI functionality is smoothly integrated.</li>
-                <li>Optimize performance and scalability.</li>
               </ul>
             </div>
             {/* Requirements */}
@@ -112,16 +106,10 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 <strong>Requirements:</strong>
               </p>
               <ul className="list-disc ml-6 text-gray-500">
-                <li>Expertise in Next.js 14+ and React.</li>
-                <li>Experience with MakerKit or ShipFast.</li>
                 <li>
-                  Knowledge of AI integrations (OpenAI, Anthropic) through
-                  Vercel AI SDK.
-                </li>
-                <li>Proficiency with PostgreSQL, Redis, Vercel KV DB.</li>
-                <li>
-                  {" "}
-                  Experience with Tailwind CSS and UI libraries (Radix, ShadCN).
+                  {requirements.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </li>
               </ul>
             </div>
@@ -129,14 +117,14 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
             {/* Project Details */}
             <div className="">
               <p>
-                <strong>Project Details:</strong>
+                <strong>Experience:</strong>
               </p>
               <div className="text-gray-500">
-                <p>Timeline: 4 weeks</p>
-                <p>
+                <p>{experience}</p>
+                {/* <p>
                   Collaboration: Work alongside other developers and a project
                   manager.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
@@ -144,8 +132,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
           <div className=" rounded-lg row-span-2 p-4 border-l">
             <div className="mb-4 text-gray-500 shadow-lg rounded-lg p-3 bg-green-50">
               <p>
-                You’ll need Connects to bid. They’re like credits that show
-                clients you’re serious.
+                You’ll need to attend exam & viva as per the company's rules and regulations. Make sure you understands all.
               </p>
               <a href="#" className="text-green-600 underline">
                 Learn more
@@ -153,7 +140,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
             </div>
 
             <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded w-full mb-2">
-              Buy Connects to apply
+              Apply Now <span></span>
             </button>
 
             <button className="border-2 border-green-500 text-green-500 font-semibold py-2 px-4 rounded w-full mb-4">
@@ -168,15 +155,15 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
 
             <div className="text-gray-700 mb-4">
               <p>
-                Required Connects to submit a proposal:{" "}
+                Response for the job: {" "}
                 <span className="font-bold">20</span>
               </p>
-              <p>
+              {/* <p>
                 Available Connects: <span className="font-bold">0</span>
-              </p>
+              </p> */}
             </div>
 
-            <div className="py-2 px-1">
+            {/* <div className="py-2 px-1">
               <h4 className="text-lg font-semibold mb-2">About the client</h4>
               <div className="flex items-center mb-2">
                 <span className="text-green-600 mr-2">✔️</span>
@@ -195,30 +182,38 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 <p className="text-sm">$10.00 /hr avg hourly rate paid</p>
                 <p className="text-sm">18 hours</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className="border-2 border-green-500 rounded-lg col-span-2 shadow-lg  py-8">
-            <div className="grid grid-cols-3 justify-items-center">
-              <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-8 rounded-lg col-span-2 drop-shadow-2xl drop-shadow-">
+            <div className="flex justify-around pt-4">
+              <div className="flex bg-green-50 shadow-xl hover:shadow-green-500 hover:bg-white rounded-lg md:p-6 items-center gap-3 transform transition-all duration-300 hover:scale-110">
                 <TbReportMoney className="text-5xl text-green-500" />
                 <div>
-                  <p>$10.00-$35.00</p>
-                  <p className="text-gray-500 text-sm">Hourly Rate</p>
+                  <p className="">
+                    {salaryRange}
+                  </p>
+                  <p className="text-gray-500 text-sm ">
+                    Salary Range
+                  </p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <SlCalender className="text-5xl text-green-500" />
+
+              <div className="flex bg-green-50 shadow-xl hover:shadow-green-500 hover:bg-white rounded-lg md:p-6 items-center gap-3 transform transition-all duration-300 hover:scale-110">
+                <MdWorkHistory className="text-5xl text-green-500" />
                 <div>
-                  <p>1 to 3 months</p>
-                  <p className="text-gray-500 text-sm">Project Length</p>
+                  <p>{employmentType}</p>
+                  <p className="text-gray-500 text-sm">Employment Type</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <PiBrainFill className="text-5xl text-green-500" />
-                <div>
-                  <p>Intermediate</p>
-                  <p className="text-gray-500 text-sm">Difficulty Level</p>
+            </div>
+            <div className="flex justify-center">
+              <div className="flex bg-green-50 shadow-xl hover:shadow-green-500 hover:bg-white rounded-lg md:p-6 items-center gap-3
+              transform transition-all duration-300 hover:scale-110">
+                <MdOutlineAddHomeWork className="text-5xl text-green-500" />
+                <div className="">
+                  <p>{remoteOption}</p>
+                  <p className="text-gray-500 text-sm">Remote Option</p>
                 </div>
               </div>
             </div>
@@ -236,7 +231,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               </div>
             </div>
           </div>
-          <div className="border-2 rounded-lg border-green-500 col-span-3">
+          {/* <div className="border-2 rounded-lg border-green-500 col-span-3">
             <div className="p-4 md:p-6 bg-white shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold mb-4">
                 Client &apos s recent history (2)
@@ -264,7 +259,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

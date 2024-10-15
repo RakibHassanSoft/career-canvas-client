@@ -1,14 +1,24 @@
-import  { useState } from 'react';
-import {  FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
+////Not working here
+import { useContext, useState } from 'react';
+import { FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
 import { ImArrowLeft } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import { FormContext } from '../../../Providers/FormContext';
 
 const EducationForm = () => {
     const navigate = useNavigate();
+    const { user, resumeId } = useContext(AuthContext);
+    const { updateEducation } = useContext(FormContext);
+    const axiosPublic = useAxiosPublic();
     const [educationList, setEducationList] = useState([
-        { degree: '', university: '', graduationYear: '' }
+        { degree: '', institution: '', duration: '' }
     ]);
     const [errors, setErrors] = useState({});
+    
+    let templateId = resumeId; // Replace with actual template ID
 
     const handleChange = (index, e) => {
         const { name, value } = e.target;
@@ -28,43 +38,65 @@ const EducationForm = () => {
         educationList.forEach((entry, index) => {
             const entryErrors = {};
             if (!entry.degree) entryErrors.degree = 'Degree is required';
-            if (!entry.university) entryErrors.university = 'University is required';
-            if (!entry.graduationYear) entryErrors.graduationYear = 'Graduation Year is required';
+            if (!entry.institution) entryErrors.institution = 'University is required';
+            if (!entry.duration) entryErrors.duration = 'Duration is required';
             if (Object.keys(entryErrors).length) newErrors[index] = entryErrors;
         });
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length) {
             setErrors(validationErrors);
         } else {
-            console.log('Education submitted successfully:', educationList);
-            navigate('/resume-templates/languages-form'); 
-       
+            try {
+                updateEducation(educationList);
+                // Prepare the data to send to the backend
+                // const data = {
+                //     userId :user.uid,
+                //     templateId,
+                //     education: educationList.map(entry => ({
+                //         degree: entry.degree,
+                //         institution: entry.institution,
+                //         duration: entry.duration
+                //     }))
+                // };
+                
+                // // // Send the data to the backend
+                // const response = await axiosPublic.post('/api/CreateEducation', data); // Adjust the URL as necessary
+                // console.log('Education submitted successfully:', response.data);
+                
+                // Navigate to the next page
+                navigate('/resume-templates/languages-form');
+            } catch (error) {
+                console.error('Error submitting education:', error);
+                // Handle error appropriately (e.g., set error state to display a message)
+            }
         }
     };
 
     const addEducationEntry = () => {
-        setEducationList([...educationList, { degree: '', university: '', graduationYear: '' }]);
+        setEducationList([...educationList, { degree: '', institution: '', duration: '' }]);
     };
 
     const removeEducationEntry = (index) => {
         const newEducationList = educationList.filter((_, i) => i !== index);
         setEducationList(newEducationList);
     };
+    
     const handleBack = () => {
-        navigate('/resume-templates/peronal-project')
-      }
+        navigate('/resume-templates/peronal-project');
+    }
+
     return (
         <div className="flex flex-row max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
             {/* Form Section */}
             <div className="w-full p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
-            <Link onClick={handleBack}>
-          <ImArrowLeft />
-        </Link>
+                <Link onClick={handleBack}>
+                    <ImArrowLeft />
+                </Link>
 
                 <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Education Information</h2>
                 <form onSubmit={handleSubmit}>
@@ -87,41 +119,41 @@ const EducationForm = () => {
                                 aria-label="Your Degree"
                             />
                             {errors[index]?.degree && <p className="text-red-500 text-sm mt-1">{errors[index].degree}</p>}
-                            
+
                             <label className="block text-sm font-medium text-gray-700 mb-1 mt-3">
-                                University Name
+                                Institution Name
                             </label>
                             <input
                                 type="text"
-                                name="university"
-                                value={entry.university}
+                                name="institution"
+                                value={entry.institution}
                                 onChange={(e) => handleChange(index, e)}
                                 required
                                 placeholder="e.g. Harvard University"
                                 className={`mt-1 block w-full border ${
-                                    errors[index]?.university ? 'border-red-500' : 'border-gray-300'
+                                    errors[index]?.institution ? 'border-red-500' : 'border-gray-300'
                                 } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
-                                aria-label="University Name"
+                                aria-label="Institution Name"
                             />
-                            {errors[index]?.university && <p className="text-red-500 text-sm mt-1">{errors[index].university}</p>}
-                            
+                            {errors[index]?.institution && <p className="text-red-500 text-sm mt-1">{errors[index].institution}</p>}
+
                             <label className="block text-sm font-medium text-gray-700 mb-1 mt-3">
-                                Graduation Year
+                                Duration
                             </label>
                             <input
                                 type="text"
-                                name="graduationYear"
-                                value={entry.graduationYear}
+                                name="duration"
+                                value={entry.duration}
                                 onChange={(e) => handleChange(index, e)}
                                 required
-                                placeholder="e.g. 2024"
+                                placeholder="e.g. 2018 - 2022"
                                 className={`mt-1 block w-full border ${
-                                    errors[index]?.graduationYear ? 'border-red-500' : 'border-gray-300'
+                                    errors[index]?.duration ? 'border-red-500' : 'border-gray-300'
                                 } rounded-md shadow-sm p-3 focus:outline-none focus:ring-2 focus:ring-green-500`}
-                                aria-label="Graduation Year"
+                                aria-label="Duration"
                             />
-                            {errors[index]?.graduationYear && <p className="text-red-500 text-sm mt-1">{errors[index].graduationYear}</p>}
-                            
+                            {errors[index]?.duration && <p className="text-red-500 text-sm mt-1">{errors[index].duration}</p>}
+
                             <button
                                 type="button"
                                 className="mt-3 text-red-500 hover:underline"
@@ -159,11 +191,11 @@ const EducationForm = () => {
                     </div>
                     <div className="flex items-start">
                         <FaCheckCircle className="text-green-600 mr-2 mt-1" />
-                        <p><strong>University Name:</strong> Provide the complete name of your university.</p>
+                        <p><strong>Institution Name:</strong> Provide the complete name of your institution.</p>
                     </div>
                     <div className="flex items-start">
                         <FaCheckCircle className="text-green-600 mr-2 mt-1" />
-                        <p><strong>Graduation Year:</strong> Specify the year you graduated or expect to graduate.</p>
+                        <p><strong>Duration:</strong> Specify the duration, e.g., 2018 - 2022.</p>
                     </div>
                 </div>
                 <p className="mt-4 text-gray-600">

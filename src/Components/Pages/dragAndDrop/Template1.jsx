@@ -12,9 +12,9 @@ import Skills from './componentsTem1/Skills';
 
 const Template1 = () => {
     const [contactInfo, setContactInfo] = useState({
-        name: 'Rahim Akter',
-        phone: '03493223002',
-        email: 'kaskjf@gmail.com',
+        name: 'Rumi Akter',
+        phone: '01945400904',
+        email: 'rumi@gmail.com',
         city: 'Senson the Stone',
         state: 'Denmark'
     });

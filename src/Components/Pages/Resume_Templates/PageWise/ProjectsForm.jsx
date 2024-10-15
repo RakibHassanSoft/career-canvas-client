@@ -1,16 +1,20 @@
-import  { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ImArrowLeft } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import { FormContext } from '../../../Providers/FormContext';
 
 const ProjectsForm = () => {
     const navigate = useNavigate();
+    const { user, resumeId } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
+    const { updateProjects } = useContext(FormContext);
     const [projects, setProjects] = useState([
         {
-            name: '',
-            features: '',
-            technology: '',
-            githubLink: '',
-            liveLink: '',
+            title: '',
+            description: '',
         },
     ]);
 
@@ -22,7 +26,7 @@ const ProjectsForm = () => {
     };
 
     const handleAddProject = () => {
-        setProjects([...projects, { name: '', features: '', technology: '', githubLink: '', liveLink: '' }]);
+        setProjects([...projects, { title: '', description: '' }]);
     };
 
     const handleRemoveProject = (index) => {
@@ -30,28 +34,47 @@ const ProjectsForm = () => {
         setProjects(updatedProjects);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Projects submitted:', projects);
-        navigate('/resume-templates/Education-form'); 
-        
+
+        // Prepare the data for submission according to your schema
+        const requestData = {
+            userId: user.uid, // User ID
+            templateId: String(resumeId), // Ensure templateId is a string
+            projects: projects.map((project) => ({
+                title: project.title,
+                description: project.description,
+            })),
+        };
+        updateProjects(projects);
+        try {
+            // Submit the data to your API using Axios
+            // const response = await axiosPublic.post('/api/projects', requestData);
+            // console.log('Success:', response.data);
+            navigate('/resume-templates/Education-form'); // Navigate after successful submission
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const handleSkip = () => {
         navigate('/resume-templates/education-form');  // Change this to your desired navigation path for skipping
     };
+
     const handleBack = () => {
-        navigate('/resume-templates/skills-form')
-      }
+        navigate('/resume-templates/skills-form');
+    };
+
     return (
         <div className="flex flex-col max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
             <div className="w-full p-6 bg-white rounded-lg shadow-md">
-            <Link onClick={handleBack}>
-          <ImArrowLeft />
-        </Link>
+                <Link onClick={handleBack}>
+                    <ImArrowLeft />
+                </Link>
 
                 <h2 className="text-3xl font-bold mb-6 text-center text-green-700">Projects</h2>
-                
+
                 {/* Tips Section */}
                 <div className="mb-6 p-4 border-l-4 border-green-600 bg-green-50 rounded-lg">
                     <h3 className="text-lg font-semibold text-gray-800">Tips:</h3>
@@ -78,8 +101,8 @@ const ProjectsForm = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
                                 <input
                                     type="text"
-                                    name="name"
-                                    value={project.name}
+                                    name="title"
+                                    value={project.title}
                                     onChange={(e) => handleChange(index, e)}
                                     placeholder="Enter project name"
                                     className="block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200"
@@ -87,47 +110,14 @@ const ProjectsForm = () => {
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Top Features</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                                 <textarea
-                                    name="features"
-                                    value={project.features}
+                                    name="description"
+                                    value={project.description}
                                     onChange={(e) => handleChange(index, e)}
-                                    placeholder="Enter top features"
+                                    placeholder="Enter project description"
                                     className="block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200"
                                     rows="3"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Technology</label>
-                                <input
-                                    type="text"
-                                    name="technology"
-                                    value={project.technology}
-                                    onChange={(e) => handleChange(index, e)}
-                                    placeholder="Enter technology used"
-                                    className="block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">GitHub Link</label>
-                                <input
-                                    type="url"
-                                    name="githubLink"
-                                    value={project.githubLink}
-                                    onChange={(e) => handleChange(index, e)}
-                                    placeholder="Enter GitHub link"
-                                    className="block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Live Link</label>
-                                <input
-                                    type="url"
-                                    name="liveLink"
-                                    value={project.liveLink}
-                                    onChange={(e) => handleChange(index, e)}
-                                    placeholder="Enter live link"
-                                    className="block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200"
                                 />
                             </div>
                         </div>

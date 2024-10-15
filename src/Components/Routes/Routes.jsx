@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
+// import Resume_Templates from "../Pages/Resume_Templates/Resume_Templates";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Premium_Membership from "../Pages/Premium_Membership/Premium_Membership";
@@ -13,11 +14,19 @@ import ProjectsForm from "../Pages/Resume_Templates/PageWise/ProjectsForm";
 import EducationForm from "../Pages/Resume_Templates/PageWise/EducationForm";
 import LanguagesForm from "../Pages/Resume_Templates/PageWise/LanguagesForm";
 import Main from "../Pages/Resume_Templates/Main/Main";
-import JobPosting from "../Pages/Job_Posting/JobPosting";
+import JobPosting from "../Pages/Job_Posting_admin/JobPosting";
 import Chat from "../Pages/Chat/Chat";
 import Resume_templates_row from "../Pages/Resume_Templates/templatesColllection/Resume_templates_row";
 import Template1 from "../Pages/dragAndDrop/Template1";
+// import Dashboard from "../Pages/Dashboard/Dashboard";
+import AdminSidebar from "../Pages/Dashboard/AdminSidebar";
+import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
 import JobsSection from "../Pages/JobPosting/JobsSection";
+import GoogleDocAdvanced from "../Pages/GoogleDocLikeEdit/GoogleDocLikeEdit";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import ResumeReview from "../Pages/Dashboard/ResumeReview/ResumeReview";
+import AddAdmin from "../Pages/Dashboard/AddAdmin/AddAdmin";
+import PrivateRouter from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -65,24 +74,8 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: '/job-posting',
-        element: <JobPosting></JobPosting>
-      },
-      {
-        path: '/job-service',
+        path: '/job-section',
         element: <JobsSection></JobsSection>
-      },
-      {
-        path: '/premium-membership',
-        element: <Premium_Membership></Premium_Membership>
-      },
-      {
-        path: '/resume-review',
-        element: <Resume_Review></Resume_Review>
-      },
-      {
-        path: '/user-profile',
-        element: <User_Profile></User_Profile>
       },
       {
         path: '/signin',
@@ -100,8 +93,53 @@ const router = createBrowserRouter([
         path: '/drag-and-drop',
         element: <Template1/>
       },
+      {
+        path: '/google-doc',
+        element: <GoogleDocAdvanced/>
+      },
     ]
   },
+  {
+   path:'/dashboard',
+   element:<PrivateRouter><AdminSidebar/></PrivateRouter> ,
+   children:[
+    {
+      path:'',
+      element:<Dashboard/>
+    },
+    {
+      path:'manage-users',
+      element:<ManageUser/>
+    },
+    {
+      path:'job-posting',
+      element:<JobPosting></JobPosting>
+    },
+    {
+      path:'resume-review',
+      element:<ResumeReview/>
+    }
+    ,
+    {
+      path: 'admin',
+      element : <AddAdmin></AddAdmin>
+    },
+    {
+      path: 'premium-membership',
+      element: <Premium_Membership></Premium_Membership>
+    },
+    {
+      path: 'review-resume',
+      element: <Resume_Review></Resume_Review>
+    },
+    {
+      path: 'user-profile',
+      element: <User_Profile></User_Profile>
+    },
+    
+
+   ]
+  }
 ]);
 
 
