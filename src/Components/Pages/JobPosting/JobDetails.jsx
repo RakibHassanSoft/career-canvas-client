@@ -2,7 +2,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { PiBrainFill, PiMapPinAreaFill } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
 import { TbReportMoney } from "react-icons/tb";
-import hiringImage from "../../../public/images/HiringConfirmed.png";
+// import hiringImage from "../../../public/images/HiringConfirmed.png";
 
 const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
   if (!job) {
@@ -232,7 +232,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
                 <p>Who knows maybe you will hire from this apply</p>
               </div>
               <div>
-                <img src={hiringImage} alt="" />
+                <img src="" alt="image" />
               </div>
             </div>
           </div>

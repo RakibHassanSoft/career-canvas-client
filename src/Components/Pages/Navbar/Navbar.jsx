@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  console.log()
 
   const handleLogOut = () => {
     logOut()
@@ -54,38 +55,24 @@ const Navbar = () => {
               Home
             </NavLink>
             <div className="dropdown dropdown-hover">
-              <label tabIndex={0} className="ml-4 cursor-pointer text-lg font-semibold">
-                Resume Templates
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-              >
-                <NavLink
-                  to="/resume-templates/personal-info-form"
-                  className={({ isActive }) =>
-                    `ml-4 ${isActive
-                      ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                      : "text-lg font-semibold"
-                    }`
-                  }
-                >
-                  Personal Info
-                </NavLink>
+          <label tabIndex={0} className="ml-4 cursor-pointer text-lg font-semibold">
+            Resume Templates
+          </label>
+          <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <NavLink
+              to="/resume-templates/Resume_Templates"
+              className={({ isActive }) =>
+                `ml-4 ${isActive
+                  ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                  : "text-lg font-semibold"
+                }`
+              }
+            >
+              Make resume
+            </NavLink>
 
-                <NavLink
-                  to="/resume-templates/languages-form"
-                  className={({ isActive }) =>
-                    `ml-4 ${isActive
-                      ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                      : "text-lg font-semibold"
-                    }`
-                  }
-                >
-                  Languages
-                </NavLink>
-              </ul>
-            </div>
+          </ul>
+        </div>
             <NavLink
               to="/job-posting"
               className={({ isActive }) =>
