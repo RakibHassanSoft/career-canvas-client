@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isAdmin, loading, error } = useAdmin();
 
- 
+
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   }
@@ -25,7 +25,6 @@ const Navbar = () => {
   };
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-  console.log(isAdmin);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -108,17 +107,6 @@ const Navbar = () => {
               }
             >
               Job Postings
-            </NavLink>
-            <NavLink
-              to="/premium-membership"
-              className={({ isActive }) =>
-                `ml-4 ${isActive
-                  ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                  : "text-lg font-semibold"
-                }`
-              }
-            >
-              Premium Membership
             </NavLink>
             <NavLink
               to="/resume-review"
@@ -218,9 +206,8 @@ const Navbar = () => {
             </ul>
           </div>
         }
-
         <NavLink
-          to="/premium-membership"
+          to="/ai-chat"
           className={({ isActive }) =>
             `ml-4 ${isActive
               ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
@@ -228,10 +215,10 @@ const Navbar = () => {
             }`
           }
         >
-          Premium Membership
+          CC Ai
         </NavLink>
         <NavLink
-          to="/resume-review"
+          to="/job-section"
           className={({ isActive }) =>
             `ml-4 ${isActive
               ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
@@ -239,51 +226,12 @@ const Navbar = () => {
             }`
           }
         >
-          Resume Review
+          Job posts
         </NavLink>
-        {
-          user && <NavLink
-            to="/user-profile"
-            className={({ isActive }) =>
-              `ml-4 ${isActive
-                ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                : "text-lg font-semibold"
-              }`
-            }
-          >
-            User Profile
-          </NavLink>
-        }
 
-        {
-          user && <NavLink
-            to="/ai-chat"
-            className={({ isActive }) =>
-              `ml-4 ${isActive
-                ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                : "text-lg font-semibold"
-              }`
-            }
-          >
-            CC Ai
-          </NavLink>
-        }
-        {
-          user && <NavLink
-            to="/job-section"
-            className={({ isActive }) =>
-              `ml-4 ${isActive
-                ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                : "text-lg font-semibold"
-              }`
-            }
-          >
-            Job posts
-          </NavLink>
-        }
 
       </div>
-      
+
       <div className="navbar-end">
         {user ? (
           <div className="relative inline-block text-left">
@@ -291,7 +239,9 @@ const Navbar = () => {
               className="flex items-center cursor-pointer"
               onClick={handleDropdownToggle}
             >
-              <Link to="/user-profile">
+              <Link
+                to={'/dashboard/user-profile'}
+              >
                 <span className="font-bold text-lg">{user.displayName}</span>
               </Link>
               <svg
@@ -314,20 +264,17 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-10">
                 <ul className="py-1">
-                  
-                  {
-                    isAdmin && <li>
-                      <Link
-                        to="/dashboard"
-                        className="block px-4 text-lg py-2 text-gray-700 hover:bg-gray-200"
-                      >
-                        Dashboard
-                      </Link>
-                    </li>
-                  }
                   <li>
                     <Link
-                      to="/user-profile"
+                      to="/dashboard"
+                      className="block px-4 text-lg py-2 text-gray-700 hover:bg-gray-200"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/dashboard/user-profile"
                       className="block px-4 text-lg py-2 text-gray-700 hover:bg-gray-200"
                     >
                       Profile

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-white md:mt-20 mt-6 dark:bg-gray-900 border-t-4 border-green-100">
@@ -7,7 +9,7 @@ const Footer = () => {
             Subscribe our newsletter to get update.
           </h1>
           <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-            <button className="inline-flex items-center justify-center w-full px-4 py-4 text-sm text-white duration-300 bg-green-500 rounded-xl gap-x-3 hover:bg-green-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80 ">
+            <Link to={'/signup'} className="inline-flex items-center justify-center w-full px-4 py-4 text-sm text-white duration-300 bg-green-500 rounded-xl gap-x-3 hover:bg-green-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80 ">
               <span className="text-lg">Sign Up Now</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +25,7 @@ const Footer = () => {
                   d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                 />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
         <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />

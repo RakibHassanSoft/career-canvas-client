@@ -1,5 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion"; // Import Framer Motion
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -45,18 +45,18 @@ const Banner = () => {
                 animate={{ opacity: 1, y: 0 }} // Animate upwards to normal position
                 transition={{ delay: 1, duration: 0.8 }}
               >
-                <a
-                  href="#"
+                <Link 
+                to={'/resume-templates/Resume_Templates'}
                   className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-transform duration-300 transform bg-green-500 rounded-md shadow-md hover:scale-105 hover:shadow-lg"
                 >
                   Get Started
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                to={'/resume-templates/Resume_Templates'}
                   className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-transform duration-300 transform bg-blue-500 rounded-md shadow-md lg:mx-4 hover:scale-105 hover:shadow-lg"
                 >
                   Learn More
-                </a>
+                </Link>
               </motion.div>
             </div>
           </motion.div>
