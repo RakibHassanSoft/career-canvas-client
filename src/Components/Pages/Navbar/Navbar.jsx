@@ -3,12 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { isAdmin, loading, error } = useAdmin();
 
 
   const handleDropdownToggle = () => {
@@ -23,8 +21,6 @@ const Navbar = () => {
         console.log(error.message);
       });
   };
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
