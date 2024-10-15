@@ -78,18 +78,6 @@ const router = createBrowserRouter([
         element: <JobsSection></JobsSection>
       },
       {
-        path: '/premium-membership',
-        element: <Premium_Membership></Premium_Membership>
-      },
-      {
-        path: '/resume-review',
-        element: <Resume_Review></Resume_Review>
-      },
-      {
-        path: '/user-profile',
-        element: <User_Profile></User_Profile>
-      },
-      {
         path: '/signin',
         element: <SignIn></SignIn>
       },
@@ -135,7 +123,20 @@ const router = createBrowserRouter([
     {
       path: 'admin',
       element : <AddAdmin></AddAdmin>
-    }
+    },
+    {
+      path: 'premium-membership',
+      element: <Premium_Membership></Premium_Membership>
+    },
+    {
+      path: 'review-resume',
+      element: <Resume_Review></Resume_Review>
+    },
+    {
+      path: 'user-profile',
+      element: <User_Profile></User_Profile>
+    },
+    
 
    ]
   }

@@ -1,18 +1,22 @@
 import { useContext, useState } from 'react';
 import { FaFile, FaHome, FaUser } from 'react-icons/fa';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
 import { RiAdminFill } from "react-icons/ri";
+import useAdmin from '../../../Hooks/useAdmin';
+import { MdCardMembership, MdRateReview } from 'react-icons/md';
 
 const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { logOut } = useContext(AuthContext);
+    const { logOut, user } = useContext(AuthContext);
+    const { isAdmin, loading, error } = useAdmin();
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
     };
-
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     const handleLogOut = () => {
         logOut()
@@ -32,48 +36,97 @@ const AdminSidebar = () => {
                     <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
                     <nav className="mt-10">
                         <ul>
-                            <li>
-                                <Link to="/dashboard" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 3a7 7 0 00-5.874 11.164A7.001 7.001 0 0010 17a7.001 7.001 0 005.874-2.836A7 7 0 0010 3zm0 10a3 3 0 110-6 3 3 0 010 6z" />
-                                    </svg>
-                                    <span className="ml-3">Dashboard</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/dashboard/manage-users" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <FaUser />
-                                    <span className="ml-3">Manage Users</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/dashboard/job-posting" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <FaFile />
-                                    <span className="ml-3">Post Job</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/dashboard/admin" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <RiAdminFill />
-                                    <span className="ml-3">Make Admin</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/dashboard/resume-review" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 2a1 1 0 011 1v3a1 1 0 11-2 0V3a1 1 0 011-1zM2 10a1 1 0 011-1h3a1 1 0 110 2H3a1 1 0 01-1-1zm14-1a1 1 0 100 2h3a1 1 0 100-2h-3zM5.293 14.293a1 1 0 011.414 0L10 17.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                    <span className="ml-3">Review request</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/settings" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 3a8 8 0 100 16 8 8 0 000-16zM10 4a1 1 0 011 1v2a1 1 0 11-2 0V5a1 1 0 011-1zm1 10h-2v-2h2v2z" />
-                                    </svg>
-                                    <span className="ml-3">Settings</span>
-                                </Link>
-                            </li>
+
+
+                            {
+                                !isAdmin && user &&
+                                <>
+                                    <li>
+                                        <Link
+                                            to={'/dashboard/premium-membership'}
+                                            className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <MdCardMembership />
+                                            <span className="ml-3">Premium Membership</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to={'/dashboard/review-resume'}
+                                            className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                                        >
+                                            <MdRateReview />
+                                            <span className="ml-3">Review Resume</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="user-profile"
+                                            className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                                        >
+                                            <RiAdminFill />
+                                            <span className="ml-3">User Profile</span>
+
+                                        </Link>
+                                    </li>
+                                </>
+                            }
+                            {
+                                user && isAdmin && <>
+                                    <li>
+                                        <Link to="/dashboard" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 3a7 7 0 00-5.874 11.164A7.001 7.001 0 0010 17a7.001 7.001 0 005.874-2.836A7 7 0 0010 3zm0 10a3 3 0 110-6 3 3 0 010 6z" />
+                                            </svg>
+                                            <span className="ml-3">Dashboard</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard/manage-users" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <FaUser />
+                                            <span className="ml-3">Manage Users</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard/job-posting" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <FaFile />
+                                            <span className="ml-3">Post Job</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard/admin" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <RiAdminFill />
+                                            <span className="ml-3">Make Admin</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard/resume-review" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 2a1 1 0 011 1v3a1 1 0 11-2 0V3a1 1 0 011-1zM2 10a1 1 0 011-1h3a1 1 0 110 2H3a1 1 0 01-1-1zm14-1a1 1 0 100 2h3a1 1 0 100-2h-3zM5.293 14.293a1 1 0 011.414 0L10 17.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                                            </svg>
+                                            <span className="ml-3">Review request</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard/settings" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 3a8 8 0 100 16 8 8 0 000-16zM10 4a1 1 0 011 1v2a1 1 0 11-2 0V5a1 1 0 011-1zm1 10h-2v-2h2v2z" />
+                                            </svg>
+                                            <span className="ml-3">Settings</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="user-profile"
+                                            className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                                        >
+                                            <RiAdminFill />
+                                            <span className="ml-3">User Profile</span>
+
+                                        </Link>
+                                    </li>
+                                </>
+
+                            }
                             <li>
                                 <Link
                                     onClick={handleLogOut}

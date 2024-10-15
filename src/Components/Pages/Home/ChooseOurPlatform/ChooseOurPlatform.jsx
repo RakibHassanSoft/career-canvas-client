@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ChooseOurPlatform = () => {
   return (
     <section className="py-12 px-4 md:px-8 lg:px-16 bg-green-50 rounded-2xl">
@@ -102,9 +104,9 @@ const ChooseOurPlatform = () => {
 
             {/* Button aligned to the bottom of the right side */}
             <div className="w-full mt-6 md:mt-auto md:pt-6">
-              <button className="bg-green-500 text-xl text-white px-6 py-3 rounded-full shadow-md hover:bg-green-600 transition-all">
+              <Link to={'/google-doc'} className="bg-green-500 text-xl text-white px-6 py-3 rounded-full shadow-md hover:bg-green-600 transition-all">
                 Lets Build Your CV
-              </button>
+              </Link>
             </div>
           </div>
         </div>
