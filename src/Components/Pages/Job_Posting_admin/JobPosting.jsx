@@ -1,12 +1,10 @@
-import React, { useCallback, useContext, useState } from 'react';
+import  {useContext, useState } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import useAxiosPublic from '../../../Hooks/AxiosHooks/useAxiosPublic';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 const JobPosting = () => {
-  // State for the job posting details
-  const navigate = useNavigate();
+
   const {user}= useContext(AuthContext);
   const axiosPublic = useAxiosPublic()
   const [jobDetails, setJobDetails] = useState({
@@ -25,7 +23,9 @@ const JobPosting = () => {
       callToAction: '',
       applyLinkText: '',
       applyLink: ''
-    }
+    },
+    date : new Date().toLocaleDateString(),
+    userId : user.uid
   });
 
   // Function to handle input change for non-array fields
@@ -66,11 +66,10 @@ const JobPosting = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     console.log(jobDetails); // Log job details to console
-    jobDetails.userId =  user.uid;
-    const response = await axiosPublic.post('/api/jobs', jobDetails); // Send job details to the server
+    
+    const response = await axiosPublic.post('/api/createJobs', jobDetails); // Send job details to the server
     console.log(response);
-    e.target.reset(); 
-    navigate('/premium-membership');
+    // e.target.reset(); 
     try {
       // Log the response from the server
 

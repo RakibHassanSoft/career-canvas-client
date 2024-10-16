@@ -1,45 +1,78 @@
 import { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import JobsCard from "./JobsCard";
+import useAxiosPublic from "../../../Hooks/AxiosHooks/useAxiosPublic";
 
 const JobsSection = () => {
   const [jobs, setJobs] = useState([]);
   const [sortBy, setSortBy] = useState("newest");
   const [experienceOpen, setExperienceOpen] = useState(false);
   const [jobTypeOpen, setJobTypeOpen] = useState(false);
-  
+ 
+  const [searchQuery, setSearchQuery] = useState("");
+  const axios = useAxiosPublic();
+  // Pagination done
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
+  // Sort 
+  const [experienceLevel, setExperienceLevel] = useState([]);
+  const [jobType, setJobType] = useState([]);
+  const [minSalary, setMinSalary] = useState("");
+  const [maxSalary, setMaxSalary] = useState("");
+  
   // Toggling the dropdowns
   const toggleExperience = () => setExperienceOpen(!experienceOpen);
   const toggleJobType = () => setJobTypeOpen(!jobTypeOpen);
 
+  // Fetch jobs from the backend with filtering, sorting, and searching
   useEffect(() => {
-    fetch("jobs.JSON")
-      .then((res) => res.json())
-      .then((data) => setJobs(data));
-  }, []);
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get(`/api/getJobsByFlitterSearch`, {
+          params: {
+            page: currentPage,
+            limit: itemsPerPage,
+            sortBy,
+            searchQuery,
+            experienceLevel,
+            jobType,
+            minSalary,
+            maxSalary,
+          },
+        });
+        setJobs(response.data.jobs);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchJobs();
+  }, [
+    itemsPerPage,
+    axios,
+    currentPage,
+    sortBy,
+    searchQuery,
+    experienceLevel,
+    jobType,
+    minSalary,
+    maxSalary,
+  ]);
 
-  const parseDate = (dateString) => {
-    const [day, month, year] = dateString.split("-");
-    const fullYear = year.length === 2 ? `20${year}` : year; // Ensure the year is in 'yyyy' format
-    return new Date(`${fullYear}-${month}-${day}`);
+  console.log(jobs)
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
-  const sortedJobs = [...jobs].sort((a, b) => {
-    return sortBy === "newest"
-      ? parseDate(b.postedDate) - parseDate(a.postedDate)
-      : parseDate(a.postedDate) - parseDate(b.postedDate);
-  });
 
-  // Function to open the sidebar with the selected blog
-  const handleBlogClick = () => {
-    
-  };
 
   return (
     <div>
       {/* Header Section */}
-      <div className=" p-6 md:p-14 flex flex-col items-center border-b-4 border-green-500">
+      <div className="p-6 md:p-14 flex flex-col items-center border-b-4 border-green-500">
         <h1 className="text-center text-3xl md:text-5xl font-semibold text-green-500">
           Job Posting Page
         </h1>
@@ -49,22 +82,34 @@ const JobsSection = () => {
         </p>
       </div>
 
-      {/* Sort by Section */}
-      <div className="flex flex-col md:flex-row items-center container mx-auto justify-end gap-2 text-green-500 mt-4 md:mt-6">
-        <label className="text-lg font-medium">Sort by</label>
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="border rounded px-3 py-2 mt-2 md:mt-0"
-        >
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-        </select>
+      {/* Search and Sort Section */}
+      <div className="flex mt-4">
+        <div className="flex justify-end flex-col text-end w-full">
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
+            type="text"
+            name="search"
+            placeholder="Search for jobs"
+          />
+        </div>
+        {/* Sort by Section */}
+        <div className="flex flex-col md:flex-row items-center container mx-auto justify-end gap-2 text-green-500 mt-4 md:mt-6">
+          <label className="text-lg font-medium">Sort by</label>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border rounded px-3 py-2 mt-2 md:mt-0"
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
       </div>
 
       {/* Main Content Section */}
       <div className="container mx-auto mt-4 grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Left Sidebar */}
         <div className="col-span-1 bg-gray-50 text-green-500 p-4 rounded-lg h-auto">
           <h2 className="text-xl font-bold mb-4 text-center">Filters</h2>
           {/* Experience Level Dropdown */}
@@ -161,13 +206,36 @@ const JobsSection = () => {
 
         {/* Jobs Section */}
         <div className="col-span-1 lg:col-span-3 grid grid-cols-1 gap-4 md:gap-2">
-          {sortedJobs.map((job) => (
-              <JobsCard
-                key={job.id}
-                job={job}
-                onClick={() => handleBlogClick(job)} // Pass the click handler
-              />
+          {jobs.map((job) => (
+            <JobsCard key={job.id} job={job} />
           ))}
+
+          {/* Pagination Buttons */}
+          <div className="mt-4 ml-3 md:ml-0 md:flex justify-center items-center">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 mx-1 bg-blue-500 text-white rounded disabled:opacity-50"
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-2 py-2 rounded mx-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 mx-1 bg-blue-500 text-white rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
