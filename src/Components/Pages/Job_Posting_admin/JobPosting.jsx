@@ -148,7 +148,6 @@ const JobPosting = () => {
             placeholder="e.g., Full-time, Part-time"
           />
         </div>
-
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Salary Range</label>
           <input
