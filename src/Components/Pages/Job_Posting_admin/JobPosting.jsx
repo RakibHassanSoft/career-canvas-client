@@ -63,7 +63,6 @@ const JobPosting = () => {
   };
 
   // Function to handle form submission
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     console.log(jobDetails); // Log job details to console
