@@ -63,7 +63,7 @@ const JobsSection = () => {
     employType,
   ]);
 
-  console.log(jobs);
+  console.log(searchQuery);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
