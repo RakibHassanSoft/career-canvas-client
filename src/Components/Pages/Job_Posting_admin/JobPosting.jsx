@@ -16,6 +16,7 @@ const JobPosting = () => {
     remoteOption: '',
     experience: '',
     jobDescription: '',
+    longDescription: '',
     responsibilities: [''],
     requirements: [''],
     skills: [''],
@@ -189,6 +190,17 @@ const JobPosting = () => {
           <textarea
             name="jobDescription"
             value={jobDetails.jobDescription}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
+            rows="4"
+            placeholder="Provide a detailed job description"
+          ></textarea>
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-gray-700 font-semibold mb-2">Long Description</label>
+          <textarea
+            name="longDescription"
+            value={jobDetails.longDescription}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
             rows="4"

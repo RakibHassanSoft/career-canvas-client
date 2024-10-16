@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { IoArrowBackOutline } from "react-icons/io5";
-import {  PiMapPinAreaFill } from "react-icons/pi";
+import { PiMapPinAreaFill } from "react-icons/pi";
 import { TbReportMoney } from "react-icons/tb";
 import hiringImage from "../../../../public/HiringConfirmed.png";
 import { MdOutlineAddHomeWork, MdWorkHistory } from "react-icons/md";
@@ -13,7 +13,6 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
   const {
     jobTitle,
     location,
-    postedDate,
     longDescription,
     responsibilities,
     requirements,
@@ -21,8 +20,11 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
     employmentType,
     remoteOption,
     experience,
-    // applySection
+    date,
+    applySection,
   } = job;
+
+  const formattedDate = new Date(date).toISOString().split('T')[0];
 
   return (
     <>
@@ -54,7 +56,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               {jobTitle}
             </h2>
             <div className="flex justify-between">
-              <p>Posted Date: {postedDate}</p>
+              <p>Posted Date: {formattedDate}</p>
               <div className="flex items-center gap-2">
                 <PiMapPinAreaFill className="text-xl text-green-500" />
                 <p>{location}</p>
@@ -62,30 +64,6 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
             </div>
             <hr />
             <h4 className="text-gray-500">{longDescription}</h4>
-
-            {/* Project Overview */}
-            {/* <div className="">
-              <p>
-                <strong>Project Overview:</strong>
-              </p>
-              <ul className="list-disc ml-6 text-gray-500">
-                <li>AI Search Engine (Next.js, Redis, Tailwind)</li>
-                <li>AI Chatbot (Next.js, Vercel KV DB, AI SDKs)</li>
-              </ul>
-            </div> */}
-
-            {/* Goal */}
-            {/* <div className="">
-              <p>
-                <strong>Goal:</strong>
-              </p>
-              <p className="text-gray-500">
-                Integrate these applications into a single SaaS platform, using
-                MakerKit or ShipFast to implement multi-tenancy, subscription
-                management, and unified authentication with PostgreSQL for
-                long-term storage.
-              </p>
-            </div> */}
 
             {/* Responsibilities */}
             <div className="">
@@ -132,7 +110,8 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
           <div className=" rounded-lg row-span-2 p-4 border-l">
             <div className="mb-4 text-gray-500 shadow-lg rounded-lg p-3 bg-green-50">
               <p>
-                You’ll need to attend exam & viva as per the company's rules and regulations. Make sure you understands all.
+                You’ll need to attend exam & viva as per the company's rules and
+                regulations. Make sure you understands all.
               </p>
               <a href="#" className="text-green-600 underline">
                 Learn more
@@ -140,7 +119,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
             </div>
 
             <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded w-full mb-2">
-              Apply Now <span></span>
+              <a target="_blank" href={applySection.applyLink}>Apply Now</a>
             </button>
 
             <button className="border-2 border-green-500 text-green-500 font-semibold py-2 px-4 rounded w-full mb-4">
@@ -155,8 +134,7 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
 
             <div className="text-gray-700 mb-4">
               <p>
-                Response for the job: {" "}
-                <span className="font-bold">20</span>
+                Response for the job: <span className="font-bold">20</span>
               </p>
               {/* <p>
                 Available Connects: <span className="font-bold">0</span>
@@ -190,12 +168,8 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               <div className="flex bg-green-50 shadow-xl hover:shadow-green-500 hover:bg-white rounded-lg md:p-6 items-center gap-3 transform transition-all duration-300 hover:scale-110">
                 <TbReportMoney className="text-5xl text-green-500" />
                 <div>
-                  <p className="">
-                    {salaryRange}
-                  </p>
-                  <p className="text-gray-500 text-sm ">
-                    Salary Range
-                  </p>
+                  <p className="">{salaryRange}</p>
+                  <p className="text-gray-500 text-sm ">Salary Range</p>
                 </div>
               </div>
 
@@ -208,8 +182,10 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="flex bg-green-50 shadow-xl hover:shadow-green-500 hover:bg-white rounded-lg md:p-6 items-center gap-3
-              transform transition-all duration-300 hover:scale-110">
+              <div
+                className="flex bg-green-50 shadow-xl hover:shadow-green-500 hover:bg-white rounded-lg md:p-6 items-center gap-3
+              transform transition-all duration-300 hover:scale-110"
+              >
                 <MdOutlineAddHomeWork className="text-5xl text-green-500" />
                 <div className="">
                   <p>{remoteOption}</p>
