@@ -8,7 +8,7 @@ const JobsSection = () => {
   const [sortBy, setSortBy] = useState("newest");
   const [experienceOpen, setExperienceOpen] = useState(false);
   const [jobTypeOpen, setJobTypeOpen] = useState(false);
- 
+  const [salaryRangeOpen, setSalaryRangeOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const axios = useAxiosPublic();
   // Pagination done
@@ -16,15 +16,16 @@ const JobsSection = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  // Sort 
+  // Filter
   const [experienceLevel, setExperienceLevel] = useState([]);
   const [jobType, setJobType] = useState([]);
-  const [minSalary, setMinSalary] = useState("");
-  const [maxSalary, setMaxSalary] = useState("");
-  
+  const [employType, setEmployType] = useState([]);
+  const [salaryRange, setSalaryRange] = useState([]);
+
   // Toggling the dropdowns
   const toggleExperience = () => setExperienceOpen(!experienceOpen);
   const toggleJobType = () => setJobTypeOpen(!jobTypeOpen);
+  const toggleSalaryRange = () => setSalaryRangeOpen(!salaryRangeOpen);
 
   // Fetch jobs from the backend with filtering, sorting, and searching
   useEffect(() => {
@@ -37,12 +38,13 @@ const JobsSection = () => {
             sortBy,
             searchQuery,
             experienceLevel,
-            jobType,
-            minSalary,
-            maxSalary,
+            remoteOption: jobType,
+            salaryRange,
+            employmentType: employType,
           },
         });
-        setJobs(response.data.jobs);
+        setJobs(response?.data?.jobs);
+        console.log(response);
         setTotalPages(response.data.totalPages);
       } catch (error) {
         console.log(error);
@@ -57,17 +59,34 @@ const JobsSection = () => {
     searchQuery,
     experienceLevel,
     jobType,
-    minSalary,
-    maxSalary,
+    salaryRange,
+    employType,
   ]);
 
-  console.log(jobs)
+  console.log(jobs);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  // Handle JobType filter changes
+  const handleJobTypeChange = (type) => {
+    setJobType((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+  const handleEmploymentTypeChange = (type) => {
+    setEmployType((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
 
+  // Handle Salary Range filter changes
+  const handleSalaryRangeChange = (range) => {
+    setSalaryRange((prev) =>
+      prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
+    );
+  };
 
   return (
     <div>
@@ -83,12 +102,12 @@ const JobsSection = () => {
       </div>
 
       {/* Search and Sort Section */}
-      <div className="flex mt-4">
-        <div className="flex justify-end flex-col text-end w-full">
+      <div className="flex flex-col md:flex-row items-center container mx-auto justify-start gap-2 text-green-500 mt-4 md:mt-6">
+        <div className="flex justify-end flex-col">
           <input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
+            className="px-4 py-2 text-gray-700 border-green-500 rounded placeholder-gray-500 bg-white outline-none focus:placeholder-transparent border-2"
             type="text"
             name="search"
             placeholder="Search for jobs"
@@ -152,53 +171,60 @@ const JobsSection = () => {
             </div>
             {jobTypeOpen && (
               <div className="py-2">
-                <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Hourly
-                </label>
-                <label className="flex items-center mt-2">
-                  <input type="checkbox" className="mr-2" />
-                  Fixed-Price
-                </label>
+                {["FullTime", "PartTime"].map((type) => (
+                  <label className="flex items-center mt-2" key={type}>
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      checked={employType.includes(type)}
+                      onChange={() => handleEmploymentTypeChange(type)}
+                    />
+                    {type}
+                  </label>
+                ))}
+                {["OnSite", "Remote", "Hybrid"].map((type) => (
+                  <label className="flex items-center mt-2" key={type}>
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      checked={jobType.includes(type)}
+                      onChange={() => handleJobTypeChange(type)}
+                    />
+                    {type}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
 
-                {/* Price Range for Hourly */}
-                <div className="flex items-center mt-4">
-                  <input
-                    type="number"
-                    className="border px-2 py-1 rounded w-20 mr-2"
-                    placeholder="Min"
-                  />
-                  <span className="mr-2">/hr</span>
-                  <input
-                    type="number"
-                    className="border px-2 py-1 rounded w-20"
-                    placeholder="Max"
-                  />
-                </div>
-
-                {/* Price Range for Fixed Price */}
-                <div className="mt-4">
-                  <label className="flex items-center">
-                    <input type="checkbox" className="mr-2" />
-                    Less than $100
-                  </label>
-                  <label className="flex items-center mt-2">
-                    <input type="checkbox" className="mr-2" />
-                    $100 to $500
-                  </label>
-                  <label className="flex items-center mt-2">
-                    <input type="checkbox" className="mr-2" />
-                    $500 - $1K
-                  </label>
-                  <label className="flex items-center mt-2">
-                    <input type="checkbox" className="mr-2" />
-                    $1K - $5K
-                  </label>
-                  <label className="flex items-center mt-2">
-                    <input type="checkbox" className="mr-2" />
-                    $5K+
-                  </label>
-                </div>
+          {/* Salary Range Dropdown */}
+          <div className="border-b mb-4">
+            <div
+              className="flex justify-between items-center cursor-pointer py-2"
+              onClick={toggleSalaryRange}
+            >
+              <span className="text-lg font-medium">Salary Range</span>
+              <span>
+                {salaryRangeOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
+            {salaryRangeOpen && (
+              <div className="py-2">
+                {["0-100", "100-500", "500-1000", "1000-5000", "5000+"].map(
+                  (range) => (
+                    <label className="flex items-center mt-2" key={range}>
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        checked={salaryRange.includes(range)}
+                        onChange={() => handleSalaryRangeChange(range)}
+                      />
+                      {range === "5000+"
+                        ? "$5K+"
+                        : `$${range.split("-").join(" to ")}`}
+                    </label>
+                  )
+                )}
               </div>
             )}
           </div>
@@ -206,16 +232,16 @@ const JobsSection = () => {
 
         {/* Jobs Section */}
         <div className="col-span-1 lg:col-span-3 grid grid-cols-1 gap-4 md:gap-2">
-          {jobs.map((job) => (
-            <JobsCard key={job.id} job={job} />
-          ))}
+          {jobs?.length >= 0 &&
+            jobs?.map((job) => <JobsCard key={job.id} job={job} />)}
+          {!jobs && <h1>Jobs Not FOund</h1>}
 
           {/* Pagination Buttons */}
           <div className="mt-4 ml-3 md:ml-0 md:flex justify-center items-center">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 mx-1 bg-blue-500 text-white rounded disabled:opacity-50"
+              className="px-4 py-2 mx-1 bg-green-500 text-white rounded disabled:opacity-50"
             >
               Previous
             </button>
@@ -223,7 +249,11 @@ const JobsSection = () => {
               <button
                 key={page}
                 onClick={() => handlePageChange(page)}
-                className={`px-2 py-2 rounded mx-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}
+                className={`px-2 py-2 rounded mx-1 ${
+                  currentPage === page
+                    ? "bg-green-700 text-white"
+                    : "bg-green-500 text-white"
+                }`}
               >
                 {page}
               </button>
@@ -231,7 +261,7 @@ const JobsSection = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 mx-1 bg-blue-500 text-white rounded disabled:opacity-50"
+              className="px-4 py-2 mx-1 bg-green-500 text-white rounded disabled:opacity-50"
             >
               Next
             </button>
