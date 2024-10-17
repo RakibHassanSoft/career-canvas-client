@@ -78,7 +78,7 @@ const EducationForm = () => {
     };
 
     const addEducationEntry = () => {
-        setEducationList([...educationList, { degree: '', institution: '', duration: '' }]);
+        setEducationList([...educationList, { degree: '', institution: '' }]);
     };
 
     const removeEducationEntry = (index) => {

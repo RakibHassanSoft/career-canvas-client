@@ -106,14 +106,14 @@ const AdminSidebar = () => {
                                             <span className="ml-3">Review request</span>
                                         </Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <Link to="/dashboard/settings" className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 3a8 8 0 100 16 8 8 0 000-16zM10 4a1 1 0 011 1v2a1 1 0 11-2 0V5a1 1 0 011-1zm1 10h-2v-2h2v2z" />
                                             </svg>
                                             <span className="ml-3">Settings</span>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     <li>
                                         <Link
                                             to="user-profile"

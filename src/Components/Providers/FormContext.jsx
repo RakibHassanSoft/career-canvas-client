@@ -3,7 +3,6 @@ import { createContext, useContext, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
 export const FormContext = createContext();
-import axios from 'axios';
 import useAxiosPublic from '../../Hooks/AxiosHooks/useAxiosPublic';
 
 export const FormProvider = ({ children }) => {
@@ -20,9 +19,9 @@ export const FormProvider = ({ children }) => {
     },
     careerObjective: '',
     education: [],
-    skills: '',
+    skills: [],
     projects: [],
-    languages: '',
+    languages: [],
   });
 
   console.log(formData);
@@ -60,7 +59,7 @@ export const FormProvider = ({ children }) => {
   const submitFormData = async () => {
     // Get user context
     const formDataWithUserId = { ...formData, userId: user.uid }; // Add userId to formData
-  
+  console.log(formDataWithUserId);
     try {
       const response = await axiosInstance.post('/api/formdata', formDataWithUserId);
       console.log('Form data submitted successfully:', response.data);
@@ -118,7 +117,7 @@ export const FormProvider = ({ children }) => {
   //         description: 'Specialized in cloud computing and data management.',
   //       },
   //     ],
-  //     skills: 'JavaScript, React, Node.js, MongoDB, Express',
+  //     skills: 'JavaScript,React,Node.js,MongoDB,Express',
   //     projects: [
   //       {
   //         title: 'Personal Portfolio',
@@ -131,11 +130,11 @@ export const FormProvider = ({ children }) => {
   //         link: 'https://github.com/johndoe/e-commerce',
   //       },
   //     ],
-  //     languages: 'English, Spanish',
+  //     languages: 'English , Spanish',
   //   };
 
   //   // Add userId to dummy data
-  //   const formDataWithUserId = { ...dummyData, userId: user.uid }; // Add userId to formData
+  //   const formDataWithUserId = { userId: user.uid ,...dummyData }; // Add userId to formData
 
   //   try {
   //     const response = await axiosInstance.post('/api/formdata', formDataWithUserId);
