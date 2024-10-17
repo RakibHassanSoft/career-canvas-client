@@ -1,80 +1,49 @@
+import { useContext, useEffect, useState } from "react";
+import useAxiosPublic from "../../../../Hooks/AxiosHooks/useAxiosPublic";
+import { AuthContext } from "../../../Providers/AuthProvider";
+
+
+
 const ResumeMe = () => {
-    // Demo data
-    const contactInfo = {
-      phone: '123-456-7890',
-      email: 'example@example.com',
-      website: 'https://www.example.com'
-    };
-    
-    const name = 'John Doe';
-  
-    const skillData = ['JavaScript', 'React', 'Node.js', 'CSS', 'HTML'];
-  
-    const careerObjective = 'A passionate web developer with experience in building dynamic web applications.';
-  
-    const projects = [
-      {
-        _id: '1',
-        title: 'Portfolio Website',
-        description: 'A personal portfolio to showcase my work.',
-        features: ['Responsive Design', 'User-friendly Interface']
-      },
-      {
-        _id: '2',
-        title: 'E-Commerce Application',
-        description: 'An online store for various products.',
-        features: ['Shopping Cart', 'Payment Gateway Integration']
-      }
-    ];
-  
-    const education = [
-      {
-        _id: '1',
-        degree: 'Bachelor of Science in Computer Science',
-        institution: 'XYZ University',
-        startDate: '2016',
-        endDate: '2020'
-      }
-    ];
-  
-    const experience = [
-      {
-        _id: '1',
-        jobTitle: 'Frontend Developer',
-        company: 'ABC Company',
-        duration: '2020 - Present',
-        responsibilities: [
-          'Developed user-friendly web interfaces',
-          'Collaborated with designers and backend developers'
-        ]
-      }
-    ];
-  
-    const languages = ['English', 'Spanish'];
-  
-    const certificates = [
-      {
-        _id: '1',
-        title: 'Certified JavaScript Developer',
-        institution: 'Code Academy'
-      }
-    ];
-  
-    const awards = [
-      {
-        _id: '1',
-        title: 'Employee of the Month',
-        organization: 'ABC Company',
-        year: '2021'
-      }
-    ];
-  
+  const axiosPublic=useAxiosPublic()
+ const { user } = useContext(AuthContext);
+  console.log(user)
+
+const[userDetails,setUserDetail]=useState()
+
+console.log(userDetails)
+
+
+// // for get from backend
+// useEffect(()=>{
+//   axiosPublic.get(`/api/formdata/${user?.uid}`)
+//   .then((res)=>{
+//     console.log(res.data)
+//   })
+//   .catch((error)=>{
+//     console.error('fetch error',error.message)
+//   })
+// },[user?.uid])
+// console.log(userDetails)
+
+
+
+useEffect(()=>{
+  fetch('../../../../../public/person.json')
+  .then(res=>res.json())
+  .then(data => {
+    setUserDetail(data); 
+  })
+  .catch(error => console.error('Error fetching :', error));
+},[])
+
+ 
     return (
       <div className="w-full mx-auto p-8 bg-gray-50">
         {/* Resume Title */}
         <header className="flex justify-between items-center border-b-2 pb-4 mb-8">
           <div>
-            <h1 className="text-4xl font-bold">{name}</h1>
+            <h1 className="text-4xl font-bold">{userDetails?.personalInfo?.name}</h1>
             <h2 className="text-lg font-light text-gray-500">Web Developer</h2>
           </div>
         </header>
@@ -82,21 +51,21 @@ const ResumeMe = () => {
         {/* Contact Summary */}
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Contact Summary</h3>
-          <p>Phone: {contactInfo.phone}</p>
-          <p>Email: {contactInfo.email}</p>
-          <p>Website: <a href={contactInfo.website} target="_blank" rel="noopener noreferrer">{contactInfo.website}</a></p>
+          <p>Phone: {userDetails?.personalInfo?.phone}</p>
+          <p>Email: {userDetails?.personalInfo?.email}</p>
+          <p>Website: <a href={userDetails?.personalInfo?.website} target="_blank" rel="noopener noreferrer">{userDetails?.personalInfo?.website}</a></p>
         </section>
   
         {/* Career Objective */}
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Career Objective</h3>
-          <p>{careerObjective}</p>
+          <p>{userDetails?.careerObjective}</p>
         </section>
   
         {/* Skills */}
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Skills</h3>
-          {skillData.map((item, index) => (
+          {userDetails?.skills.map((item, index) => (
             <ul key={index} className="list-disc ml-4">
               <li>{item}</li>
             </ul>
@@ -106,15 +75,13 @@ const ResumeMe = () => {
         {/* Projects */}
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Projects</h3>
-          {projects.map((project, index) => (
+          {userDetails?.projects.map((project, index) => (
             <div key={project._id} className="mb-4">
               <h4 className="text-xl font-bold">Project {index + 1}: {project.title}</h4>
               <p className="text-gray-600">{project.description}</p>
-              <ul className="list-disc ml-4 mt-2">
-                {project.features.map((feature, i) => (
-                  <li key={i}>{feature}</li>
-                ))}
-              </ul>
+              <p className="mt-1 text-blue-600">
+                {project.link}
+              </p>
             </div>
           ))}
         </section>
@@ -122,10 +89,10 @@ const ResumeMe = () => {
         {/* Education Details */}
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Education</h3>
-          {education.map((edu) => (
+          {userDetails?.education.map((edu) => (
             <div key={edu._id} className="mb-4">
               <h4 className="text-xl font-bold">{edu.degree}</h4>
-              <p className="text-gray-600">{edu.institution}, {edu.startDate} - {edu.endDate}</p>
+              <p className="text-gray-600">{edu?.institution}, {edu?.startDate} - {edu.endDate}</p>
             </div>
           ))}
         </section>
@@ -134,7 +101,7 @@ const ResumeMe = () => {
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Languages</h3>
           <ul className="list-disc ml-4">
-            {languages.map((language, index) => (
+            {userDetails?.languages.map((language, index) => (
               <li key={index}>{language}</li>
             ))}
           </ul>
@@ -143,15 +110,14 @@ const ResumeMe = () => {
         {/* Experience */}
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Experience</h3>
-          {experience.map((exp) => (
+          {userDetails?.experience.map((exp) => (
             <div key={exp._id} className="mb-6">
               <h4 className="text-xl font-bold">{exp.jobTitle}</h4>
-              <p className="text-gray-600">{exp.company}, {exp.duration}</p>
-              <ul className="list-disc ml-4 mt-2">
-                {exp.responsibilities.map((responsibility, index) => (
-                  <li key={index}>{responsibility}</li>
-                ))}
-              </ul>
+              <p className="text-gray-600 text-lg">{exp.company}, {exp.duration}</p>
+              
+             <p className="text-gray-600">
+              {exp.description}
+             </p>
             </div>
           ))}
         </section>
@@ -160,9 +126,9 @@ const ResumeMe = () => {
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Certificates</h3>
           <ul className="list-disc ml-4">
-            {certificates.map(cert => (
+            {userDetails?.certificates.map(cert => (
               <li key={cert._id}>
-                {cert.title} by {cert.institution}
+                {cert.title} by {cert.issuer}
               </li>
             ))}
           </ul>
@@ -172,9 +138,9 @@ const ResumeMe = () => {
         <section className="mb-8">
           <h3 className="text-2xl font-semibold mb-2">Awards</h3>
           <ul className="list-disc ml-4">
-            {awards.map((award) => (
+            {userDetails?.awards.map((award) => (
               <li key={award._id}>
-                {award.title} - {award.organization} ({award.year})
+                {award.title} - {award.issuer} ({award.date})
               </li>
             ))}
           </ul>
