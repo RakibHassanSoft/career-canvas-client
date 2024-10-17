@@ -64,7 +64,7 @@ const PersonalInfoForm = () => {
       //   setWebsite("");
       //   navigate('/resume-templates/career-objective-form');
       // }
-      updatePersonalInfo({ name, contact: { phone, email, website } });
+      updatePersonalInfo({ name,  phone, email, website  });
      
       navigate('/resume-templates/career-objective-form');
     } catch (error) {

@@ -73,10 +73,6 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-
-  const handleResumeTemplate = (id) => {
-    setResumeId(id); 
-  };
   console.log(user);
   
   const UpdateProfile = (fullName , role) => {
@@ -103,7 +99,6 @@ const AuthProvider = ({ children }) => {
     loading,
     UpdateProfile,
     resumeId,
-    handleResumeTemplate,
     error, // Add error to context value
   };
 
