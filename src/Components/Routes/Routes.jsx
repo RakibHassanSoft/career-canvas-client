@@ -27,6 +27,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import ResumeReview from "../Pages/Dashboard/ResumeReview/ResumeReview";
 import AddAdmin from "../Pages/Dashboard/AddAdmin/AddAdmin";
 import PrivateRouter from "./PrivateRoute";
+import Payment from "../Pages/Payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -128,6 +129,11 @@ const router = createBrowserRouter([
       path: 'premium-membership',
       element: <Premium_Membership></Premium_Membership>
     },
+    {
+      path: 'payment',
+      element: <Payment></Payment>
+    },
+
     {
       path: 'review-resume',
       element: <Resume_Review></Resume_Review>
