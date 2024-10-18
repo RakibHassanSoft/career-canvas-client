@@ -75,7 +75,7 @@ export const FormProvider = ({ children }) => {
       // Return the response data to the caller
       return response.data; // Send back the response data
     } catch (error) {
-      console.error('Error submitting form data:', error);
+      console.error('Error submitting form data:', error.message);
   
       // Show SweetAlert error modal
       Swal.fire({

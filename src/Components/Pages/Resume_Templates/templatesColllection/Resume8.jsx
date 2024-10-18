@@ -1,39 +1,22 @@
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume8 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
+
+const Resume8 = (props) => {
+  const {personalInfo,skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg border border-gray-300">
       {/* Header: Name and Contact */}
       <div className="flex justify-between items-center border-b pb-4 mb-6">
         <div>
-          <h1 className="text-5xl font-bold text-orange-600 mb-2">{name}</h1>
+          <h1 className="text-5xl font-bold text-orange-600 mb-2">{personalInfo?.name}</h1>
           <p className="text-lg font-medium text-gray-600">Web Developer</p>
         </div>
         <div className="text-right">
-          <p className="text-gray-600">📞 {contactInfo?.phone}</p>
-          <p className="text-gray-600">📧 {contactInfo?.email}</p>
-          <p className="text-gray-600">📍 {contactInfo?.location}</p>
-          <p className="text-gray-600">💼 @{contactInfo?.linkedin}</p>
+          <p className="text-gray-600">📞 {personalInfo?.phone}</p>
+          <p className="text-gray-600">📧 {personalInfo?.email}</p>
+          <p className="text-gray-600">📍 {personalInfo?.location}</p>
+          <p className="text-gray-600">💼 @{personalInfo?.linkedin}</p>
         </div>
       </div>
 
@@ -70,9 +53,9 @@ const Resume8 = () => {
           {/* Skills */}
           <section className="mb-8">
             <h2 className="text-xl font-semibold text-orange-600 mb-4">Skills</h2>
-            {skillData && skillData.length > 0 ? (
+            {skills && skills.length > 0 ? (
               <ul className="list-disc list-inside text-gray-700 space-y-2">
-                {skillData.map((skill, index) => (
+                {skills.map((skill, index) => (
                   <li key={index}>{skill}</li>
                 ))}
               </ul>

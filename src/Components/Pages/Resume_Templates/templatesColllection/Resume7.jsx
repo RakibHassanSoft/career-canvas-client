@@ -1,49 +1,32 @@
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume7 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
+
+const Resume7 = (props) => {
+  const {personalInfo, skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg border-t-8 border-yellow-400">
       {/* Header: Name and Contact */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold">{name}</h1>
+          <h1 className="text-4xl font-bold">{personalInfo?.name}</h1>
           <p className="text-lg text-gray-600">{careerObjective || "Your Job Title"}</p>
-          <p className="text-gray-500 mt-2">📞 {contactInfo?.phone || "Phone Number"}</p>
-          <p className="text-gray-500">📧 {contactInfo?.email || "email@example.com"}</p>
-          {contactInfo?.website && (
+          <p className="text-gray-500 mt-2">📞 {personalInfo?.phone || "Phone Number"}</p>
+          <p className="text-gray-500">📧 {personalInfo?.email || "email@example.com"}</p>
+          {personalInfo?.website && (
             <p className="text-gray-500">
-              🌐 <a href={contactInfo.website} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">Website</a>
+              🌐 <a href={personalInfo.website} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">Website</a>
             </p>
           )}
-          {contactInfo?.linkedin && (
+          {personalInfo?.linkedin && (
             <p className="text-gray-500">
-              🔗 <a href={contactInfo.linkedin} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">LinkedIn: {contactInfo.linkedin}</a>
+              🔗 <a href={personalInfo.linkedin} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">LinkedIn: {personalInfo.linkedin}</a>
             </p>
           )}
         </div>
-        {contactInfo?.profileImage && (
+        {personalInfo?.profileImage && (
           <div>
-            <img src={contactInfo.profileImage} alt={`${name}'s Profile`} className="rounded-full w-20 h-20" />
+            <img src={personalInfo.profileImage} alt={`${personalInfo?.name}'s Profile`} className="rounded-full w-20 h-20" />
           </div>
         )}
       </div>
@@ -57,11 +40,11 @@ const Resume7 = () => {
       </section>
 
       {/* Skills */}
-      {skillData && skillData.length > 0 && (
+      {skills && skills.length > 0 && (
         <section className="mb-8">
           <h2 className="text-xl font-semibold">Skills</h2>
           <ul className="list-disc ml-5 mt-2 text-gray-700">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>

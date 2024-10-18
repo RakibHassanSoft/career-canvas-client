@@ -3,65 +3,33 @@ import { FaPhone, FaEnvelope, FaLinkedin } from 'react-icons/fa';
 import { MdOutlineAssignment } from 'react-icons/md';
 
 // Import your custom hooks
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume10 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name, loading: contactLoading, error: contactError } = getNameContacts();
-  const { skillData, loading: skillsLoading, error: skillsError } = getSkills();
-  const { careerObjective, loading: objectiveLoading, error: objectiveError } = getCareerObjectives();
-  const { projects, loading: projectsLoading, error: projectsError } = getProjects();
-  const { education, loading: educationLoading, error: educationError } = getEducation();
-  const { experience, loading: experienceLoading, error: experienceError } = getExperience();
-  const { languages, loading: languagesLoading, error: languagesError } = getLanguages();
-  const { certificates, loading: certificatesLoading, error: certificatesError } = getCertificates();
-  const { awards, loading: awardsLoading, error: awardsError } = getAwards();
 
-  // Handle loading and error states
-  if (
-    contactLoading || skillsLoading || objectiveLoading || projectsLoading ||
-    educationLoading || experienceLoading || languagesLoading ||
-    certificatesLoading || awardsLoading
-  ) {
-    return <div className="text-center p-10">Loading...</div>;
-  }
+const Resume10 = (props) => {
+  const {personalInfo,skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
-  if (
-    contactError || skillsError || objectiveError || projectsError ||
-    educationError || experienceError || languagesError ||
-    certificatesError || awardsError
-  ) {
-    return <div className="text-center p-10 text-red-500">Error loading data.</div>;
-  }
+ 
 
   return (
     <div className="max-w-4xl mx-auto bg-gray-50 shadow-lg rounded-lg overflow-hidden">
       {/* Title and Contact */}
       <div className="bg-blue-600 p-6 text-white">
-        <h1 className="text-4xl font-bold">{name || "Your Name"}</h1>
+        <h1 className="text-4xl font-bold">{personalInfo?.name || "Your Name"}</h1>
         <h2 className="text-lg">{careerObjective || "Web Developer"}</h2>
         <div className="mt-4 flex justify-end space-x-4">
-          {contactInfo?.phone && (
+          {personalInfo?.phone && (
             <div className="flex items-center">
-              <FaPhone className="mr-1" /> <p>{contactInfo.phone}</p>
+              <FaPhone className="mr-1" /> <p>{personalInfo.phone}</p>
             </div>
           )}
-          {contactInfo?.email && (
+          {personalInfo?.email && (
             <div className="flex items-center">
-              <FaEnvelope className="mr-1" /> <p>{contactInfo.email}</p>
+              <FaEnvelope className="mr-1" /> <p>{personalInfo.email}</p>
             </div>
           )}
-          {contactInfo?.website && (
+          {personalInfo?.website && (
             <div className="flex items-center">
-              <FaLinkedin className="mr-1" /> <a href={contactInfo.website} className="underline">{contactInfo.website}</a>
+              <FaLinkedin className="mr-1" /> <a href={personalInfo.website} className="underline">{personalInfo.website}</a>
             </div>
           )}
         </div>
@@ -97,9 +65,9 @@ const Resume10 = () => {
           <MdOutlineAssignment className="mr-2" />
           Skills
         </h3>
-        {skillData && skillData.length > 0 ? (
+        {skills && skills.length > 0 ? (
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>

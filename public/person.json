@@ -1,0 +1,87 @@
+{
+    "userId": "user123",
+    "templateId": "template456",
+    "personalInfo": {
+      "name": "John Doe",
+      "phone": "123-456-7890",
+      "email": "john.doe@example.com",
+      "website": "https://johndoeportfolio.com"
+    },
+    "careerObjective": "To secure a position as a full-stack developer where I can leverage my skills in React, Node.js, and MongoDB to contribute to team success.",
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "University of Example"
+      },
+      {
+        "degree": "Master of Science in Information Technology",
+        "institution": "Tech University"
+      }
+    ],
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Express",
+      "CSS",
+      "HTML"
+    ],
+    "projects": [
+      {
+        "title": "E-Commerce Website",
+        "description": "Developed a full-stack e-commerce application with a product catalog, shopping cart, and payment integration using MERN stack.",
+        "link": "https://myecommerceproject.com"
+      },
+      {
+        "title": "Task Management App",
+        "description": "Created a task management app with user authentication, role-based access control, and real-time notifications using React and Firebase.",
+        "link": ""
+      }
+    ],
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "experience": [
+      {
+        "jobTitle": "Full Stack Developer",
+        "company": "Tech Solutions Inc.",
+        "duration": "Jan 2021 - Present",
+        "description": "Develop and maintain full-stack web applications using React, Node.js, and MongoDB. Collaborate with cross-functional teams to deliver efficient solutions."
+      },
+      {
+        "jobTitle": "Frontend Developer",
+        "company": "Creative Labs",
+        "duration": "Jun 2019 - Dec 2020",
+        "description": "Designed and implemented responsive UI components using React and Redux. Ensured cross-browser compatibility and optimized website performance."
+      }
+    ],
+    "certificates": [
+      {
+        "title": "Certified React Developer",
+        "issuer": "React Institute",
+        "date": "March 2022"
+      },
+      {
+        "title": "MongoDB for Developers",
+        "issuer": "MongoDB University",
+        "date": "June 2021"
+      }
+    ],
+    "awards": [
+      {
+        "title": "Best Developer Award",
+        "issuer": "Tech Solutions Inc.",
+        "date": "December 2022",
+        "description": "Awarded for outstanding contributions to the development of high-impact projects."
+      },
+      {
+        "title": "Employee of the Year",
+        "issuer": "Creative Labs",
+        "date": "November 2020",
+        "description": "Recognized for consistently delivering high-quality frontend solutions and leadership in the development team."
+      }
+    ]
+  }
+  
