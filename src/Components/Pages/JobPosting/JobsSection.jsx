@@ -17,7 +17,7 @@ const JobsSection = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Filter
-  const [experienceLevel, setExperienceLevel] = useState([]);
+  const [experience, setExperience] = useState([]);
   const [jobType, setJobType] = useState([]);
   const [employType, setEmployType] = useState([]);
   const [salaryRange, setSalaryRange] = useState([]);
@@ -37,7 +37,7 @@ const JobsSection = () => {
             limit: itemsPerPage,
             sortBy,
             searchQuery,
-            experienceLevel,
+            experience ,
             remoteOption: jobType,
             salaryRange,
             employmentType: employType,
@@ -57,13 +57,12 @@ const JobsSection = () => {
     currentPage,
     sortBy,
     searchQuery,
-    experienceLevel,
+    experience,
     jobType,
     salaryRange,
     employType,
   ]);
 
-  console.log(searchQuery);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -87,6 +86,17 @@ const JobsSection = () => {
       prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
     );
   };
+
+  const handleExperienceChange = (type) => {
+    setExperience((prev) => {
+      if (prev.includes(type)) {
+        return prev.filter((level) => level !== type); // Remove if already selected
+      } else {
+        return [...prev, type]; // Add new selection
+      }
+    });
+  };
+  
 
   return (
     <div>
@@ -144,18 +154,17 @@ const JobsSection = () => {
             </div>
             {experienceOpen && (
               <div className="py-2">
-                <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Beginner
-                </label>
-                <label className="flex items-center mt-2">
-                  <input type="checkbox" className="mr-2" />
-                  Intermediate
-                </label>
-                <label className="flex items-center mt-2">
-                  <input type="checkbox" className="mr-2" />
-                  Expert
-                </label>
+                {["0-1", "2-3", "3+"].map((range) => (
+                  <label key={range} className="flex items-center mt-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      checked={experience.includes(range)}
+                      onChange={() => handleExperienceChange(range)}
+                    />
+                    { range === "0-1" ? "Beginner" : range === "2-3" ? "Intermediate" : "Expert"}
+                  </label>
+                ))}
               </div>
             )}
           </div>
@@ -249,11 +258,10 @@ const JobsSection = () => {
               <button
                 key={page}
                 onClick={() => handlePageChange(page)}
-                className={`px-2 py-2 rounded mx-1 ${
-                  currentPage === page
-                    ? "bg-green-700 text-white"
-                    : "bg-green-500 text-white"
-                }`}
+                className={`px-2 py-2 rounded mx-1 ${currentPage === page
+                  ? "bg-green-700 text-white"
+                  : "bg-green-500 text-white"
+                  }`}
               >
                 {page}
               </button>

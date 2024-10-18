@@ -14,7 +14,7 @@ const JobPosting = () => {
     employmentType: '',
     salaryRange: '',
     remoteOption: '',
-    experience: '',
+    experience : Number,
     jobDescription: '',
     longDescription: '',
     responsibilities: [''],
@@ -174,7 +174,7 @@ const JobPosting = () => {
         <div className="md:col-span-2">
           <label className="block text-gray-700 font-semibold mb-2">Experience</label>
           <input
-            type="text"
+            type="number"
             name="experience"
             value={jobDetails.experience}
             onChange={handleChange}
