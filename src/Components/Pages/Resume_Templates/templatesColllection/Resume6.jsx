@@ -1,38 +1,21 @@
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume6 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
+
+const Resume6 = (props) => {
+  const {personalInfo, skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
   return (
     <div className="max-w-4xl mx-auto p-5 bg-white shadow-lg">
       {/* Title and Contact */}
       <div className="border-b pb-4 mb-4">
-        <h1 className="text-4xl font-bold text-orange-600 mb-2">{name}</h1>
-        <h2 className="text-xl text-gray-600">{contactInfo?.title || "Customer Success Manager"}</h2>
+        <h1 className="text-4xl font-bold text-orange-600 mb-2">{personalInfo?.name}</h1>
+        <h2 className="text-xl text-gray-600">{personalInfo?.title || "Customer Success Manager"}</h2>
         <div className="mt-2">
-          <p>📞 {contactInfo?.phone || "(123) 456-7899"}</p>
-          <p>📧 {contactInfo?.email || "john.xander@gmail.com"}</p>
-          <p>📍 {contactInfo?.location || "Amsterdam, Netherlands"}</p>
-          {contactInfo?.linkedin && (
-            <a href={contactInfo.linkedin} className="text-blue-500 underline">
+          <p>📞 {personalInfo?.phone || "(123) 456-7899"}</p>
+          <p>📧 {personalInfo?.email || "john.xander@gmail.com"}</p>
+          <p>📍 {personalInfo?.location || "Amsterdam, Netherlands"}</p>
+          {personalInfo?.linkedin && (
+            <a href={personalInfo.linkedin} className="text-blue-500 underline">
               LinkedIn
             </a>
           )}
@@ -51,7 +34,7 @@ const Resume6 = () => {
       <section className="mb-6">
         <h3 className="text-2xl font-semibold text-orange-600 mb-4">Summary</h3>
         <p className="text-gray-700">
-          {`A dedicated and result-driven ${contactInfo?.title || "Customer Success Manager"} with a solid understanding of front-end and back-end development. Experienced in working in agile environments and using JavaScript, React, Node.js, and other modern technologies to build efficient and scalable applications.`}
+          {`A dedicated and result-driven ${personalInfo?.title || "Customer Success Manager"} with a solid understanding of front-end and back-end development. Experienced in working in agile environments and using JavaScript, React, Node.js, and other modern technologies to build efficient and scalable applications.`}
         </p>
       </section>
 
@@ -113,9 +96,9 @@ const Resume6 = () => {
       {/* Skills */}
       <section className="mb-6">
         <h3 className="text-2xl font-semibold text-orange-600 mb-4">Skills</h3>
-        {skillData && skillData.length > 0 ? (
+        {skills && skills.length > 0 ? (
           <ul className="list-disc ml-5 text-gray-700">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>

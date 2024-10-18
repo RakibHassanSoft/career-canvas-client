@@ -32,7 +32,8 @@ const Resume_templates_row = () => {
     const handleImageClick = (resumeType) => {
         console.log('Selected Resume:', resumeType);
         // Logs the selected resume
-        setTemplateId(resumeType)
+        let templateId= String(resumeType)
+        setTemplateId(templateId)
         navigate('/resume-templates/personal-info-form', { state: { resumeType } });
     };
 

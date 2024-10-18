@@ -169,7 +169,7 @@ const SubmitForm = () => {
             <strong>Languages:</strong>
             <input
               type="text"
-              value={formValues.languages.join(", ")}
+              value={formValues.languages}
               onChange={handleLanguagesChange}
               className="mt-1 p-2 border rounded w-full"
               placeholder="Enter languages separated by commas"
