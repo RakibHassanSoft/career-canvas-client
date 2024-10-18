@@ -9,7 +9,7 @@ export const FormProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosPublic();
   const [formData, setFormData] = useState({
-    tempalteId: '',
+    templateId: '',
     personalInfo: {
       name: '',
       phone: '',
@@ -52,7 +52,7 @@ export const FormProvider = ({ children }) => {
 
 
   const setTemplateId = (id) => {
-    setFormData((prev) => ({ ...prev, tempalteId: id }));
+    setFormData((prev) => ({ ...prev, templateId: id }));
   };
 
   // Function to send all data to the server

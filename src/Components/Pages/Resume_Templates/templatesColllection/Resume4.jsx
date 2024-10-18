@@ -3,12 +3,12 @@
 
 
 const Resume4 = (props) => {
-  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+  const {personalInfo, skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
   return (
     <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
       {/* Header */}
       <div className="text-center mb-6">
-        <h1 className="text-4xl font-bold text-teal-600">{name || "Your Name"}</h1>
+        <h1 className="text-4xl font-bold text-teal-600">{personalInfo?.name || "Your Name"}</h1>
         <p className="text-xl text-teal-500">Web Developer</p>
       </div>
 
@@ -16,18 +16,18 @@ const Resume4 = (props) => {
       <div className="flex justify-between border-b pb-4 mb-6">
         <div>
           <h2 className="text-xl font-semibold">Contact</h2>
-          <p>Address: {contactInfo?.address || "Anytown, 12345"}</p>
-          <p>Phone: {contactInfo?.phone || "555-555-122"}</p>
+          <p>Address: {personalInfo?.address || "Anytown, 12345"}</p>
+          <p>Phone: {personalInfo?.phone || "555-555-122"}</p>
           <p>
             Email:{" "}
-            <a href={`mailto:${contactInfo?.email || "john.doe@email.com"}`} className="text-teal-500">
-              {contactInfo?.email || "john.doe@email.com"}
+            <a href={`mailto:${personalInfo?.email || "john.doe@email.com"}`} className="text-teal-500">
+              {personalInfo?.email || "john.doe@email.com"}
             </a>
           </p>
           <p>
             Website:{" "}
-            <a href={contactInfo?.website || "https://www.yourwebsite.com"} className="text-teal-500">
-              {contactInfo?.website || "www.yourwebsite.com"}
+            <a href={personalInfo?.website || "https://www.yourwebsite.com"} className="text-teal-500">
+              {personalInfo?.website || "www.yourwebsite.com"}
             </a>
           </p>
         </div>
@@ -36,8 +36,8 @@ const Resume4 = (props) => {
         <div>
           <h2 className="text-xl font-semibold">Skills</h2>
           <ul>
-            {skillData && skillData.length > 0 ? (
-              skillData.map((skill, index) => (
+            {skills && skills.length > 0 ? (
+              skills.map((skill, index) => (
                 <li key={index}>
                   {skill} - <span className="text-green-500">Excellent</span>
                 </li>

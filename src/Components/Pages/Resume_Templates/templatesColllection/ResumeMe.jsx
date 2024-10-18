@@ -16,12 +16,15 @@ import Resume1 from './Resume1';
 const ResumeMe = () => {
   const data = useUserTemplateData();
   const lastData = data?.data?.[data?.data.length - 1]; // Get the last element safely
-  const templateId = lastData?.templateId; // Extract templateId
+  // const templateId = lastData?.templateId; // Extract templateId
+  const templateId = 12 
 
   if (!templateId) {
     return <p>No data available...</p>; // Handle case where there's no data
   }
-
+  if (!lastData) {
+    return <p>No data available...</p>; // Handle case where there's no data
+  }
   
   if (templateId == 1 ) {
     return <Resume1 props={lastData} />;

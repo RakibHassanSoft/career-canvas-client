@@ -1,25 +1,26 @@
 
 
 const Resume3 = (props) => {
-  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+  console.log(props)
+  const {personalInfo,skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
   return (
     <div className="max-w-5xl mx-auto p-8 bg-white shadow-lg">
       {/* Title */}
       <header className="text-center mb-6 bg-blue-800 p-4 rounded">
-        <h1 className="text-4xl font-bold uppercase text-white">{name || "Your Name"}</h1>
-        <h2 className="text-xl text-white">{careerObjective ? careerObjective.title : "Your Profession"}</h2>
+        <h1 className="text-4xl font-bold uppercase text-white">{personalInfo?.name || "Your Name"}</h1>
+        <h2 className="text-xl text-white">{careerObjective ? careerObjective : "Your Profession"}</h2>
       </header>
 
       {/* Contact Summary */}
       <section className="border-b-2 pb-4 mb-4">
         <h3 className="text-lg font-semibold">Contact Information</h3>
         <ul className="text-gray-700">
-          <li>Email: <a href={`mailto:${contactInfo?.email}`} className="text-blue-500">{contactInfo?.email || "email@example.com"}</a></li>
-          <li>Phone: {contactInfo?.phone || "(123) 456-7890"}</li>
-          <li>Location: {contactInfo?.location || "Staten Island, New York"}</li>
-          <li>Website: <a href={contactInfo?.website} className="text-blue-500" target="_blank" rel="noopener noreferrer">{contactInfo?.website || "www.yourwebsite.com"}</a></li>
-          <li>LinkedIn: <a href={contactInfo?.linkedin} className="text-blue-500" target="_blank" rel="noopener noreferrer">{contactInfo?.linkedin || "LinkedIn Profile"}</a></li>
+          <li>Email: <a href={`mailto:${personalInfo?.email}`} className="text-blue-500">{personalInfo?.email || "email@example.com"}</a></li>
+          <li>Phone: {personalInfo?.phone || "(123) 456-7890"}</li>
+          <li>Location: {personalInfo?.location || "Staten Island, New York"}</li>
+          <li>Website: <a href={personalInfo?.website} className="text-blue-500" target="_blank" rel="noopener noreferrer">{personalInfo?.website || "www.yourwebsite.com"}</a></li>
+          <li>LinkedIn: <a href={personalInfo?.linkedin} className="text-blue-500" target="_blank" rel="noopener noreferrer">{personalInfo?.linkedin || "LinkedIn Profile"}</a></li>
         </ul>
       </section>
 
@@ -27,7 +28,7 @@ const Resume3 = (props) => {
       <section className="border-b-2 pb-4 mb-4">
         <h3 className="text-lg font-semibold">Career Objective</h3>
         <p>
-          {careerObjective?.description || "Your career objective goes here."}
+          {careerObjective || "Your career objective goes here."}
         </p>
       </section>
 
@@ -115,9 +116,9 @@ const Resume3 = (props) => {
       {/* Skills */}
       <section className="border-b-2 pb-4 mb-4">
         <h3 className="text-lg font-semibold">Skills</h3>
-        {skillData && skillData.length > 0 ? (
+        {skills && skills.length > 0 ? (
           <ul className="list-disc list-inside">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>

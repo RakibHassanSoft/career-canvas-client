@@ -3,7 +3,7 @@ const Resume11 = (props) => {
   const {
     personalInfo,
     
-    skillData,
+    skills,
     careerObjective,
     projects,
     education,
@@ -11,7 +11,7 @@ const Resume11 = (props) => {
     languages,
     certificates,
     awards,
-  } = props;
+  } = props?.props;
 // console.log(personalInfo)
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-md p-8">
@@ -62,9 +62,9 @@ const Resume11 = (props) => {
           {/* Skills */}
           <section className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Skills</h3>
-            {skillData && skillData.length > 0 ? (
+            {skills && skills.length > 0 ? (
               <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                {skillData.map((skill, index) => (
+                {skills.map((skill, index) => (
                   <li key={index}>{skill}</li>
                 ))}
               </ul>

@@ -6,45 +6,30 @@ import { MdOutlineAssignment } from 'react-icons/md';
 
 
 const Resume10 = (props) => {
-  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+  const {personalInfo,skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
-  // Handle loading and error states
-  if (
-    contactLoading || skillsLoading || objectiveLoading || projectsLoading ||
-    educationLoading || experienceLoading || languagesLoading ||
-    certificatesLoading || awardsLoading
-  ) {
-    return <div className="text-center p-10">Loading...</div>;
-  }
-
-  if (
-    contactError || skillsError || objectiveError || projectsError ||
-    educationError || experienceError || languagesError ||
-    certificatesError || awardsError
-  ) {
-    return <div className="text-center p-10 text-red-500">Error loading data.</div>;
-  }
+ 
 
   return (
     <div className="max-w-4xl mx-auto bg-gray-50 shadow-lg rounded-lg overflow-hidden">
       {/* Title and Contact */}
       <div className="bg-blue-600 p-6 text-white">
-        <h1 className="text-4xl font-bold">{name || "Your Name"}</h1>
+        <h1 className="text-4xl font-bold">{personalInfo?.name || "Your Name"}</h1>
         <h2 className="text-lg">{careerObjective || "Web Developer"}</h2>
         <div className="mt-4 flex justify-end space-x-4">
-          {contactInfo?.phone && (
+          {personalInfo?.phone && (
             <div className="flex items-center">
-              <FaPhone className="mr-1" /> <p>{contactInfo.phone}</p>
+              <FaPhone className="mr-1" /> <p>{personalInfo.phone}</p>
             </div>
           )}
-          {contactInfo?.email && (
+          {personalInfo?.email && (
             <div className="flex items-center">
-              <FaEnvelope className="mr-1" /> <p>{contactInfo.email}</p>
+              <FaEnvelope className="mr-1" /> <p>{personalInfo.email}</p>
             </div>
           )}
-          {contactInfo?.website && (
+          {personalInfo?.website && (
             <div className="flex items-center">
-              <FaLinkedin className="mr-1" /> <a href={contactInfo.website} className="underline">{contactInfo.website}</a>
+              <FaLinkedin className="mr-1" /> <a href={personalInfo.website} className="underline">{personalInfo.website}</a>
             </div>
           )}
         </div>
@@ -80,9 +65,9 @@ const Resume10 = (props) => {
           <MdOutlineAssignment className="mr-2" />
           Skills
         </h3>
-        {skillData && skillData.length > 0 ? (
+        {skills && skills.length > 0 ? (
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>

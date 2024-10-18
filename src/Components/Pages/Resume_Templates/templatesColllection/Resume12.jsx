@@ -2,7 +2,7 @@
 
 
 const Resume12 = (props) => {
-  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+  const {personalInfo, skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
 // console.log(props)
   return (
@@ -17,24 +17,24 @@ const Resume12 = (props) => {
             className="w-24 h-24 rounded-full shadow-md mr-4"
           /> */}
           <div>
-            <h1 className="text-4xl font-bold">{name || "Your Name"}</h1>
+            <h1 className="text-4xl font-bold">{personalInfo?.name || "Your Name"}</h1>
             <h2 className="text-lg text-gray-600">
-              {contactInfo?.title || "Your Profession"}
+              {personalInfo?.title || "Your Profession"}
             </h2>
           </div>
         </div>
         <div className="mb-6">
-          <p>📞 {contactInfo?.phone || "123-456-7890"}</p>
-          <p>✉️ {contactInfo?.email || "email@example.com"}</p>
+          <p>📞 {personalInfo?.phone || "123-456-7890"}</p>
+          <p>✉️ {personalInfo?.email || "email@example.com"}</p>
           <p>
             🌍{" "}
             <a
-              href={contactInfo?.website || "#"}
+              href={personalInfo?.website || "#"}
               className="text-blue-500 underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {contactInfo?.website || "yourwebsite.com"}
+              {personalInfo?.website || "yourwebsite.com"}
             </a>
           </p>
         </div>
@@ -52,9 +52,9 @@ const Resume12 = (props) => {
         {/* Skills */}
         <section className="mb-6">
           <h3 className="text-xl font-semibold text-orange-600 mb-2">Skills</h3>
-          {skillData && skillData.length > 0 ? (
+          {skills && skills.length > 0 ? (
             <ul className="list-disc pl-5 space-y-1 text-gray-700">
-              {skillData.map((skill, index) => (
+              {skills.map((skill, index) => (
                 <li key={index}>{skill}</li>
               ))}
             </ul>

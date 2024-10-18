@@ -36,9 +36,14 @@ const LanguagesForm = () => {
         } else {
             try {
                 updateLanguages(formData.languages);
-               const res=await  submitFormData()
-
-                 console.log(res)
+                navigate('/resume-templates/submit-form');
+                // const result = await submitFormData();
+                // if (result) {
+                //     console.log('Received response:', result);
+                //     // Handle the response as needed
+                // } else {
+                //     console.log('Failed to submit the form.');
+                // }
                 // Change to your desired route
 
             } catch (error) {

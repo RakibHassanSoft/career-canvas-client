@@ -3,27 +3,27 @@
 
 const Resume5 = (props) => {
 
-  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+  const {personalInfo, skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 shadow-md rounded-md">
       {/* Header */}
       <div className="flex items-center justify-between border-b pb-4 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">{name}</h1>
-          <p className="text-lg text-gray-600">{contactInfo?.title || "Web Developer"}</p>
+          <h1 className="text-3xl font-bold text-gray-900">{personalInfo?.name}</h1>
+          <p className="text-lg text-gray-600">{personalInfo?.title || "Web Developer"}</p>
           <p className="mt-2 text-gray-500">
-            {contactInfo?.phone} — {contactInfo?.email} —{" "}
-            <a href={contactInfo?.website} className="text-blue-500 underline">
-              {contactInfo?.website}
+            {personalInfo?.phone} — {personalInfo?.email} —{" "}
+            <a href={personalInfo?.website} className="text-blue-500 underline">
+              {personalInfo?.website}
             </a>
           </p>
         </div>
-        {contactInfo?.profilePhoto && (
+        {personalInfo?.profilePhoto && (
           <img
             className="h-24 w-24 rounded-full object-cover"
-            src={contactInfo.profilePhoto} // Ensure this path is correct
-            alt={`${name}'s Profile`}
+            src={personalInfo.profilePhoto} // Ensure this path is correct
+            alt={`${personalInfo?.name}'s Profile`}
           />
         )}
       </div>
@@ -37,11 +37,11 @@ const Resume5 = (props) => {
       </div>
 
       {/* Skills */}
-      {skillData && skillData.length > 0 && (
+      {skills && skills.length > 0 && (
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-gray-900">Skills</h2>
           <div className="flex flex-wrap mt-2">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <span key={index} className="bg-gray-100 text-gray-700 rounded-full px-4 py-1 m-1">
                 {skill}
               </span>

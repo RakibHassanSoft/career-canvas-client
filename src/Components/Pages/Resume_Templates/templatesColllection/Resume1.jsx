@@ -1,7 +1,7 @@
 const Resume1 = (props) => {
   const {
     personalInfo,
-    name,
+    
     skills,
     careerObjective,
     projects,
