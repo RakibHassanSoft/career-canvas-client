@@ -36,26 +36,14 @@ const LanguagesForm = () => {
         } else {
             try {
                 updateLanguages(formData.languages);
-                // const requestData = {
-                //     userId: user.uid, // Get userId from context
-                //     templateId: resumeId, // Get templateId from context
-                //     languages: formData.languages.split(',').map(lang => lang.trim()), // Convert input string to array
-                // };
-
-                // const response = await axiosPublic.post('/api/Language', requestData); // Adjust endpoint as necessary
-
-                // if (response.status === 201) {
-                //     console.log('Languages submitted successfully:', response.data);
-                //     navigate('/user-profile'); // Change to your desired route
-
+                navigate('/resume-templates/submit-form');
+                // const result = await submitFormData();
+                // if (result) {
+                //     console.log('Received response:', result);
+                //     // Handle the response as needed
+                // } else {
+                //     console.log('Failed to submit the form.');
                 // }
-                const result = await submitFormData();
-                if (result) {
-                    console.log('Received response:', result);
-                    // Handle the response as needed
-                } else {
-                    console.log('Failed to submit the form.');
-                }
                 // Change to your desired route
 
             } catch (error) {

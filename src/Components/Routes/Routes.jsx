@@ -28,6 +28,7 @@ import ResumeReview from "../Pages/Dashboard/ResumeReview/ResumeReview";
 import AddAdmin from "../Pages/Dashboard/AddAdmin/AddAdmin";
 import PrivateRouter from "./PrivateRoute";
 import Payment from "../Pages/Payment/Payment";
+import SubmitForm from "../Pages/Resume_Templates/PageWise/SubmitForm";
 
 
 const router = createBrowserRouter([
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
           {
             path: "languages-form",
             element: <LanguagesForm />,
+          },
+          {
+            path: "submit-form",
+            element: <SubmitForm/>,
           },
         ]
       },
