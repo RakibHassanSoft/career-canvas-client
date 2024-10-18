@@ -1,26 +1,10 @@
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume12 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
 
+const Resume12 = (props) => {
+  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+
+// console.log(props)
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-md p-8 flex flex-col md:flex-row">
       {/* Left Column */}
@@ -132,8 +116,8 @@ const Resume12 = () => {
         {/* Projects */}
         <section className="mb-6">
           <h3 className="text-xl font-semibold text-orange-600 mb-2">Projects</h3>
-          {projects && projects.length > 0 ? (
-            projects.map((project, index) => (
+          {projects && projects?.length > 0 ? (
+            projects?.map((project, index) => (
               <div key={project._id} className="mb-4">
                 <h4 className="text-lg font-bold">
                   {project.title || `Project ${index + 1}`}

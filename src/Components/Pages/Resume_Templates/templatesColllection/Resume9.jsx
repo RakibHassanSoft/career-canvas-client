@@ -1,27 +1,10 @@
 // src/Components/Pages/Resume/Resume2.jsx
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume2 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
 
+const Resume9 = (props) => {
+  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
+ 
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-md p-8">
       {/* Title and Contact */}
@@ -182,4 +165,4 @@ const Resume2 = () => {
   );
 };
 
-export default Resume2;
+export default Resume9;

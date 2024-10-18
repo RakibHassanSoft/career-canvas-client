@@ -3,27 +3,10 @@ import { FaPhone, FaEnvelope, FaLinkedin } from 'react-icons/fa';
 import { MdOutlineAssignment } from 'react-icons/md';
 
 // Import your custom hooks
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume10 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name, loading: contactLoading, error: contactError } = getNameContacts();
-  const { skillData, loading: skillsLoading, error: skillsError } = getSkills();
-  const { careerObjective, loading: objectiveLoading, error: objectiveError } = getCareerObjectives();
-  const { projects, loading: projectsLoading, error: projectsError } = getProjects();
-  const { education, loading: educationLoading, error: educationError } = getEducation();
-  const { experience, loading: experienceLoading, error: experienceError } = getExperience();
-  const { languages, loading: languagesLoading, error: languagesError } = getLanguages();
-  const { certificates, loading: certificatesLoading, error: certificatesError } = getCertificates();
-  const { awards, loading: awardsLoading, error: awardsError } = getAwards();
+
+const Resume10 = (props) => {
+  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
 
   // Handle loading and error states
   if (

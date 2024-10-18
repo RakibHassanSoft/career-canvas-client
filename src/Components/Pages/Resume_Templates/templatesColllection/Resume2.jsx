@@ -1,26 +1,7 @@
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume2 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
-console.log(awards)
+const Resume2 = (props) => {
+  const {contactInfo, name,skillData,careerObjective,projects,education,experience,languages,certificates, awards }=props
   return (
     <div className="w-full mx-auto bg-white p-10 shadow-lg">
       {/* Resume Title and Contact Information */}
