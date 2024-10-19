@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import ReactQuill from "react-quill"; // Rich text editor
 import "react-quill/dist/quill.snow.css"; // Styles for the editor
 import jsPDF from "jspdf";
@@ -20,34 +20,36 @@ const GoogleDocAdvanced = () => {
 
   // Export as PDF using html2canvas and jsPDF
   const downloadPdf = () => {
-    const input = editorRef.current.getEditor().root; // Get the editor content as an HTML element
+    const input = editorRef.current?.getEditor().root; // Ensure ref is valid
 
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        const imgWidth = 210; // A4 size width in mm
-        const pageHeight = 297; // A4 size height in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-        let position = 0;
+    if (input) {
+      html2canvas(input)
+        .then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF("p", "mm", "a4");
+          const imgWidth = 210; // A4 size width in mm
+          const pageHeight = 297; // A4 size height in mm
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          let heightLeft = imgHeight;
+          let position = 0;
 
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        // If content is larger than one page, add new pages
-        while (heightLeft >= 0) {
-          position = heightLeft - imgHeight;
-          pdf.addPage();
           pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
-        }
 
-        pdf.save("document.pdf");
-      })
-      .catch((error) => {
-        console.error("Error generating PDF:", error);
-      });
+          // If content is larger than one page, add new pages
+          while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+          }
+
+          pdf.save("document.pdf");
+        })
+        .catch((error) => {
+          console.error("Error generating PDF:", error);
+        });
+    }
   };
 
   // Export as DOCX
@@ -77,7 +79,7 @@ const GoogleDocAdvanced = () => {
 
   // Print the document
   const printDocument = () => {
-    const content = editorRef.current.getEditor().root.innerHTML;
+    const content = editorRef.current?.getEditor().root.innerHTML;
     const newWindow = window.open();
     newWindow.document.write(content);
     newWindow.print();
