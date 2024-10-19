@@ -242,7 +242,7 @@ const JobsSection = () => {
         {/* Jobs Section */}
         <div className="col-span-1 lg:col-span-3 grid grid-cols-1 gap-4 md:gap-2">
           {jobs?.length >= 0 &&
-            jobs?.map((job) => <JobsCard key={job.id} job={job} />)}
+            jobs?.map((job) => <JobsCard key={job._id} job={job} />)}
           {!jobs && <h1>Jobs Not FOund</h1>}
 
           {/* Pagination Buttons */}
