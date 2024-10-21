@@ -44,7 +44,7 @@ const JobsSection = () => {
           },
         });
         setJobs(response?.data?.jobs);
-        console.log(response);
+        console.log(response?.data?.jobs);
         setTotalPages(response.data.totalPages);
       } catch (error) {
         console.log(error);
