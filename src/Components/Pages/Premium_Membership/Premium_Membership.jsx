@@ -1,5 +1,6 @@
-import React from 'react';
+
 import { FaCheckCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Premium_Membership = () => {
   const benefits = [
@@ -39,9 +40,9 @@ const Premium_Membership = () => {
 
       {/* Purchase Button */}
       <div className="mt-10">
-        <button className="bg-green-600 text-white py-3 px-8 rounded-full font-semibold hover:bg-green-700 transition transform hover:scale-105 duration-300">
+       <Link to={'/dashboard/payment'}> <button className="bg-green-600 text-white py-3 px-8 rounded-full font-semibold hover:bg-green-700 transition transform hover:scale-105 duration-300">
           Get Premium
-        </button>
+        </button></Link>
       </div>
     </div>
   );

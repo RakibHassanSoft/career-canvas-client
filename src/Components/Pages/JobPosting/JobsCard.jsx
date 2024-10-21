@@ -63,7 +63,7 @@ const JobsCard = ({ job }) => {
             {employmentType} - {remoteOption}
           </p>
           <p>
-            Experience: {experience}
+            Experience: { experience ?  experience + ' ' + 'Years' : "No Experience Needed"}
           </p>
           <p>
             Company: {company}

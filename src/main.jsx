@@ -7,6 +7,7 @@ import AuthProvider from "./Components/Providers/AuthProvider";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { FormProvider } from "./Components/Providers/FormContext";
+import { Toaster } from 'react-hot-toast';
 
 
 // Create a client
@@ -20,6 +21,7 @@ createRoot(document.getElementById("root")).render(
           <RouterProvider router={router} />
         </FormProvider>
       </QueryClientProvider>
+      <Toaster />
     </StrictMode>
     <ToastContainer></ToastContainer>
   </AuthProvider>

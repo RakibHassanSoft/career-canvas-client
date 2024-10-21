@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useAxiosPublic from '../../../../Hooks/AxiosHooks/useAxiosPublic';
+import toast from 'react-hot-toast';
 
 const ResumeReview = () => {
+    const axios = useAxiosPublic();
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [rating, setRating] = useState(0);
-    const [feedback, setFeedback] = useState('');
+    const [text, setText] = useState('');
+    const [resumes, setResumes] = useState([]); // Initialize with an empty array
+    const [error, setError] = useState(null);
 
-    // Sample data
-    const resumes = [
-        { id: 1, name: 'John Doe', resumePdf: '/path/to/resume1.pdf', status: 'Pending' },
-        { id: 2, name: 'Jane Smith', resumePdf: '/path/to/resume2.pdf', status: 'Reviewed' },
-        { id: 3, name: 'Mike Johnson', resumePdf: '/path/to/resume3.pdf', status: 'Pending' },
-    ];
+    // Function to fetch resumes
+    const fetchResumes = async () => {
+        try {
+            const response = await axios.get('/api/resumes');
+            setResumes(response.data.data);
+            console.log(response.data);
+        } catch (err) {
+            console.error(err);
+            setError('Failed to load resumes.');
+        }
+    };
+
+    // Fetch resumes on component mount
+    useEffect(() => {
+        fetchResumes();
+    }, [axios]);
 
     const openModal = (user) => {
         setSelectedUser(user);
@@ -22,23 +37,36 @@ const ResumeReview = () => {
         setModalOpen(false);
         setSelectedUser(null);
         setRating(0);
-        setFeedback('');
+        setText('');
     };
 
-    const handleReviewSubmit = () => {
-        // Submit the review (you can add your logic here)
-        console.log(`Reviewed ${selectedUser.name} with rating: ${rating}, feedback: ${feedback}`);
+    const handleReviewSubmit = async () => {
+        try {
+            // Assume there's an API endpoint to submit the feedback
+            const reviewData = {
+                rating,
+                text,
+            };
+            await axios.put(`/api/feedback/${selectedUser._id}`, reviewData);
+            toast.success('Review submitted successfully');
+            console.log('Review submitted successfully');
+            await fetchResumes(); // Refetch resumes after submitting review
+        } catch (err) {
+            console.error('Error submitting review:', err);
+        }
         closeModal();
     };
+
 
     return (
         <div className="p-8 bg-white min-h-screen">
             <h1 className="text-4xl font-bold mb-6 text-green-600 text-center">Resume Review</h1>
+            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
             <div className="overflow-x-auto rounded-lg shadow-md">
                 <table className="min-w-full bg-white border border-gray-300">
                     <thead className="bg-gray-200">
                         <tr>
-                            <th className="py-3 px-6 text-left text-gray-600">User Name</th>
+                            <th className="py-3 px-6 text-left text-gray-600">User Email</th>
                             <th className="py-3 px-6 text-left text-gray-600">Resume PDF</th>
                             <th className="py-3 px-6 text-left text-gray-600">Status</th>
                             <th className="py-3 px-6 text-left text-gray-600">Action</th>
@@ -47,9 +75,9 @@ const ResumeReview = () => {
                     <tbody>
                         {resumes.map((resume) => (
                             <tr key={resume.id} className="hover:bg-gray-100 transition-colors duration-200">
-                                <td className="py-3 px-6 border-b border-gray-300">{resume.name}</td>
+                                <td className="py-3 px-6 border-b border-gray-300">{resume.userEmail}</td>
                                 <td className="py-3 px-6 border-b border-gray-300">
-                                    <a href={resume.resumePdf} className="text-blue-500 hover:underline">
+                                    <a href={`http://localhost:8000/${resume.pdf}`} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
                                         View Resume
                                     </a>
                                 </td>
@@ -77,6 +105,7 @@ const ResumeReview = () => {
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <span
                                     key={star}
+                                    
                                     className={`cursor-pointer text-${star <= rating ? 'yellow-500' : 'gray-400'} text-3xl`}
                                     onClick={() => setRating(star)}
                                 >
@@ -87,8 +116,8 @@ const ResumeReview = () => {
                         <textarea
                             rows="4"
                             placeholder="Write your feedback here..."
-                            value={feedback}
-                            onChange={(e) => setFeedback(e.target.value)}
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
                             className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                         <div className="flex justify-end mt-4">

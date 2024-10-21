@@ -1,39 +1,22 @@
 // src/Components/Pages/Resume/Resume2.jsx
 
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
 
-const Resume2 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
 
+const Resume9 = (props) => {
+  const {personalInfo, skills,careerObjective,projects,education,experience,languages,certificates, awards }=props?.props
+ 
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-md p-8">
       {/* Title and Contact */}
       <header className="flex justify-between items-center border-b pb-4 mb-6">
         <div>
-          <h1 className="text-4xl font-bold">{name}</h1>
+          <h1 className="text-4xl font-bold">{personalInfo?.name}</h1>
           <h2 className="text-lg text-gray-600">Web Developer</h2>
         </div>
         <div className="text-right">
-          <p>📞 {contactInfo?.phone}</p>
-          <p>✉️ {contactInfo?.email}</p>
-          <p>🌍 <a href={contactInfo?.website} className="text-blue-500 underline">{contactInfo?.website}</a></p>
+          <p>📞 {personalInfo?.phone}</p>
+          <p>✉️ {personalInfo?.email}</p>
+          <p>🌍 <a href={personalInfo?.website} className="text-blue-500 underline">{personalInfo?.website}</a></p>
         </div>
       </header>
 
@@ -56,9 +39,9 @@ const Resume2 = () => {
       {/* Skills */}
       <section className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Skills</h3>
-        {skillData && skillData.length > 0 ? (
+        {skills && skills.length > 0 ? (
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>
@@ -182,4 +165,4 @@ const Resume2 = () => {
   );
 };
 
-export default Resume2;
+export default Resume9;

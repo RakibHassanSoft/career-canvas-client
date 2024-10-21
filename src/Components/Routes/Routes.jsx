@@ -27,6 +27,8 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import ResumeReview from "../Pages/Dashboard/ResumeReview/ResumeReview";
 import AddAdmin from "../Pages/Dashboard/AddAdmin/AddAdmin";
 import PrivateRouter from "./PrivateRoute";
+import Payment from "../Pages/Payment/Payment";
+import SubmitForm from "../Pages/Resume_Templates/PageWise/SubmitForm";
 
 
 const router = createBrowserRouter([
@@ -70,6 +72,10 @@ const router = createBrowserRouter([
           {
             path: "languages-form",
             element: <LanguagesForm />,
+          },
+          {
+            path: "submit-form",
+            element: <SubmitForm/>,
           },
         ]
       },
@@ -128,6 +134,11 @@ const router = createBrowserRouter([
       path: 'premium-membership',
       element: <Premium_Membership></Premium_Membership>
     },
+    {
+      path: 'payment',
+      element: <Payment></Payment>
+    },
+
     {
       path: 'review-resume',
       element: <Resume_Review></Resume_Review>

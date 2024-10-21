@@ -1,42 +1,38 @@
-// Resume11.jsx
-
-import getAwards from "../../../../Hooks/getHooks/getAwards";
-import getCareerObjectives from "../../../../Hooks/getHooks/getCareerObjectives";
-import getCertificates from "../../../../Hooks/getHooks/getCertificates";
-import getEducation from "../../../../Hooks/getHooks/getEducation";
-import getExperience from "../../../../Hooks/getHooks/getExperience";
-import getLanguages from "../../../../Hooks/getHooks/getLanguages";
-import getNameContacts from "../../../../Hooks/getHooks/getNameContacts";
-import getProjects from "../../../../Hooks/getHooks/getProjects";
-import getSkills from "../../../../Hooks/getHooks/getSkills";
-
-const Resume11 = () => {
-  // Fetch data using custom hooks
-  const { contactInfo, name } = getNameContacts();
-  const { skillData } = getSkills();
-  const { careerObjective } = getCareerObjectives();
-  const { projects } = getProjects();
-  const { education } = getEducation();
-  const { experience } = getExperience();
-  const { languages } = getLanguages();
-  const { certificates } = getCertificates();
-  const { awards } = getAwards();
-
+const Resume11 = (props) => {
+  console.log(props.props)
+  const {
+    personalInfo,
+    
+    skills,
+    careerObjective,
+    projects,
+    education,
+    experience,
+    languages,
+    certificates,
+    awards,
+  } = props?.props;
+// console.log(personalInfo)
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-md p-8">
       {/* Header: Title and Contact */}
       <div className="flex justify-between items-center border-b pb-4 mb-6">
         <div>
-          <h1 className="text-4xl font-bold text-purple-600">{name || "Your Name"}</h1>
+          <h1 className="text-4xl font-bold text-purple-600">
+            {personalInfo?.name || "Your Name"}
+          </h1>
           <h2 className="text-lg text-gray-600">Senior Project Manager</h2>
         </div>
         <div className="text-right">
-          <p>📞 {contactInfo?.phone || "(123) 456-7890"}</p>
-          <p>✉️ {contactInfo?.email || "email@example.com"}</p>
+          <p>📞 {personalInfo?.phone || "(123) 456-7890"}</p>
+          <p>✉️ {personalInfo?.email || "email@example.com"}</p>
           <p>
-            🌍 {contactInfo?.location || "Minneapolis, MN"} |{" "}
-            <a href={contactInfo?.website || "#"} className="text-blue-500 underline">
-              {contactInfo?.website || "LinkedIn"}
+            🌍 {personalInfo?.location || "Minneapolis, MN"} |{" "}
+            <a
+              href={personalInfo?.website || "#"}
+              className="text-blue-500 underline"
+            >
+              {personalInfo?.website || "LinkedIn"}
             </a>
           </p>
         </div>
@@ -66,9 +62,9 @@ const Resume11 = () => {
           {/* Skills */}
           <section className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Skills</h3>
-            {skillData && skillData.length > 0 ? (
+            {skills && skills.length > 0 ? (
               <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                {skillData.map((skill, index) => (
+                {skills.map((skill, index) => (
                   <li key={index}>{skill}</li>
                 ))}
               </ul>
@@ -114,15 +110,20 @@ const Resume11 = () => {
         <div className="col-span-2">
           {/* Career Objective */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold text-purple-600 mb-4">Career Objective</h3>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">
+              Career Objective
+            </h3>
             <p className="text-gray-700">
-              {careerObjective || "Dynamic senior project manager with extensive experience seeking a challenging position where I can contribute to organizational growth and success."}
+              {careerObjective ||
+                "Dynamic senior project manager with extensive experience seeking a challenging position where I can contribute to organizational growth and success."}
             </p>
           </section>
 
           {/* Work Experience */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold text-purple-600 mb-4">Work Experience</h3>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">
+              Work Experience
+            </h3>
             {experience && experience.length > 0 ? (
               experience.map((exp) => (
                 <div key={exp._id} className="mb-6">
@@ -130,7 +131,9 @@ const Resume11 = () => {
                   <p className="text-gray-600">
                     {exp.company} • {exp.duration}
                   </p>
-                  <p className="text-gray-700 mt-2">{exp.description || "Job description goes here."}</p>
+                  <p className="text-gray-700 mt-2">
+                    {exp.description || "Job description goes here."}
+                  </p>
                   {exp.responsibilities && exp.responsibilities.length > 0 && (
                     <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
                       {exp.responsibilities.map((resp, index) => (
@@ -141,18 +144,26 @@ const Resume11 = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-600">No work experience data available.</p>
+              <p className="text-gray-600">
+                No work experience data available.
+              </p>
             )}
           </section>
 
           {/* Projects */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold text-purple-600 mb-4">Projects</h3>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">
+              Projects
+            </h3>
             {projects && projects.length > 0 ? (
               projects.map((project, index) => (
                 <div key={project._id} className="mb-4">
-                  <h4 className="text-lg font-bold">{project.title || `Project ${index + 1}`}</h4>
-                  <p className="text-gray-700">{project.description || "Project description goes here."}</p>
+                  <h4 className="text-lg font-bold">
+                    {project.title || `Project ${index + 1}`}
+                  </h4>
+                  <p className="text-gray-700">
+                    {project.description || "Project description goes here."}
+                  </p>
                   {project.features && project.features.length > 0 ? (
                     <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
                       {project.features.map((feature, i) => (
@@ -174,7 +185,9 @@ const Resume11 = () => {
 
           {/* Languages */}
           <section className="mb-6">
-            <h3 className="text-xl font-semibold text-purple-600 mb-4">Languages</h3>
+            <h3 className="text-xl font-semibold text-purple-600 mb-4">
+              Languages
+            </h3>
             {languages && languages.length > 0 ? (
               <ul className="list-disc pl-5 space-y-1 text-gray-700">
                 {languages.map((language, index) => (

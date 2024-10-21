@@ -1,12 +1,10 @@
-import React, { useCallback, useContext, useState } from 'react';
+import  {useContext, useState } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import useAxiosPublic from '../../../Hooks/AxiosHooks/useAxiosPublic';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 const JobPosting = () => {
-  // State for the job posting details
-  const navigate = useNavigate();
+
   const {user}= useContext(AuthContext);
   const axiosPublic = useAxiosPublic()
   const [jobDetails, setJobDetails] = useState({
@@ -16,8 +14,9 @@ const JobPosting = () => {
     employmentType: '',
     salaryRange: '',
     remoteOption: '',
-    experience: '',
+    experience : Number,
     jobDescription: '',
+    longDescription: '',
     responsibilities: [''],
     requirements: [''],
     skills: [''],
@@ -25,7 +24,9 @@ const JobPosting = () => {
       callToAction: '',
       applyLinkText: '',
       applyLink: ''
-    }
+    },
+    date : new Date().toLocaleDateString(),
+    userId : user.uid
   });
 
   // Function to handle input change for non-array fields
@@ -62,15 +63,13 @@ const JobPosting = () => {
   };
 
   // Function to handle form submission
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     console.log(jobDetails); // Log job details to console
-    jobDetails.userId =  user.uid;
-    const response = await axiosPublic.post('/api/jobs', jobDetails); // Send job details to the server
+    
+    const response = await axiosPublic.post('/api/createJobs', jobDetails); // Send job details to the server
     console.log(response);
-    e.target.reset(); 
-    navigate('/premium-membership');
+    // e.target.reset(); 
     try {
       // Log the response from the server
 
@@ -148,7 +147,6 @@ const JobPosting = () => {
             placeholder="e.g., Full-time, Part-time"
           />
         </div>
-
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Salary Range</label>
           <input
@@ -176,7 +174,7 @@ const JobPosting = () => {
         <div className="md:col-span-2">
           <label className="block text-gray-700 font-semibold mb-2">Experience</label>
           <input
-            type="text"
+            type="number"
             name="experience"
             value={jobDetails.experience}
             onChange={handleChange}
@@ -190,6 +188,17 @@ const JobPosting = () => {
           <textarea
             name="jobDescription"
             value={jobDetails.jobDescription}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
+            rows="4"
+            placeholder="Provide a detailed job description"
+          ></textarea>
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-gray-700 font-semibold mb-2">Long Description</label>
+          <textarea
+            name="longDescription"
+            value={jobDetails.longDescription}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500"
             rows="4"
