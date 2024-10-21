@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { FaUpload, FaCheckCircle, FaPen } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const Resume_Review = () => {
   const [file, setFile] = useState(null); // State to hold the uploaded file
   const [uploadStatus, setUploadStatus] = useState(''); // State to hold upload status message
+  const [isUploading, setIsUploading] = useState(false); // Add an uploading state
 
   // Handler function for file input change
   const handleFileChange = (event) => {
@@ -15,34 +17,49 @@ const Resume_Review = () => {
     }
   };
 
-  // Handler function for form submission
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission
 
+
+  // Modify the handleSubmit function
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!file) {
       setUploadStatus('Please upload a resume before submitting.');
       return;
     }
 
-    const formData = new FormData(); // Create a new FormData object
-    formData.append('resume', file); // Append the file to the form data
-    // console.log(formData.resume)
-    try {
-      // const response = await fetch('https://your-server-endpoint.com/upload', {
-      //   method: 'POST',
-      //   body: formData,
-      // });
+    setIsUploading(true); // Show loading state
+    const formData = new FormData();
+    formData.append('pdf', file);
 
-      // if (response.ok) {
-      //   setUploadStatus('Resume uploaded successfully!'); // Set success message
-      //   setFile(null); // Clear the file after successful upload
-      // } else {
-      //   throw new Error('Failed to upload the resume.');
-      // }
+    try {
+      const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+      const response = await fetch('http://localhost:8000/api/upload', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
+        },
+        body: formData,
+      });
+      if (response.status === 201) {
+        
+        setUploadStatus('Resume uploaded successfully!');
+        toast.success('Upload successful')
+        setFile(null);
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.message)
+        throw new Error(errorData.message || 'Failed to upload the resume.');
+      }
     } catch (error) {
-      setUploadStatus(`Error: ${error.message}`); // Set error message
+      toast.error('An error occurred while uploading the resume.') // Show error message in toast notification
+      setUploadStatus(`Error: ${error.message}`);
+    } finally {
+      setIsUploading(false); // Remove loading state
     }
   };
+
+  { isUploading && <p>Uploading...</p> }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white flex flex-col items-center py-12">
@@ -59,9 +76,9 @@ const Resume_Review = () => {
             <label className="flex flex-col items-center px-4 py-6 bg-green-200 text-green-600 rounded-lg shadow-md tracking-wide uppercase border border-green-300 cursor-pointer hover:bg-green-300 transition duration-300 ease-in-out">
               <FaUpload className="text-3xl mb-2" />
               <span className="text-base leading-normal">Upload Resume</span>
-              <input 
-                type="file" 
-                className="hidden" 
+              <input
+                type="file"
+                className="hidden"
                 accept=".pdf" // Optional: Restrict to PDF files
                 onChange={handleFileChange} // Call the handler on file change
               />
@@ -70,7 +87,7 @@ const Resume_Review = () => {
           <p className="text-gray-700 text-center mb-4">
             Upload your resume in PDF format for review by our team.
           </p>
-          
+
           {file ? (
             <div className="text-center mt-4">
               <p className="text-green-600 font-semibold">Uploaded File: {file.name}</p>
@@ -87,7 +104,7 @@ const Resume_Review = () => {
             Submit Resume
           </button>
         </form>
-        
+
         {/* Upload Status */}
         {uploadStatus && (
           <p className="mt-4 text-center text-green-600">{uploadStatus}</p>
