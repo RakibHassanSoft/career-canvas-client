@@ -41,7 +41,7 @@ const SignUp = () => {
     const pass = e.target.pass.value;
     const name = e.target.name.value;
     const role = 'admin'
-    
+
     if (!validatePassword(pass)) return;
 
     setLoading(true);
