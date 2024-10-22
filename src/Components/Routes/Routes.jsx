@@ -29,6 +29,8 @@ import AddAdmin from "../Pages/Dashboard/AddAdmin/AddAdmin";
 import PrivateRouter from "./PrivateRoute";
 import Payment from "../Pages/Payment/Payment";
 import SubmitForm from "../Pages/Resume_Templates/PageWise/SubmitForm";
+import ApplyJob from "../Pages/ApplyJob/ApplyJob";
+import AppliedJob from "../Pages/Dashboard/AppliedJob/AppliedJob";
 
 
 const router = createBrowserRouter([
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: '/resume-templates',
         element: <Main></Main>,
-        
+
         children: [
           {
             path: 'Resume_Templates',
@@ -75,7 +77,7 @@ const router = createBrowserRouter([
           },
           {
             path: "submit-form",
-            element: <SubmitForm/>,
+            element: <SubmitForm />,
           },
         ]
       },
@@ -93,63 +95,70 @@ const router = createBrowserRouter([
       },
       {
         path: '/ai-chat',
-        element: <Chat/>
+        element: <Chat />
       },
       {
         path: '/drag-and-drop',
-        element: <Template1/>
+        element: <Template1 />
       },
       {
         path: '/google-doc',
-        element: <GoogleDocAdvanced/>
+        element: <GoogleDocAdvanced />
       },
+      {
+        path: "/applyJob",
+        element: <PrivateRouter><ApplyJob></ApplyJob></PrivateRouter>
+      }
     ]
   },
   {
-   path:'/dashboard',
-   element:<PrivateRouter><AdminSidebar/></PrivateRouter> ,
-   children:[
-    {
-      path:'',
-      element:<Dashboard/>
-    },
-    {
-      path:'manage-users',
-      element:<ManageUser/>
-    },
-    {
-      path:'job-posting',
-      element:<JobPosting></JobPosting>
-    },
-    {
-      path:'resume-review',
-      element:<ResumeReview/>
-    }
-    ,
-    {
-      path: 'admin',
-      element : <AddAdmin></AddAdmin>
-    },
-    {
-      path: 'premium-membership',
-      element: <Premium_Membership></Premium_Membership>
-    },
-    {
-      path: 'payment',
-      element: <Payment></Payment>
-    },
+    path: '/dashboard',
+    element: <PrivateRouter><AdminSidebar /></PrivateRouter>,
+    children: [
+      {
+        path: '',
+        element: <Dashboard />
+      },
+      {
+        path: 'manage-users',
+        element: <ManageUser />
+      },
+      {
+        path: 'job-posting',
+        element: <JobPosting></JobPosting>
+      },
+      {
+        path: 'resume-review',
+        element: <ResumeReview />
+      }
+      ,
+      {
+        path: 'admin',
+        element: <AddAdmin></AddAdmin>
+      },
+      {
+        path: 'premium-membership',
+        element: <Premium_Membership></Premium_Membership>
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>
+      },
 
-    {
-      path: 'review-resume',
-      element: <Resume_Review></Resume_Review>
-    },
-    {
-      path: 'user-profile',
-      element: <User_Profile></User_Profile>
-    },
-    
+      {
+        path: 'review-resume',
+        element: <Resume_Review></Resume_Review>
+      },
+      {
+        path: 'user-profile',
+        element: <User_Profile></User_Profile>
+      },
+      {
+        path: 'appliedJob',
+        element: <AppliedJob></AppliedJob>
+      }
 
-   ]
+    ]
   }
 ]);
 
