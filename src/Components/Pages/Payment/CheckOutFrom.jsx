@@ -82,9 +82,9 @@ const CheckOutFrom = ({ amount }) => {
             base: {
               backgroundColor:"",
               fontSize: "20px",
-              color: "#374151",
+              color: "#FFFFFF",
               "::placeholder": {
-                color: "#374151",
+                color: "#FFFFFF",
               },
             },
             invalid: {

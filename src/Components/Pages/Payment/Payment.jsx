@@ -16,7 +16,8 @@ const Payment = () => {
   const formatAmount = (amount) => (amount / 100).toFixed(2);
   return (
     <div>
-      <div className="bg-gray-300 py-20">
+      <div className="bg-gradient-to-r
+      l from-green-300 to-yellow-200 py-20">
       <h1 className='text-center pt-6 text-gray-500 pb-8 md:pb-14 text-4xl px-1 font-semibold'>
         We Offer The Best Plan.  
         <span className='text-green-500'>
@@ -111,7 +112,7 @@ const Payment = () => {
         </div>
 
         {selectedAmount && (
-          <div className="bg-green-300 rounded-sm mx-3 md:mx-40 mt-12 md:mt-8 lg:px-10 md:pt-12 text-center">
+          <div className="bg-gradient-to-r from-blue-500 to-green-400  rounded-sm mx-3 md:mx-40 mt-12 md:mt-8 lg:px-10 md:pt-12 text-center">
             <h3 className="text-3xl text-gray-700 font-bold pt-3 md:pt-0">Proceed to Checkout</h3>
             <p className="text-lg mt-2 text-gray-700">
               Your Selected Service is:{" "}
