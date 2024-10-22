@@ -10,7 +10,7 @@ const axiosPublic = axios.create({
     // baseURL: 'https://careen-canvas-server.vercel.app'
 
     // Rakib final url for deployment
-    baseURL:"https://careen-canvas-server.onrender.com"
+    baseURL:"https://careen-canvas-server.vercel.app"
     
 })
 

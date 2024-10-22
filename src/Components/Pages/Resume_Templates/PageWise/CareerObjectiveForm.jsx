@@ -71,7 +71,7 @@ const CareerObjectiveForm = () => {
   }
 
   return (
-    <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
+    <div className="flex flex-col md:flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
       {/* Form Section */}
       <div className="w-full p-6 bg-white rounded-lg shadow-md">
         <Link onClick={handleBack}>

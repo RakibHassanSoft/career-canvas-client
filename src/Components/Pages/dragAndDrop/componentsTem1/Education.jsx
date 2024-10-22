@@ -44,7 +44,7 @@ const Education = ({ educationDetails, setEducationDetails }) => {
             {/* Modal for editing */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white w-2/3 max-w-3xl p-6 rounded-md shadow-lg flex">
+                    <div className="bg-white w-4/5 max-w-3xl p-6 rounded-md shadow-lg flex">
                         <div className="w-full">
                             <h2 className="text-2xl font-bold mb-4">Edit Education Details</h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
