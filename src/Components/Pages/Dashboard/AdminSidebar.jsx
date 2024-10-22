@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { RiAdminFill } from "react-icons/ri";
 import useAdmin from '../../../Hooks/useAdmin';
 import { MdCardMembership, MdRateReview } from 'react-icons/md';
+import { GiRunningNinja } from "react-icons/gi";
 
 const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,9 @@ const AdminSidebar = () => {
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
     };
-    if (loading) return <div>Loading...</div>;
+    if (loading) return   <div className='flex w-full items-center justify-center pt-20'>
+        <GiRunningNinja className="text-[2.8rem] animate-bounce h-16  w-16 md:h-36  md:w-36 text-green-500" />
+    </div>    ;
     if (error) return <div>Error: {error}</div>;
 
     const handleLogOut = () => {
