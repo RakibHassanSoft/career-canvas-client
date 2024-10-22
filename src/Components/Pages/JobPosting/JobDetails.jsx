@@ -4,12 +4,12 @@ import { PiMapPinAreaFill } from "react-icons/pi";
 import { TbReportMoney } from "react-icons/tb";
 import hiringImage from "../../../../public/HiringConfirmed.png";
 import { MdOutlineAddHomeWork, MdWorkHistory } from "react-icons/md";
-
+import { Link } from 'react-router-dom';
 const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
   if (!job) {
-    return null; // Early return if blog is undefined
+    return; // Early return if blog is undefined
   }
-
+  console.log(job);
   const {
     jobTitle,
     location,
@@ -21,7 +21,6 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
     remoteOption,
     experience,
     date,
-    applySection,
   } = job;
 
   const formattedDate = new Date(date).toISOString().split('T')[0];
@@ -37,9 +36,8 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
       )}
 
       <div
-        className={`fixed top-0 right-0 z-40 w-64 p-4 overflow-y-auto transition-transform shadow-xl  ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out bg-white shadow-lg z-40 max-w-5xl md:w-full h-full md:p-4`}
+        className={`fixed top-0 right-0 z-40 w-64 p-4 overflow-y-auto transition-transform shadow-xl  ${isOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-300 ease-in-out bg-white shadow-lg z-40 max-w-5xl md:w-full h-full md:p-4`}
       >
         <button
           onClick={toggleDetails}
@@ -99,10 +97,6 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               </p>
               <div className="text-gray-500">
                 <p>{experience}</p>
-                {/* <p>
-                  Collaboration: Work alongside other developers and a project
-                  manager.
-                </p> */}
               </div>
             </div>
           </div>
@@ -119,7 +113,10 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
             </div>
 
             <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded w-full mb-2">
-              <a target="_blank" href={applySection.applyLink}>Apply Now</a>
+              <Link
+                state={{ job }}
+                to={'/applyJob'}>Apply Now
+              </Link>
             </button>
 
             <button className="border-2 border-green-500 text-green-500 font-semibold py-2 px-4 rounded w-full mb-4">
@@ -136,31 +133,10 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               <p>
                 Response for the job: <span className="font-bold">20</span>
               </p>
-              {/* <p>
-                Available Connects: <span className="font-bold">0</span>
-              </p> */}
+
             </div>
 
-            {/* <div className="py-2 px-1">
-              <h4 className="text-lg font-semibold mb-2">About the client</h4>
-              <div className="flex items-center mb-2">
-                <span className="text-green-600 mr-2">✔️</span>
-                <span className="text-green-600">Payment method verified</span>
-              </div>
 
-              <div className="text-gray-700 mb-2">
-                <p className="mb-1">⭐⭐☆☆☆ 2.0</p>
-                <p className="text-sm">2.0 of 1 review</p>
-                <p className="text-sm">Spain</p>
-                <p className="text-sm">Madrid 11:02 PM</p>
-                <p className="text-sm">4 jobs posted</p>
-                <p className="text-sm">50% hire rate, 1 open job</p>
-                <p className="text-sm">$209 total spent</p>
-                <p className="text-sm">2 hires, 1 active</p>
-                <p className="text-sm">$10.00 /hr avg hourly rate paid</p>
-                <p className="text-sm">18 hours</p>
-              </div>
-            </div> */}
           </div>
 
           <div className="flex flex-col gap-8 rounded-lg col-span-2 drop-shadow-2xl drop-shadow-">
@@ -207,35 +183,6 @@ const JobDetails = ({ toggleDetails, closeDetails, isOpen, job }) => {
               </div>
             </div>
           </div>
-          {/* <div className="border-2 rounded-lg border-green-500 col-span-3">
-            <div className="p-4 md:p-6 bg-white shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold mb-4">
-                Client &apos s recent history (2)
-              </h2>
-              <h3 className="text-md text-gray-600 mb-2">Jobs in progress</h3>
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h4 className="text-lg font-medium mb-2">Test Render Shoes</h4>
-                <div className="flex items-center mb-2">
-                  <span className="text-yellow-500 mr-2">⭐⭐⭐⭐✰</span>
-                  <span className="text-sm text-gray-500">2.0</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-2">
-                  It would be great if you could give a clear response.
-                </p>
-                <p className="text-sm text-gray-700">
-                  To freelancer:{" "}
-                  <span className="text-green-500">Hameed M.</span>{" "}
-                  <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>{" "}
-                  <span className="text-gray-500">4.3 Good Job.</span>
-                </p>
-                <div className="mt-2 text-xs text-gray-400">
-                  <p>Apr 2020 - Apr 2022</p>
-                  <p>0 hrs</p>
-                  <p>Billed: $20.00</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </>

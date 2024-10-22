@@ -1,4 +1,5 @@
-import React, { memo, useState } from 'react';
+/* eslint-disable react/display-name */
+import  { memo, useState } from 'react';
 import ProjectsItem from './ProjectsItem';
 import ProjectModal from './ProjectModal';
 import AddProjectModal from './AddProjectModal';
@@ -52,9 +53,9 @@ const Projects = memo(({ projects, setProjects }) => {
             )}
 
             <div className="space-y-4 mt-4">
-                {projects.map((project) => (
+                {projects.map((project, index) => (
                     <ProjectsItem 
-                        key={project.id} 
+                        key={index} 
                         project={project} 
                         onOpen={handleOpen} 
                     />

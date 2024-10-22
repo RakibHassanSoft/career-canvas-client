@@ -2,6 +2,9 @@ import { useState } from "react";
 import JobDetails from "./JobDetails";
 
 const JobsCard = ({ job }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+  console.log( job );
   const {
     jobTitle,
     jobDescription,
@@ -15,8 +18,6 @@ const JobsCard = ({ job }) => {
 
   } = job;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(null);
 
   const toggleDetails = () => {
     setIsOpen(!isOpen);
@@ -63,7 +64,7 @@ const JobsCard = ({ job }) => {
             {employmentType} - {remoteOption}
           </p>
           <p>
-            Experience: {experience}
+            Experience: {experience ? experience + ' ' + 'Years' : "No Experience Needed"}
           </p>
           <p>
             Company: {company}
