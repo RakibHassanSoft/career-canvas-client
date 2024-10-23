@@ -54,7 +54,7 @@ const User_Profile = () => {
     <div className="w-10/12 m-auto bg-white shadow-lg rounded-lg overflow-hidden">
       {/* User Profile Header */}
       <header className="bg-green-600 p-6 text-white text-center">
-        <h1 className="text-4xl font-bold">User Profile</h1>
+        <h1 className="text-4xl font-bold">Your Resume</h1>
         <p className="mt-2 text-lg">Your professional journey starts here</p>
       </header>
 

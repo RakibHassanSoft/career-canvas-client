@@ -65,10 +65,10 @@ const Skills = ({ skills, setSkills }) => {
 
             {/* Modal for editing skills */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white w-2/3 max-w-3xl p-6 rounded-md shadow-lg flex">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
+                    <div className="bg-white w-4/5 max-w-3xl p-6 rounded-md shadow-lg flex flex-col md:flex-row max-h-screen overflow-y-auto">
                         {/* Left Side for Form */}
-                        <div className="w-1/2 pr-4">
+                        <div className="md:w-1/2 pr-4">
                             <h2 className="text-2xl font-bold mb-4">Edit Skills</h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 {formData.map((skill, index) => (
@@ -106,8 +106,8 @@ const Skills = ({ skills, setSkills }) => {
                         </div>
 
                         {/* Right Side for Text Size, Alignment, Layout, and List Type Controls */}
-                        <div className="w-1/2 pl-4 border-l">
-                            <h2 className="text-2xl font-bold mb-4">Options</h2>
+                        <div className="md:w-1/2  border-l">
+                            <h2 className="text-2xl font-bold mb-4 text-center mt-4">Options</h2>
                             <div className="flex space-x-4 mb-4">
                                 <select
                                     value={textSize}

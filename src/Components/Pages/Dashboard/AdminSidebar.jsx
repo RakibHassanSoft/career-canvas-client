@@ -67,7 +67,17 @@ const AdminSidebar = () => {
                                             className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
                                         >
                                             <RiAdminFill />
-                                            <span className="ml-3">User Profile</span>
+                                            <span className="ml-3">Your Resume</span>
+
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="loginUserProfile"
+                                            className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                                        >
+                                            <RiAdminFill />
+                                            <span className="ml-3">Profile</span>
 
                                         </Link>
                                     </li>
@@ -121,7 +131,17 @@ const AdminSidebar = () => {
                                             className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
                                         >
                                             <RiAdminFill />
-                                            <span className="ml-3">User Profile</span>
+                                            <span className="ml-3">Your Resume</span>
+
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="loginUserProfile"
+                                            className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                                        >
+                                            <RiAdminFill />
+                                            <span className="ml-3">Profile</span>
 
                                         </Link>
                                     </li>
