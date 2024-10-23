@@ -80,8 +80,8 @@ const PersonalInfoForm = () => {
   };
 
   return (
-    <div className="flex flex-row gap-2 max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
-      <div className="w-1/2 p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
+    <div className="flex flex-col md:flex-row gap-7 md:gap-2 w-full md:max-w-6xl mx-auto p-6 bg-gradient-to-r from-green-200 to-green-400 rounded-lg shadow-lg">
+      <div className="md:w-1/2 p-6 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
         <Link onClick={handleBack} aria-label="Go back">
           <ImArrowLeft />
         </Link>
@@ -156,7 +156,7 @@ const PersonalInfoForm = () => {
         </form>
       </div>
 
-      <div className="w-1/2 p-6 ml-4 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
+      <div className="md:w-1/2 p-6 md:ml-4 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105">
         <h2 className="text-2xl font-semibold mb-4 flex items-center text-gray-800">
           💡 Tips for Filling Out the Form
         </h2>

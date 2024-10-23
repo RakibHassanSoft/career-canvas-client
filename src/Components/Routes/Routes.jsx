@@ -31,6 +31,8 @@ import Payment from "../Pages/Payment/Payment";
 import SubmitForm from "../Pages/Resume_Templates/PageWise/SubmitForm";
 import ApplyJob from "../Pages/ApplyJob/ApplyJob";
 import AppliedJob from "../Pages/Dashboard/AppliedJob/AppliedJob";
+import LoginUserProfile from "../Pages/Dashboard/LoginUserProfile/LoginUserProfile";
+import DashboardC from "../../Chat-app/Dashbord/Dashbord";
 
 
 const router = createBrowserRouter([
@@ -108,7 +110,8 @@ const router = createBrowserRouter([
       {
         path: "/applyJob",
         element: <PrivateRouter><ApplyJob></ApplyJob></PrivateRouter>
-      }
+      },
+      { path: '/chat', element:<DashboardC /> },
     ]
   },
   {
@@ -122,6 +125,10 @@ const router = createBrowserRouter([
       {
         path: 'manage-users',
         element: <ManageUser />
+      },
+      {
+        path: 'loginUserProfile',
+        element: <LoginUserProfile></LoginUserProfile>
       },
       {
         path: 'job-posting',

@@ -79,9 +79,9 @@ const Summary = ({ summary, setSummary }) => {
 
             {/* Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white w-2/3 max-w-3xl p-6 rounded-md shadow-lg flex">
-                        <div className="w-1/2 pr-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
+                    <div className="bg-white w-4/5 max-w-3xl p-6 rounded-md shadow-lg flex flex-col md:flex-row max-h-screen overflow-y-auto">
+                        <div className="md:w-1/2 pr-4">
                             <h2 className="text-2xl font-bold mb-4">Edit Summary</h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="flex space-x-2 mb-4">
@@ -98,15 +98,20 @@ const Summary = ({ summary, setSummary }) => {
                                     placeholder="Write your summary here..."
                                 />
                                 {error && <p className="text-red-500">{error}</p>}
-                                <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded" disabled={!!error}>
-                                    Save
-                                </button>
+                                <div className="text-center w-full md:text-start pb-3">
+                <button
+                  type="submit"
+                  className="bg-green-500 text-white py-2 px-4 rounded w-full mb-5"
+                >
+                  Save
+                </button>
+                </div>
                             </form>
                         </div>
 
                         {/* Options for text alignment and size */}
-                        <div className="w-1/2 pl-4 border-l">
-                            <h2 className="text-2xl font-bold mb-4">Options</h2>
+                        <div className="md:w-1/2 pl-4 border-l">
+                            <h2 className="text-2xl font-bold mb-3 mt-4 text-center">Options</h2>
                             <div className="flex flex-col space-y-4">
                                 {/* Text Alignment */}
                                 <div>
@@ -140,7 +145,7 @@ const Summary = ({ summary, setSummary }) => {
                         </div>
 
                         {/* Instructions */}
-                        <div className="w-1/2 pl-4 border-l">
+                        <div className="md:w-1/2 pl-4 border-l">
                             <h2 className="text-2xl font-bold mb-4">Instructions</h2>
                             <ul className="list-disc list-inside text-gray-700">
                                 <li>Summarize your professional experience concisely.</li>

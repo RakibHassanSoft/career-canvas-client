@@ -271,7 +271,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      to="/dashboard/user-profile"
+                      to="/dashboard/loginUserProfile"
                       className="block px-4 text-lg py-2 text-gray-700 hover:bg-gray-200"
                     >
                       Profile
