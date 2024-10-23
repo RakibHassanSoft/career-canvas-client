@@ -161,11 +161,20 @@ const Resume_Review = () => {
                     (item, index) => (
                       <tr key={index} className='hover'>
                         <td>{index + 1}</td>
-                        <td className='max-w-28'>
+                        <td className='max-w-36'>
                           {item?.pdf.split(/[/\\]/).pop().replace(/.*-/, '')}
                         </td>
-                        <td className='max-w-3'>{item?.feedback?.rating}</td>
-                        <td className='max-w-28'>{item?.feedback?.text}</td>
+                        {
+                          item?.feedback?.rating && item?.feedback?.text ? <>
+                            <td className='max-w-3'>{item?.feedback?.rating}</td>
+                            <td className='max-w-28'>{item?.feedback?.text}</td>
+                          </> :
+
+                            <>
+                              <td className='max-w-3'>Panding Rating</td>
+                              <td className='max-w-28'>Panding Feedback</td>
+                            </>
+                        }
                       </tr>
                     )
                   )
