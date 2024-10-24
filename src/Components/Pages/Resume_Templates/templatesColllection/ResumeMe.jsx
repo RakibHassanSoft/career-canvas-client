@@ -20,10 +20,10 @@ const ResumeMe = () => {
   // const templateId = 11 
 
   if (!templateId) {
-    return <p>No data available...</p>; // Handle case where there's no data
+    return <p className='text-3xl text-center font-medium  mt-4 mb-4 text-green-600'>No data available...</p>; // Handle case where there's no data
   }
   if (!lastData) {
-    return <p>No data available...</p>; // Handle case where there's no data
+    return <p className='text-3xl text-center font-medium   mt-4 mb-4  text-green-600'>No data available...</p>; // Handle case where there's no data
   }
   
   if (templateId == 1 ) {
