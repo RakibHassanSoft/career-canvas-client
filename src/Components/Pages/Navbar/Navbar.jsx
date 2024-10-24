@@ -320,7 +320,7 @@ const Navbar = () => {
 
                     {/* Dropdown Menu */}
                     {isMenuVisible && (
-                        <div className=" absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-10">
+                        <div className=" absolute right-0 mt-1 pt-2 w-48 bg-white border rounded shadow-lg z-10">
                             <ul className="py-2">
                                 <li>
                                     <Link
