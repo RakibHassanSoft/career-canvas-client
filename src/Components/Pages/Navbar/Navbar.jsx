@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import logo from "/public/LogoCareerCanvas.png"
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -149,8 +151,9 @@ const Navbar = () => {
             Career Canvas
           </Link> */}
           <img
-            className="w-24 h-20  rounded-full"
-            src="/Blue White Modern Minimalist Name Logo.png"
+            className="w-14 h-14 md: ml-4  rounded-full"
+            // src="/public/LogoCareerCanvas.png"
+            src={logo}
             alt="Career Canvas Logo"
           />
         </div>

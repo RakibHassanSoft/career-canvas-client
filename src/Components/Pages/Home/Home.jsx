@@ -4,7 +4,7 @@ import ChooseOurPlatform from "./ChooseOurPlatform/ChooseOurPlatform";
 import Testimonials from "./Testimonials/Testimonials";
 import WeDeliverBest from "./WeDeliverBest/WeDeliverBest";
 
-import CustomerReview from "./CustomerReview/CustomerReview";
+// import CustomerReview from "./CustomerReview/CustomerReview";
 import Resume_Templates from "../Resume_Templates/Resume_Templates";
 // import ResumeTemplatePreview from "./ResumeTemplatePreview/ResumeTemplatePreview";
 
@@ -18,7 +18,7 @@ const Home = () => {
                     <ChooseOurPlatform></ChooseOurPlatform>
                     <WeDeliverBest></WeDeliverBest>
                     <Testimonials></Testimonials>
-                    <CustomerReview></CustomerReview>
+                    {/* <CustomerReview></CustomerReview> */}
                 
             </div>
         </div>
