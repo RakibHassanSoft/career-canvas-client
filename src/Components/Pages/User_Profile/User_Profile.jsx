@@ -5,6 +5,7 @@ import Resume2 from "../Resume_Templates/templatesColllection/Resume9";
 import { useContext, useRef, } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import ResumeMe from "../Resume_Templates/templatesColllection/ResumeMe";
+import JobRecom from "../../../important/JobRecom";
 
 const User_Profile = () => {
   const { resumeId } = useContext(AuthContext);
@@ -54,7 +55,7 @@ const User_Profile = () => {
   };
 
   return (
-    <div className="w-10/12 m-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="w-10/12 m-auto h-screen bg-white shadow-lg rounded-lg overflow-hidden">
       {/* User Profile Header */}
       <header className="bg-green-600 p-6 text-white text-center">
         <h1 className="text-4xl font-bold">Your Resume</h1>
@@ -63,7 +64,9 @@ const User_Profile = () => {
 
       {/* Profile Content */}
       <div className="p-6">
-        <ResumeMe />
+
+       <ResumeMe/>
+      
         {/* Download Button */}
         <button
           onClick={downloadPDF}
@@ -72,6 +75,7 @@ const User_Profile = () => {
           Download as PDF
         </button>
       </div>
+      <JobRecom/>
     </div>
   );
 };
