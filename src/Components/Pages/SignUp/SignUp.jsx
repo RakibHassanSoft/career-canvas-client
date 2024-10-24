@@ -38,9 +38,12 @@ const SignUp = () => {
 
     const email = e.target.email.value;
     const pass = e.target.pass.value;
+    const Cpass = e.target.Cpass.value;
     const name = e.target.name.value;
     const role = 'admin'
-    
+    if(pass !==Cpass) {
+      return toast.error("Give same password");
+    }
     if (!validatePassword(pass)) return;
 
     setLoading(true);
@@ -111,6 +114,17 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 name="pass"
+                required
+                placeholder="Enter your Password"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
+              />
+            </div>
+            <div className="mb-4 animate__animated animate__lightSpeedInRight">
+              <label className="block text-sm font-bold mb-2" htmlFor="password">Coform password</label>
+              <input
+                type="password"
+                id="Cpassword"
+                name="Cpass"
                 required
                 placeholder="Enter your Password"
                 className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
