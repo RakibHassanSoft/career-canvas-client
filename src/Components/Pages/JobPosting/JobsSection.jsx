@@ -43,6 +43,7 @@ const JobsSection = () => {
             employmentType: employType,
           },
         });
+
         setJobs(response?.data?.jobs);
         console.log(response?.data?.jobs);
         setTotalPages(response.data.totalPages);

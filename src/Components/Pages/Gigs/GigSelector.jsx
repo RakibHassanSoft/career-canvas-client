@@ -8,31 +8,73 @@ const GigSelector = () => {
     const [selectedRating, setSelectedRating] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-   const axiosPublic=useAxiosPublic()
-    const [gigsCards,setGigsCards]=useState([])
-   useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const res = await axiosPublic.get('/api/gig');
-            console.log(res.data);
-            setGigsCards(res.data)
-        } catch (error) {
-            console.error('Error fetching data:', error);
+    const axiosPublic = useAxiosPublic();
+    const [gigsCards, setGigsCards] = useState([]);
+    const [availableSkills, setAvailableSkills] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 12;
+
+    // Fetch all gigs initially
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axiosPublic.get('/api/gig');
+                setGigsCards(res.data);
+
+                const skillsSet = new Set();
+                res.data.forEach(gig => {
+                    if (gig.skills) {
+                        gig.skills.forEach(skill => skillsSet.add(skill));
+                    }
+                });
+
+                setAvailableSkills([...skillsSet]);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [axiosPublic]);
+
+    // Auto-submit when any filter input changes
+    useEffect(() => {
+        const fetchFilteredData = async () => {
+            try {
+                const response = await axiosPublic.get('/api/getByFilter', {
+                    params: {
+                        title: searchInput,
+                        skills: selectedSkills,
+                        rating: selectedRating,
+                        startDate: startDate,
+                        endDate: endDate,
+                        page: currentPage,
+                        limit: itemsPerPage,
+                    },
+                });
+
+                setGigsCards(response.data.gigs); // Assuming the API response contains a 'gigs' array
+                setTotalPages(response.data.totalPages); // Assuming the API returns total pages
+            } catch (error) {
+                console.error('Error fetching filtered gigs:', error);
+            }
+        };
+
+        fetchFilteredData();
+    }, [searchInput, selectedSkills, selectedRating, startDate, endDate, currentPage, axiosPublic]);
+
+    // Pagination button handlers
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prevPage => prevPage + 1);
         }
     };
 
-    fetchData();
-}, [axiosPublic]);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Search Input:', searchInput);
-        console.log('Selected Skills:', selectedSkills);
-        console.log('Selected Rating:', selectedRating);
-        console.log('Start Date:', startDate);
-        console.log('End Date:', endDate);
-
-        // You can also display selected details if needed
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prevPage => prevPage - 1);
+        }
     };
 
     return (
@@ -40,7 +82,7 @@ const GigSelector = () => {
             <h1 className="text-3xl font-bold mb-6 text-green-600">Select a Gig</h1>
 
             {/* Filter Form */}
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-white p-6 rounded-lg shadow-md">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-white p-6 rounded-lg shadow-md">
                 {/* Search Input */}
                 <div>
                     <label htmlFor="searchInput" className="block font-medium text-gray-700">Search for Gigs</label>
@@ -64,11 +106,11 @@ const GigSelector = () => {
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                     >
                         <option value="">Select skills</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Python">Python</option>
-                        <option value="React">React</option>
-                        <option value="Node.js">Node.js</option>
-                        <option value="Graphic Design">Graphic Design</option>
+                        {availableSkills.map((skill, index) => (
+                            <option key={index} value={skill}>
+                                {skill}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
@@ -82,11 +124,11 @@ const GigSelector = () => {
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                     >
                         <option value="">Select a rating</option>
-                        <option value="1">1 Star</option>
-                        <option value="2">2 Stars</option>
-                        <option value="3">3 Stars</option>
-                        <option value="4">4 Stars</option>
-                        <option value="5">5 Stars</option>
+                        {[1, 2, 3, 4, 5].map(rating => (
+                            <option key={rating} value={rating}>
+                                {rating} Star{rating > 1 ? 's' : ''}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
@@ -113,15 +155,32 @@ const GigSelector = () => {
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
                     />
                 </div>
- 
-                <div className="col-span-1 sm:col-span-3">
-                    <button type="submit" className="mt-4 w-full bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700 transition duration-200">
-                        Submit
-                    </button>
-                </div>
-            </form>
-            <div className=' grid md:grid-cols-3 grid-cols-1 gap-4'>
-                {gigsCards.map(gigCard=><GigCard key={gigCard._id} gigCard={gigCard}></GigCard>)}
+            </div>
+
+            {/* Display Gig Cards */}
+            <div className="grid md:grid-cols-3 grid-cols-1 gap-4 mt-6">
+                {gigsCards.map(gigCard => (
+                    <GigCard key={gigCard._id} gigCard={gigCard}></GigCard>
+                ))}
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between mt-6">
+                <button
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 bg-green-500 text-white rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                    Previous
+                </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 bg-green-500 text-white rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );

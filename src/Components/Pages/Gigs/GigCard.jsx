@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 const GigCard = ({gigCard}) => {
-  console.log(gigCard);
+  // console.log(gigCard);
     // eslint-disable-next-line no-unused-vars
     const {projectImages,Image,userName,title,}=gigCard
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,14 +32,14 @@ const GigCard = ({gigCard}) => {
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
       <img
         className="w-full h-48 object-cover"
-        src={gigCard?.projectImages}
+        src={gigCard?.projectImages[0]}
         alt="Project"
       />
       <div className="px-6 py-4">
         <div className="flex items-center mb-4">
           <img
             className="w-10 h-10 rounded-full mr-2"
-            src={gigCard?.Image}
+            src={gigCard?.userImage}
             alt="User Avatar"
           />
           <span className="font-bold text-lg">{gigCard?.userName}</span>
@@ -74,7 +74,7 @@ const GigCard = ({gigCard}) => {
             </h2>
             <img
               className="w-full h-48 object-cover mb-4 rounded-lg"
-              src={gigCard?.projectImage}
+              src={gigCard?.projectImages[0]}
               alt="Project"
             />
             <div className="flex items-center mb-4">
