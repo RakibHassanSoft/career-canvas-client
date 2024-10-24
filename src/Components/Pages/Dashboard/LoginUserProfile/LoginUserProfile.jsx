@@ -37,7 +37,7 @@ const LoginUserProfile = () => {
     </div>
   )}
  </div>
- <div className='text-left md:px-6 lg:px-44'>
+ <div className='text-left md:px-6 lg:px-24'>
  <h1 className='te xt-lg md:text-2xl mt-4 text-white'> Name: <span className='text-gray-600 text-xl md:text-3xl'> {user?.displayName}.</span></h1>
   <h1 className='te xt-lg md:text-2xl mt-4 text-white'> Email: <span className='text-gray-600 text-lg md:text-3xl'> {user?.email}.</span></h1>
   <h1>
