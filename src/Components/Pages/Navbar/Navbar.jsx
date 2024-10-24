@@ -7,7 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
+    const handleMouseEnter = () => {
+        setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsOpen(false);
+    };
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -172,47 +180,54 @@ const Navbar = () => {
         </NavLink>
 
         {
-          user && <div className="dropdown dropdown-hover">
-            <label tabIndex={0} className="ml-4 cursor-pointer text-lg font-semibold">
-              Resume Templates
-            </label>
-            <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow md:gap-y-3">
-              <NavLink
-                to="/resume-templates/Resume_Templates"
-                className={({ isActive }) =>
-                  `ml-4 ${isActive
-                    ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                    : "text-lg font-semibold"
-                  }`
-                }
+            user && (
+              <div 
+                  className="dropdown dropdown-hover" 
+                  onMouseEnter={handleMouseEnter} 
+                  onMouseLeave={handleMouseLeave}
               >
-                Make resume
-              </NavLink>
-              <NavLink
-                to="/drag-and-drop"
-                className={({ isActive }) =>
-                  `ml-4 ${isActive
-                    ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                    : "text-lg font-semibold"
-                  }`
-                }
-              >
-                Drag and drop
-              </NavLink>
-              <NavLink
-                to="/google-doc"
-                className={({ isActive }) =>
-                  `ml-4 ${isActive
-                    ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
-                    : "text-lg font-semibold"
-                  }`
-                }
-              >
-                Use Google doc
-              </NavLink>
-
-            </ul>
-          </div>
+                  <label tabIndex={0} className="ml-4 cursor-pointer text-lg font-semibold">
+                      Resume Templates
+                  </label>
+                  {isOpen && (
+                      <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-52 p-3 shadow md:gap-y-3">
+                          <NavLink
+                              to="/resume-templates/Resume_Templates"
+                              className={({ isActive }) =>
+                                  `ml-4 ${isActive
+                                      ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                                      : "text-lg font-semibold"
+                                  }`
+                              }
+                          >
+                              Make resume
+                          </NavLink>
+                          <NavLink
+                              to="/drag-and-drop"
+                              className={({ isActive }) =>
+                                  `ml-4 ${isActive
+                                      ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                                      : "text-lg font-semibold"
+                                  }`
+                              }
+                          >
+                              Drag and drop
+                          </NavLink>
+                          <NavLink
+                              to="/google-doc"
+                              className={({ isActive }) =>
+                                  `ml-4 ${isActive
+                                      ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                                      : "text-lg font-semibold"
+                                  }`
+                              }
+                          >
+                              Use Google doc
+                          </NavLink>
+                      </ul>
+                  )}
+              </div>
+          )
         }
         <NavLink
           to="/ai-chat"
