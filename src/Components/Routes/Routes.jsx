@@ -35,6 +35,7 @@ import LoginUserProfile from "../Pages/Dashboard/LoginUserProfile/LoginUserProfi
 import CreateGig from "../Pages/Gigs/gigrfom";
 
 import GigSelector from "../Pages/Gigs/GigSelector";
+import AnimatedHoverCard from "../Pages/Dashboard/AnimatedHoverCard/AnimatedHoverCard";
 
 
 const router = createBrowserRouter([
@@ -155,6 +156,10 @@ const router = createBrowserRouter([
       {
         path: 'admin',
         element: <AddAdmin></AddAdmin>
+      },
+      {
+        path: 'myJobs',
+        element:<AnimatedHoverCard></AnimatedHoverCard>
       },
       {
         path: 'premium-membership',

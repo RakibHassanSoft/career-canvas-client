@@ -70,6 +70,15 @@ const AdminSidebar = () => {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink
+                      to={"/dashboard/myJobs"}
+                      className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                    >
+                      <MdRateReview />
+                      <span className="ml-3">Save Jobs</span>
+                    </NavLink>
+                  </li>
+                  <li>
                     <Link
                       to="user-profile"
                       className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
