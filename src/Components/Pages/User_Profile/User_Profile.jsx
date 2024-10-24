@@ -1,8 +1,8 @@
-import html2canvas from "html2canvas"; 
-import jsPDF from "jspdf"; 
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Resume1 from "../Resume_Templates/templatesColllection/Resume1";
 import Resume2 from "../Resume_Templates/templatesColllection/Resume9";
-import { useContext, useRef } from "react";
+import { useContext, useRef, } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import ResumeMe from "../Resume_Templates/templatesColllection/ResumeMe";
 import JobRecom from "../../../important/JobRecom";
@@ -10,45 +10,48 @@ import JobRecom from "../../../important/JobRecom";
 const User_Profile = () => {
   const { resumeId } = useContext(AuthContext);
   const inputRef = useRef();
-
   const downloadPDF = () => {
     const input = inputRef.current;
     console.log("Input ref:", input); // Debugging output
     if (!input) {
-      console.error("Input reference is null. Ensure the ref is correctly set.");
-      return; 
+      console.error(
+        "Input reference is null. Ensure the ref is correctly set."
+      );
+      return;
     }
-    
+
     const dpi = 300;
 
-    html2canvas(input, { scale: dpi / 96 }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4",
-      });
+    html2canvas(input, { scale: dpi / 96 })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4",
+        });
 
-      const imgWidth = 210; // Width of A4 paper
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        const imgWidth = 210; // Width of A4 paper
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-      let position = 0;
-      let heightLeft = imgHeight;
+        let position = 0;
+        let heightLeft = imgHeight;
 
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= 297;
-
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
         pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
         heightLeft -= 297;
-      }
 
-      pdf.save("template1-high-res-a4.pdf");
-    }).catch(err => {
-      console.error("Error capturing the canvas:", err); 
-    });
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+          heightLeft -= 297;
+        }
+
+        pdf.save("template1-high-res-a4.pdf");
+      })
+      .catch((err) => {
+        console.error("Error capturing the canvas:", err);
+      });
   };
 
   return (
