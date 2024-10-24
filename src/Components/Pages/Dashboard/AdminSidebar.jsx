@@ -135,6 +135,15 @@ const AdminSidebar = () => {
                       <span className="ml-3">Post Job</span>
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      to="/dashboard/chat"
+                      className="flex items-center p-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+                    >
+                      <FaFile />
+                      <span className="ml-3">Chat with users</span>
+                    </Link>
+                  </li>
 
 
 

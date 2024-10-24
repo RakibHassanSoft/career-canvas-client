@@ -7,11 +7,14 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
+import useAxiosPublic from '../../../Hooks/AxiosHooks/useAxiosPublic';
+
 
 const SignUp = () => {
   const { createUser, signInWithGoogle, UpdateProfile } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic()
 
   const validatePassword = (password) => {
     if (password.length < 5) {
@@ -40,16 +43,20 @@ const SignUp = () => {
     const pass = e.target.pass.value;
     const Cpass = e.target.Cpass.value;
     const name = e.target.name.value;
-    const role = 'admin'
-    if(pass !==Cpass) {
+    const role = 'user'
+    if (pass !== Cpass) {
       return toast.error("Give same password");
     }
     if (!validatePassword(pass)) return;
-
     setLoading(true);
     try {
-       await createUser(email, pass);
+      await createUser(email, pass);
       await UpdateProfile(name, role);
+      const fullName = name;
+      const password = pass;
+       await axiosPublic.post('/api/register', {
+        fullName, email, password
+      })
       toast.success('User Created Successfully!!');
       navigate('/');
     } catch (error) {
@@ -61,7 +68,8 @@ const SignUp = () => {
 
   const handleGoogle = async () => {
     setLoading(true);
-    try {await signInWithGoogle();
+    try {
+      await signInWithGoogle();
       toast.success('User Created Successfully!!');
       navigate('/');
     } catch (error) {

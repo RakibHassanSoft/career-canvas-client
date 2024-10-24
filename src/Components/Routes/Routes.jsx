@@ -35,6 +35,7 @@ import LoginUserProfile from "../Pages/Dashboard/LoginUserProfile/LoginUserProfi
 import CreateGig from "../Pages/Gigs/gigrfom";
 
 import GigSelector from "../Pages/Gigs/GigSelector";
+import DashboardC from "../../SingleChat/Dashbord/Dashbord";
 
 
 const router = createBrowserRouter([
@@ -119,7 +120,7 @@ const router = createBrowserRouter([
         element: <PrivateRouter><ApplyJob></ApplyJob></PrivateRouter>
       },
      
-
+    
     ]
   },
   {
@@ -176,6 +177,10 @@ const router = createBrowserRouter([
       {
         path: 'appliedJob',
         element: <AppliedJob></AppliedJob>
+      },
+      {
+        path:"chat",
+        element:<DashboardC></DashboardC>
       }
 
     ]
