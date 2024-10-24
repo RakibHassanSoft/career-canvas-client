@@ -213,7 +213,7 @@ const Navbar = () => {
                   onMouseLeave={handleMouseLeave}
               >
                   <label tabIndex={0} className="ml-4 cursor-pointer text-lg font-semibold">
-                      Resume Templates
+                     <Link to="/resume-templates/Resume_Templates"> Resume Templates</Link>
                   </label>
                   {isOpen && (
                       <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-52 p-3 shadow md:gap-y-3">
