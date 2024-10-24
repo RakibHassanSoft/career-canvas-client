@@ -182,7 +182,7 @@ const WeDeliverBest = () => {
           {/* Right side image */}
           <div className="flex justify-center">
             <img
-              src="/public/weDevilerBest.png"
+              src="https://i.ibb.co.com/FJ2tNPX/we-Deviler-Best.png"
               alt="CV Examples"
               className="w-full md:w-3/4"
             />
