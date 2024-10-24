@@ -24,7 +24,7 @@ export const FormProvider = ({ children }) => {
     languages: [],
   });
 
-  console.log(formData);
+  // console.log(formData);
 
   const updatePersonalInfo = (data) => {
     setFormData((prev) => ({ ...prev, personalInfo: data }));

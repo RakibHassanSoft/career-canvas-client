@@ -127,6 +127,17 @@ const Navbar = () => {
             >
               Job posts
             </NavLink>
+            <NavLink
+              to="/gigCard"
+              className={({ isActive }) =>
+                `ml-4 ${isActive
+                  ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                  : "text-lg font-semibold"
+                }`
+              }
+            >
+             GiGs
+            </NavLink>
 
           </ul>
         </div>
@@ -225,7 +236,17 @@ const Navbar = () => {
         >
           Job posts
         </NavLink>
-
+        <NavLink
+              to="/gig-section"
+              className={({ isActive }) =>
+                `ml-4 ${isActive
+                  ? "font-extrabold bg-gradient-to-r from-green-500 to-slate-500 bg-clip-text text-transparent text-lg border-b-2 border-green-500"
+                  : "text-lg font-semibold"
+                }`
+              }
+            >
+             GiGs
+            </NavLink>
 
       </div>
 
