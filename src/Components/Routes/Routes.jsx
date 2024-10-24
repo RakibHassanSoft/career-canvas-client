@@ -32,6 +32,9 @@ import SubmitForm from "../Pages/Resume_Templates/PageWise/SubmitForm";
 import ApplyJob from "../Pages/ApplyJob/ApplyJob";
 import AppliedJob from "../Pages/Dashboard/AppliedJob/AppliedJob";
 import LoginUserProfile from "../Pages/Dashboard/LoginUserProfile/LoginUserProfile";
+import CreateGig from "../Pages/Gigs/gigrfom";
+
+import GigSelector from "../Pages/Gigs/GigSelector";
 
 
 const router = createBrowserRouter([
@@ -87,6 +90,11 @@ const router = createBrowserRouter([
         element: <JobsSection></JobsSection>
       },
       {
+        path: '/gig-section',
+        element: <GigSelector></GigSelector>
+      },
+
+      {
         path: '/signin',
         element: <SignIn></SignIn>
       },
@@ -109,7 +117,9 @@ const router = createBrowserRouter([
       {
         path: "/applyJob",
         element: <PrivateRouter><ApplyJob></ApplyJob></PrivateRouter>
-      }
+      },
+     
+
     ]
   },
   {
@@ -127,6 +137,11 @@ const router = createBrowserRouter([
       {
         path: 'loginUserProfile',
         element: <LoginUserProfile></LoginUserProfile>
+      },
+      
+      {
+        path: "CreateGig",
+        element:<CreateGig></CreateGig>
       },
       {
         path: 'job-posting',

@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-  console.log(user);
+  // console.log(user);
   
   const UpdateProfile = (fullName , role) => {
     return updateProfile(auth.currentUser, {
