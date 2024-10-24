@@ -22,7 +22,9 @@ const AdminSidebar = () => {
         <GiRunningNinja className="text-[2.8rem] animate-bounce h-16  w-16 md:h-36  md:w-36 text-green-500" />
       </div>
     );
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div className="flex w-full items-center justify-center pt-20">
+    <GiRunningNinja className="text-[2.8rem] animate-bounce h-16  w-16 md:h-36  md:w-36 text-green-500" />
+  </div>;
 
   const handleLogOut = () => {
     logOut()
@@ -38,13 +40,12 @@ const AdminSidebar = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-0 bg-gray-800 shadow-lg transition-transform transform md:translate-x-0 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:relative md:w-64 w-64 h-full z-30`}
+        className={`fixed inset-0 bg-gray-800 shadow-lg transition-transform transform md:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } md:relative md:w-64 w-64 h-full z-30`}
       >
         <div className="p-6 h-full">
-         
-          {!isAdmin && user &&  <h1 className="text-2xl font-bold text-white">User Dashboard</h1> }
+
+          {!isAdmin && user && <h1 className="text-2xl font-bold text-white">User Dashboard</h1>}
           {isAdmin && user && <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>}
           <nav className="mt-10">
             <ul>
@@ -134,7 +135,7 @@ const AdminSidebar = () => {
                       <span className="ml-3">Post Job</span>
                     </Link>
                   </li>
-                 
+
 
 
                   <li>

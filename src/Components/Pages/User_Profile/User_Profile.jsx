@@ -60,13 +60,6 @@ const User_Profile = () => {
 
       {/* Profile Content */}
       <div className="p-6">
-        {/* <div ref={inputRef} className="bg-gray-100 p-4 rounded-lg">
-
-          {resumeId === 1 && <Resume1 />}
-          {resumeId === 2 && <Resume2 />}
-          {resumeId === 3 && <p>Hello</p>}
-          {resumeId === undefined && <h1>Loading.....</h1>}
-        </div> */}
 
        <ResumeMe/>
         {/* Download Button */}
