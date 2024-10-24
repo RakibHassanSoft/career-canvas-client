@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {

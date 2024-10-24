@@ -9,6 +9,7 @@ const axiosPublic = axios.create({
     //ultimate 
     //   baseURL:"https://careen-canvas-server.onrender.com"
     
+      baseURL:"https://careen-canvas-server.vercel.app"
 })
 
 const useAxiosPublic = () => {
