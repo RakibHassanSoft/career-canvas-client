@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaUpload, FaCheckCircle, FaPen } from 'react-icons/fa';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../Providers/AuthProvider';
 import useAxiosPublic from '../../../Hooks/AxiosHooks/useAxiosPublic';
 

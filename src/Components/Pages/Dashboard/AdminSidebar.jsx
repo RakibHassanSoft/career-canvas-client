@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { FaFile, FaHome, FaUser } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { RiAdminFill } from "react-icons/ri";
 import useAdmin from "../../../Hooks/useAdmin";
 import { MdCardMembership, MdRateReview } from "react-icons/md";
@@ -44,7 +44,8 @@ const AdminSidebar = () => {
       >
         <div className="p-6 h-full">
          
-          {!isAdmin && user ?  <h1 className="text-2xl font-bold text-white">User Dashboard</h1> : <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1> }
+          {!isAdmin && user &&  <h1 className="text-2xl font-bold text-white">User Dashboard</h1> }
+          {isAdmin && user && <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>}
           <nav className="mt-10">
             <ul>
               {!isAdmin && user && (

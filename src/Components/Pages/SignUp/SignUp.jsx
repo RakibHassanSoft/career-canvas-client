@@ -5,12 +5,11 @@ import signup_Animation from "../../../../public/lotti-animation/signup-animatio
 import 'animate.css';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   const { createUser, signInWithGoogle, UpdateProfile } = useContext(AuthContext);
-  const [signUpError, setSignUpError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -46,7 +45,7 @@ const SignUp = () => {
 
     setLoading(true);
     try {
-      const result = await createUser(email, pass);
+       await createUser(email, pass);
       await UpdateProfile(name, role);
       toast.success('User Created Successfully!!');
       navigate('/');
@@ -59,11 +58,11 @@ const SignUp = () => {
 
   const handleGoogle = async () => {
     setLoading(true);
-    try {
-      const result = await signInWithGoogle();
+    try {await signInWithGoogle();
       toast.success('User Created Successfully!!');
       navigate('/');
     } catch (error) {
+      toast.error(' User Create Unsuccessful!!')
       console.error(error);
     } finally {
       setLoading(false);
