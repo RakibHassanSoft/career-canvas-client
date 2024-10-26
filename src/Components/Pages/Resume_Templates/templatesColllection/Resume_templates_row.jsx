@@ -59,8 +59,7 @@ const Resume_templates_row = () => {
                 breakpoints={{
                     640: { slidesPerView: 1 },
                     768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 },
-                    1280: { slidesPerView: 4 },
+                    1280: { slidesPerView: 3},
                 }}
             >
                 {images.map((image) => (
@@ -70,7 +69,7 @@ const Resume_templates_row = () => {
                                 src={image.url}
                                 className="w-full mb-2 rounded-lg object-cover"
                                 alt={image.name}
-                                style={{ height: '350px', width: '280px' }}  // Increased width and height
+                                style={{ height: '400px', width: '350px' }}  // Increased width and height
                             />
                             <a
                                 href="#_"
