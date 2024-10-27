@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../../Hooks/AxiosHooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import io from 'socket.io-client';
+const socket = io('http://localhost:8000');
 
 const AdminChat = () => {
     const [allUsers, setAllUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const axios = useAxiosPublic();
+    
+
+    // fetch socketIo client
+    useEffect(() => {
+        socket.on('connect', () => {
+            console.log('Connected to socket.io');
+        });
+    }, []);
 
     // Fetch all users
     useEffect(() => {
