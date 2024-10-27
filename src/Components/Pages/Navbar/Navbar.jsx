@@ -20,8 +20,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg  fixed top-0 left-0 right-0 z-50 text-[1rem]">
-      <div className="max-w-7xl mx-auto px-4">
+    <nav className="bg-white   shadow-lg  fixed top-0 left-0 right-0 z-10 text-[1rem]">
+      <div className="max-w-7xl  mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-2">
@@ -52,6 +52,15 @@ const Navbar = () => {
             <NavLink to="/drag-and-drop" className={({ isActive }) => isActive ? "text-green-600 font-bold" : "text-gray-600"}>
               DD
             </NavLink>
+            {
+              !user && <>
+                <NavLink to="/signin" className={({ isActive }) => isActive ? "text-green-600 font-bold" : "text-gray-600"}>
+                  Signin
+                </NavLink>
+                <NavLink to="/signup" className={({ isActive }) => isActive ? "text-green-600 font-bold" : "text-gray-600"}>
+                  Signup
+                </NavLink></>
+            }
 
             {/* User Menu */}
             {user && (
@@ -86,12 +95,14 @@ const Navbar = () => {
                     </button>
                   </div>
                 )}
+
               </div>
             )}
+
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="lg:hidden">
+          <div className="lg:hidden ">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-600 hover:text-green-600"
@@ -117,7 +128,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white shadow-md">
+        <div className="lg:hidden bg-white shadow-md z-100 flex justify-between ">
           <div className="px-4 py-2 space-y-2">
             <NavLink
               to="/"
@@ -168,20 +179,44 @@ const Navbar = () => {
             >
               DD
             </NavLink>
+            {
+              !user && (
+                <div className="flex flex-col gap-2">
+                  <NavLink
+                    to="/signin"
+                    className={({ isActive }) => isActive ? "block text-green-600 font-bold" : "block text-gray-700"}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign in
+                  </NavLink>
+                  <NavLink
+                    to="/signup"
+                    className={({ isActive }) => isActive ? "block text-green-600 font-bold" : "block text-gray-700"}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign up
+                  </NavLink>
+                </div>
+              )
+            }
 
+
+
+          </div>
+          <div className="bg-black  rounded-l-3xl">
             {/* User Menu for Mobile */}
             {user && (
               <>
                 <Link
                   to="/dashboard"
-                  className="block text-gray-700 hover:bg-gray-100 rounded px-4 py-2"
+                  className="block text-white hover:bg-gray-100 rounded px-4 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/dashboard/user-profile"
-                  className="block text-gray-700 hover:bg-gray-100 rounded px-4 py-2"
+                  className="block text-white hover:bg-gray-100 rounded px-4 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Profile
@@ -191,7 +226,7 @@ const Navbar = () => {
                     handleLogOut();
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left text-gray-700 hover:bg-gray-100 rounded px-4 py-2"
+                  className="block w-full text-left text-white hover:bg-gray-100 rounded px-4 py-2"
                 >
                   Log Out
                 </button>
